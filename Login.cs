@@ -25,16 +25,21 @@ namespace Appointments_Scheduler
                 myCulture.SetCulture(spanishCulture, spanishCulture);
                 myCulture.PrintCurrentCulture();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             finally
             {
                 // Sets the system's current culture back to the original culture (English)
-                myCulture.SetCulture(currentCulture, currentUICulture);
-                myCulture.PrintCurrentCulture();
+                //myCulture.SetCulture(currentCulture, currentUICulture); // Comment out to keep Culture Spanish
+                //myCulture.PrintCurrentCulture();
             }
 
             // Changes the login page language to Spanish if a Spanish culture is detected
             if (myCulture.GetCultureName() == "es-ES")
             {
+                lbl_Location.Text = "Ubicación - España";
                 lbl_Username.Text = "Nombre de usuario:";
                 lbl_Password.Text = "Contraseña:";
                 btn_Submit.Text = "Enviar";
