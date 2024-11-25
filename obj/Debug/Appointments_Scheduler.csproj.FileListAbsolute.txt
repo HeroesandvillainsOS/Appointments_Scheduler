@@ -40,3 +40,4 @@ C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Sche
 C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointm.FC54E542.Up2Date
 C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Scheduler.exe
 C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Scheduler.pdb
+C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Scheduler.Login.resources
