@@ -63,7 +63,6 @@
             this.lbl_Password.Size = new System.Drawing.Size(126, 29);
             this.lbl_Password.TabIndex = 2;
             this.lbl_Password.Text = "Password:";
-            this.lbl_Password.Click += new System.EventHandler(this.lbl_Password_Click);
             // 
             // txtBox_Password
             // 

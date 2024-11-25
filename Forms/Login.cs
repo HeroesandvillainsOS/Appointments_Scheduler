@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
@@ -50,24 +53,27 @@ namespace Appointments_Scheduler
                 lbl_Username.Text = "Username:";
                 lbl_Password.Text = "Password:";
                 btn_Submit.Text = "Submit";
+            } 
+            
+            // Queries the user table and returns the results to a list
+            User myUser = new User();
+            List<User> users = myUser.GetUsers();
+            foreach (User user in users)
+            {
+                Console.WriteLine(user.UserName);
             }
         }
 
         private void btn_Submit_MouseEnter(object sender, EventArgs e)
         {
             // Sets the cursor to the Hand icon when hovering over the Submit button 
-            Cursor = Cursors.Hand;
+            Cursor = Cursors.Hand;   
         }
 
         private void btn_Submit_MouseLeave(object sender, EventArgs e)
         {
             // Sets the cursor back to the default icon when exiting the Submit button area
             Cursor = Cursors.Default;
-        }
-
-        private void lbl_Password_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
