@@ -7,27 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Appointments_Scheduler
+namespace Appointments_Scheduler.Database_Table_Classes
 {
-    internal class User
+    internal class Customer
     {
-        // Stores the values of the user database table
-        public int UserId { get; set; } 
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public int CustomerID {  get; set; } // Primary Key
+        public string CustomerName { get; set; }
+        public int AddressID { get; set; } // Foreign Key
         public int Active { get; set; }
         public DateTime CreateDate { get; set; }
         public string CreatedBy { get; set; }
         public DateTime LastUpdate {  get; set; }
         public string LastUpdateBy { get; set; }
 
-        // Returns a List<User> of all records in the user database table
-        public List<User> GetUsers()
+        public List<Customer> GetCustomers()
         {
-            // Creates a new List
-            var users = new List<User>();
+            // Creates the List
+            var customers = new List<Customer>();
             // Establishes the SQL query
-            string query = "SELECT userID, userName, password, active, createDate, createdBy, lastUpdate, lastUpdateBy FROM user";
+            string query = "SELECT customerID, customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdatedBy FROM customer";
 
             // Creates a new MySQLCommand instance with the established query and connection
             using (var command = new MySqlCommand(query, DBConnection.connection))
@@ -38,27 +36,26 @@ namespace Appointments_Scheduler
                     while (reader.Read())
                     {
                         // Iterates through the database table
-                        var user = new User
+                        var customer = new Customer
                         {
-                            UserId = reader.GetInt32("userId"),
-                            UserName = reader.GetString("username"),
-                            Password = reader.GetString("password"),
+                            CustomerID = reader.GetInt32("customerID"),
+                            CustomerName = reader.GetString("customerName"),
+                            AddressID = reader.GetInt32("addressId"),
                             Active = reader.GetInt32("active"),
                             CreateDate = reader.GetDateTime("createDate"),
                             CreatedBy = reader.GetString("createdBy"),
                             LastUpdate = reader.GetDateTime("lastUpdate"),
                             LastUpdateBy = reader.GetString("lastUpdateBy")
                         };
-
-                       
                         // Adds a new user to the List
-                        users.Add(user);
+                        customers.Add(customer);
                     }
+                    // Returns the List
+                    return customers;
                 }
-            }
-            // Returns the List
-            return users;
-        }
 
+            }
+
+        }
     }
 }

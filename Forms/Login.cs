@@ -1,6 +1,8 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Appointments_Scheduler.Forms;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing.Text;
 using System.Globalization;
 using System.Threading;
@@ -22,7 +24,7 @@ namespace Appointments_Scheduler
             CultureInfo currentUICulture = Thread.CurrentThread.CurrentUICulture;
 
             // UNCOMMENT THIS BLOCK TO TEST THE PROGRAM IN SPANISH
-            /*try
+            /* try
             {
                 // Sets the system's current culture to Spanish
                 CultureInfo spanishCulture = new CultureInfo("es-ES");
@@ -32,7 +34,7 @@ namespace Appointments_Scheduler
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            } */
+            } */ 
             // UNCOMMENT THIS BLOCK TO PUT THE PROGRAM BACK INTO ENGLISH AFTER BEING FORCED INTO SPANISH
             /*finally
             {
@@ -58,20 +60,6 @@ namespace Appointments_Scheduler
             } 
         }
 
-        // Handles the Submit button Mouse Enter event
-        private void btn_Submit_MouseEnter(object sender, EventArgs e)
-        {
-            // Sets the cursor to the Hand icon when hovering over the Submit button 
-            Cursor = Cursors.Hand;   
-        }
-
-        // Handles the Submit button Mouse Leave Event
-        private void btn_Submit_MouseLeave(object sender, EventArgs e)
-        {
-            // Sets the cursor back to the default icon when exiting the Submit button area
-            Cursor = Cursors.Default;
-        }
-
         // Handles the Submit button Click event
         private void btn_Submit_Click(object sender, EventArgs e)
         {
@@ -93,7 +81,11 @@ namespace Appointments_Scheduler
                     // Verifies the password is correct for a username match
                     if (users[currentIndex].Password == currentPassword)
                     {
-                        MessageBox.Show("Success!");
+                        // Opens the Main Menu form
+                        var mainMenu = new Main_Menu();
+                        mainMenu.Show();
+                        // Closes the Login form
+                        this.Hide();
                     }
                     // Handles an incorrect password for a valid username
                     else

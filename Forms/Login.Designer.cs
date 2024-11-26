@@ -74,6 +74,7 @@
             // 
             // btn_Submit
             // 
+            this.btn_Submit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Submit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Submit.Location = new System.Drawing.Point(310, 321);
             this.btn_Submit.Name = "btn_Submit";
@@ -82,8 +83,6 @@
             this.btn_Submit.Text = "Submit";
             this.btn_Submit.UseVisualStyleBackColor = true;
             this.btn_Submit.Click += new System.EventHandler(this.btn_Submit_Click);
-            this.btn_Submit.MouseEnter += new System.EventHandler(this.btn_Submit_MouseEnter);
-            this.btn_Submit.MouseLeave += new System.EventHandler(this.btn_Submit_MouseLeave);
             // 
             // lbl_Location
             // 
