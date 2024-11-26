@@ -11,13 +11,13 @@ namespace Appointments_Scheduler.Database_Table_Classes
 {
     internal class Customer
     {
-        public int CustomerID {  get; set; } // Primary Key
+        public int CustomerID { get; set; } // Primary Key
         public string CustomerName { get; set; }
         public int AddressID { get; set; } // Foreign Key
         public int Active { get; set; }
         public DateTime CreateDate { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime LastUpdate {  get; set; }
+        public DateTime LastUpdate { get; set; }
         public string LastUpdateBy { get; set; }
 
         public List<Customer> GetCustomers()

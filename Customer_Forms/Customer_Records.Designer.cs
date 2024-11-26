@@ -1,4 +1,4 @@
-﻿namespace Appointments_Scheduler.Forms
+﻿namespace Appointments_Scheduler.Forms.Customer_Forms
 {
     partial class Customer_Records
     {
@@ -50,12 +50,11 @@
             // 
             this.lbl_AllCustomerRecords.AutoSize = true;
             this.lbl_AllCustomerRecords.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_AllCustomerRecords.Location = new System.Drawing.Point(455, 68);
+            this.lbl_AllCustomerRecords.Location = new System.Drawing.Point(450, 64);
             this.lbl_AllCustomerRecords.Name = "lbl_AllCustomerRecords";
             this.lbl_AllCustomerRecords.Size = new System.Drawing.Size(288, 32);
             this.lbl_AllCustomerRecords.TabIndex = 1;
             this.lbl_AllCustomerRecords.Text = "All Customer Records";
-            this.lbl_AllCustomerRecords.Click += new System.EventHandler(this.lbl_AllCustomerRecords_Click);
             // 
             // btn_Edit
             // 
@@ -66,6 +65,7 @@
             this.btn_Edit.TabIndex = 2;
             this.btn_Edit.Text = "Edit";
             this.btn_Edit.UseVisualStyleBackColor = true;
+            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
             // 
             // btn_Delete
             // 
@@ -76,6 +76,7 @@
             this.btn_Delete.TabIndex = 3;
             this.btn_Delete.Text = "Delete";
             this.btn_Delete.UseVisualStyleBackColor = true;
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
             // buttonAdd
             // 
@@ -86,6 +87,7 @@
             this.buttonAdd.TabIndex = 4;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // Customer_Records
             // 

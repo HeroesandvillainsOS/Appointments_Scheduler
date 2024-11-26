@@ -69,7 +69,7 @@ namespace Appointments_Scheduler.Forms
 
         private void btn_CustomerRecords_Click(object sender, EventArgs e)
         {
-            var customerRecords = new Customer_Records();
+            var customerRecords = new Customer_Forms.Customer_Records();
             customerRecords.Show();
         }
     }
