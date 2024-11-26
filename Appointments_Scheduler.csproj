@@ -98,29 +98,65 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Entry_Forms\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App_Entry_Forms\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App_Entry_Forms\Main_Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App_Entry_Forms\Main_Menu.Designer.cs">
+      <DependentUpon>Main_Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customer_Forms\Add_Customer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer_Forms\Add_Customer.Designer.cs">
+      <DependentUpon>Add_Customer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Database_Connection\DBConnection.cs" />
     <Compile Include="Database_Table_Classes\Customer.cs" />
     <Compile Include="Database_Table_Classes\User.cs" />
-    <Compile Include="Forms\Login.cs">
+    <Compile Include="Customer_Forms\Customer_Records.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="Customer_Forms\Customer_Records.Designer.cs">
+      <DependentUpon>Customer_Records.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Main_Menu.cs">
+    <Compile Include="Customer_Forms\Delete_Customer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Main_Menu.Designer.cs">
-      <DependentUpon>Main_Menu.cs</DependentUpon>
+    <Compile Include="Customer_Forms\Delete_Customer.Designer.cs">
+      <DependentUpon>Delete_Customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customer_Forms\Edit_Customer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer_Forms\Edit_Customer.Designer.cs">
+      <DependentUpon>Edit_Customer.cs</DependentUpon>
     </Compile>
     <Compile Include="PC_Info\Culture.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\Login.resx">
+    <EmbeddedResource Include="App_Entry_Forms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main_Menu.resx">
+    <EmbeddedResource Include="App_Entry_Forms\Main_Menu.resx">
       <DependentUpon>Main_Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer_Forms\Add_Customer.resx">
+      <DependentUpon>Add_Customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer_Forms\Customer_Records.resx">
+      <DependentUpon>Customer_Records.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer_Forms\Delete_Customer.resx">
+      <DependentUpon>Delete_Customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer_Forms\Edit_Customer.resx">
+      <DependentUpon>Edit_Customer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -131,7 +167,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Configs\packages.config" />
+    <None Include="_Configs\packages.config" />
     <None Include="Database_Connection\App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

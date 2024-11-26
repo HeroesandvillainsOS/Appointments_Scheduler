@@ -11,13 +11,13 @@ namespace Appointments_Scheduler.Database_Table_Classes
 {
     internal class Customer
     {
-        public int CustomerID {  get; set; } // Primary Key
+        public int CustomerID { get; set; } // Primary Key
         public string CustomerName { get; set; }
         public int AddressID { get; set; } // Foreign Key
         public int Active { get; set; }
         public DateTime CreateDate { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime LastUpdate {  get; set; }
+        public DateTime LastUpdate { get; set; }
         public string LastUpdateBy { get; set; }
 
         public List<Customer> GetCustomers()
@@ -25,7 +25,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
             // Creates the List
             var customers = new List<Customer>();
             // Establishes the SQL query
-            string query = "SELECT customerID, customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdatedBy FROM customer";
+            string query = "SELECT customerID, customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy FROM customer";
 
             // Creates a new MySQLCommand instance with the established query and connection
             using (var command = new MySqlCommand(query, DBConnection.connection))
