@@ -25,7 +25,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
             // Creates the List
             var customers = new List<Customer>();
             // Establishes the SQL query
-            string query = "SELECT customerID, customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdatedBy FROM customer";
+            string query = "SELECT customerID, customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy FROM customer";
 
             // Creates a new MySQLCommand instance with the established query and connection
             using (var command = new MySqlCommand(query, DBConnection.connection))

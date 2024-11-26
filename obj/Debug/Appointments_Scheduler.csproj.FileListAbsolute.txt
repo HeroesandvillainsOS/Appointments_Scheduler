@@ -42,3 +42,4 @@ C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Sche
 C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Scheduler.pdb
 C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Scheduler.Login.resources
 C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Scheduler.Forms.Main_Menu.resources
+C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Scheduler.Forms.Customer_Records.resources

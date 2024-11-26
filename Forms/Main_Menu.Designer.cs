@@ -45,6 +45,7 @@
             this.btn_CustomerRecords.TabIndex = 0;
             this.btn_CustomerRecords.Text = "Customer Records";
             this.btn_CustomerRecords.UseVisualStyleBackColor = true;
+            this.btn_CustomerRecords.Click += new System.EventHandler(this.btn_CustomerRecords_Click);
             // 
             // btn_Appointments
             // 
