@@ -1,9 +1,11 @@
 Scenario
+
 You are working for a software company that has been contracted to develop a scheduling desktop user interface application. The contract is with a global consulting organization that conducts business in multiple languages and has main offices in the following locations: Phoenix, Arizona; New York, New York; and London, England. The consulting organization has provided a MySQL database that your C# application must pull data from. However, this database is used for other systems, so its structure cannot be modified.
 
 The organization has outlined specific business requirements that must be included as part of the application. From these requirements, a system analyst at your company created solution statements for you to implement when developing the application. These statements are listed in the “Requirements” section.
 
 Requirements
+
 Your submission must be your original work. No more than a combined total of 30% of the submission and no more than a 10% match to any one individual source can be directly quoted or closely paraphrased from sources, even if cited correctly. The similarity report that is provided when you submit your task can be used as a guide.
 
 You must use the rubric to direct the creation of your submission because it provides detailed criteria that will be used to evaluate your work. Each requirement below may be evaluated by more than one rubric aspect. The rubric aspect titles may contain hyperlinks to relevant portions of the course.
