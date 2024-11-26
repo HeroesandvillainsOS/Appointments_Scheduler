@@ -81,6 +81,7 @@
             this.btn_Submit.TabIndex = 4;
             this.btn_Submit.Text = "Submit";
             this.btn_Submit.UseVisualStyleBackColor = true;
+            this.btn_Submit.Click += new System.EventHandler(this.btn_Submit_Click);
             this.btn_Submit.MouseEnter += new System.EventHandler(this.btn_Submit_MouseEnter);
             this.btn_Submit.MouseLeave += new System.EventHandler(this.btn_Submit_MouseLeave);
             // 

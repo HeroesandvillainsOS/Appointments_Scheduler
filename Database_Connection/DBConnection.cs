@@ -23,7 +23,7 @@ namespace Appointments_Scheduler.Database
                 // Opens the database connection
                 connection = new MySqlConnection(connectionString);
                 connection.Open();
-                MessageBox.Show("Connection successful!", "Database Test");
+                //MessageBox.Show("Connection successful!", "Database Test");
 
             }
             catch (MySqlException ex)
