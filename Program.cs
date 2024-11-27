@@ -17,8 +17,11 @@ namespace Appointments_Scheduler
         {         
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            // Opens database connection on startup
             DBConnection.StartConnection();
+            // Opens the Login.cs form
             Application.Run(new Login());
+            // Closes database connection on exit
             DBConnection.CloseConnection();
         }
     }

@@ -19,9 +19,9 @@ namespace Appointments_Scheduler.Database
             {
                 // Stores the connection string data from App.config
                 string connectionString = ConfigurationManager.ConnectionStrings["localDb"].ConnectionString;
-
-                // Opens the database connection
+                // Creates the database connection object
                 connection = new MySqlConnection(connectionString);
+                // Opens the database connection
                 connection.Open();
                 //MessageBox.Show("Connection successful!", "Database Test");
 
@@ -46,9 +46,9 @@ namespace Appointments_Scheduler.Database
             }
             catch (MySqlException ex)
             {
-                // Returns a MessageBox error if no database connection can be established
+                // Returns a MessageBox error if no database connection can be found
                 MessageBox.Show($"An error occurred: {ex.Message}", "Database Error");
-                return; // Exit if the database connection fails
+                return; // Exit if a database connection can't be found
             }
         }
     }

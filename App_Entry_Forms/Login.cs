@@ -1,9 +1,8 @@
-﻿using Appointments_Scheduler.Forms;
+﻿using Appointments_Scheduler.Database;
+using Appointments_Scheduler.Forms;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing.Text;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
@@ -67,19 +66,42 @@ namespace Appointments_Scheduler
             string currentUsername = txtBox_Username.Text.Trim();
             string currentPassword = txtBox_Password.Text.Trim();
 
-            // Creates a new User object and a List to store the user database information
-            User myUser = new User();
-            List<User> users = myUser.GetUsers();
+            // Establishes the user database table SQL query
+            string query = "SELECT * FROM user";
 
-            // Iterates through the database list to find a username match
-            foreach (User user in users)
+            // Creates a new MySQLCommand instance with the established query and database connection
+            MySqlCommand command = new MySqlCommand(query, DBConnection.connection);
+
+            // Creates a reader object for the MySQLCommand instance
+            var reader = command.ExecuteReader();
+
+            // Creates a Binding List to store the user table data
+            BindingList<User> allUsers = new BindingList<User>();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    // Adds the user table data to the Binding List
+                    allUsers.Add(new User(reader.GetInt32("userId"), reader.GetString("username"), reader.GetString("password"),
+                            reader.GetInt32("active"), reader.GetDateTime("createDate"), reader.GetString("createdBy"),
+                            reader.GetDateTime("lastUpdate"), reader.GetString("lastUpdateBy")));
+                }
+            }
+            else
+            {
+                MessageBox.Show("The user table has no rows.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // Iterates through the Binding List to find a username match
+            foreach (User user in allUsers)
             {
                 if (currentUsername == user.UserName)
                 {
-                    int currentIndex = users.IndexOf(user);
+                    int currentIndex = allUsers.IndexOf(user);
 
                     // Verifies the password is correct for a username match
-                    if (users[currentIndex].Password == currentPassword)
+                    if (allUsers[currentIndex].Password == currentPassword)
                     {
                         // Opens the Main Menu form
                         var mainMenu = new Main_Menu();
@@ -113,6 +135,7 @@ namespace Appointments_Scheduler
                     }
                 }
             }
+            reader.Close();
         }
     }
 }
