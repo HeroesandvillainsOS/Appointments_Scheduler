@@ -53,6 +53,12 @@ namespace Appointments_Scheduler.Forms.Customer_Forms
             dgv_Customers.DataSource = allCustomers;            
         }
 
+        // Unselects the automatically selected first row on the Data Grid View
+        private void OnDataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dgv_Customers.ClearSelection();
+        }
+
         // Handles the Add button click event
         private void buttonAdd_Click(object sender, EventArgs e)
         {
@@ -64,9 +70,31 @@ namespace Appointments_Scheduler.Forms.Customer_Forms
         // Handles the Edit Button click event
         private void btn_Edit_Click(object sender, EventArgs e)
         {
-            // Opens the Edit_Customer form
-            var editCustomer = new Edit_Customer();
-            editCustomer.Show();
+            if (dgv_Customers.SelectedRows.Count > 0)
+            {
+                // Gets the selected Data Grid View row
+                DataGridViewRow selectedRow = dgv_Customers.SelectedRows[0];
+
+                // Extracts the data from the row
+                string customerID = selectedRow.Cells["customerID"].Value.ToString();
+                string customerName = selectedRow.Cells["customerName"].Value.ToString();
+                string addressID = selectedRow.Cells["addressID"].Value.ToString();
+                int active = Convert.ToInt32(selectedRow.Cells["active"].Value);
+                string createDate = selectedRow.Cells["createDate"].Value.ToString();
+                string createdBy = selectedRow.Cells["createdBy"].Value.ToString();
+                string lastUpdate = selectedRow.Cells["lastUpdate"].Value.ToString();
+                string lastUpdateBy = selectedRow.Cells["lastUpdateBy"].Value.ToString();
+
+                // Opens the Edit_Customer form
+                var editCustomer = new Edit_Customer(customerID, customerName, addressID, active, createDate, createdBy,
+                    lastUpdate, lastUpdateBy);
+                editCustomer.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please select a customer to edit.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+          
 
         }
 
