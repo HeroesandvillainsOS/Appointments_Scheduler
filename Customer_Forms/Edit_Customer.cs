@@ -22,6 +22,9 @@ namespace Appointments_Scheduler.Forms.Customer_Records
             txtBox_CreatedBy.Text = customer[5];
             txtBox_LastUpdate.Text = customer[6];
             txtBox_LastUpdateBy.Text = customer[7];
+
+            // Deselects the customerName text box which is selected by default
+            txtBox_CustomerName.Select(0, 0);
         }
     }
 }

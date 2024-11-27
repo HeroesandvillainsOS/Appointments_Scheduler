@@ -189,12 +189,15 @@
             // 
             // txtBox_CustomerID
             // 
+            this.txtBox_CustomerID.Enabled = false;
             this.txtBox_CustomerID.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox_CustomerID.Location = new System.Drawing.Point(369, 55);
             this.txtBox_CustomerID.Name = "txtBox_CustomerID";
             this.txtBox_CustomerID.ReadOnly = true;
             this.txtBox_CustomerID.Size = new System.Drawing.Size(124, 34);
             this.txtBox_CustomerID.TabIndex = 18;
+            this.txtBox_CustomerID.Text = "Auto";
+            this.txtBox_CustomerID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_CustomerID
             // 
