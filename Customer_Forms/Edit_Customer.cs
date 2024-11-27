@@ -1,27 +1,27 @@
-﻿using System.Windows.Forms;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Appointments_Scheduler.Forms.Customer_Records
 {
     public partial class Edit_Customer : Form
     {
-        public Edit_Customer(string customerID, string customerName, string addressID, int active, string createDate,
-            string createdBy, string lastUpdate, string lastUpdateBy)
+        public Edit_Customer(List<String> customer)
         {
             InitializeComponent();
 
             // Fills the form with the selected customer's data
-            txtBox_CustomerID.Text = customerID;
-            txtBox_CustomerName.Text = customerName;
-            txtBox_AddressID.Text = addressID;
-            if (active == 0)
+            txtBox_CustomerID.Text = customer[0];
+            txtBox_CustomerName.Text = customer[1];
+            txtBox_AddressID.Text = customer[2];
+            if (Convert.ToInt32(customer[3]) == 0)
                 radioBtn_Active.Checked = false;
             else
                 radioBtn_Active.Checked = true;
-            txtBox_CreateDate.Text = createDate;
-            txtBox_CreatedBy.Text = createdBy;
-            txtBox_LastUpdate.Text = lastUpdate;
-            txtBox_LastUpdateBy.Text = lastUpdateBy;
+            txtBox_CreateDate.Text = customer[4];
+            txtBox_CreatedBy.Text = customer[5];
+            txtBox_LastUpdate.Text = customer[6];
+            txtBox_LastUpdateBy.Text = customer[7];
         }
     }
 }

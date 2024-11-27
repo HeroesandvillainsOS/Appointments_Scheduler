@@ -1,6 +1,4 @@
-﻿using Appointments_Scheduler.Database;
-using Appointments_Scheduler.Forms;
-using MySql.Data.MySqlClient;
+﻿using Appointments_Scheduler.Forms;
 using System;
 using System.ComponentModel;
 using System.Globalization;
@@ -34,6 +32,7 @@ namespace Appointments_Scheduler
             {
                 MessageBox.Show(ex.Message);
             } */ 
+
             // UNCOMMENT THIS BLOCK TO PUT THE PROGRAM BACK INTO ENGLISH AFTER BEING FORCED INTO SPANISH
             /*finally
             {
@@ -66,32 +65,7 @@ namespace Appointments_Scheduler
             string currentUsername = txtBox_Username.Text.Trim();
             string currentPassword = txtBox_Password.Text.Trim();
 
-            // Establishes the user database table SQL query
-            string query = "SELECT * FROM user";
-
-            // Creates a new MySQLCommand instance with the established query and database connection
-            MySqlCommand command = new MySqlCommand(query, DBConnection.connection);
-
-            // Creates a reader object for the MySQLCommand instance
-            var reader = command.ExecuteReader();
-
-            // Creates a Binding List to store the user table data
-            BindingList<User> allUsers = new BindingList<User>();
-
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    // Adds the user table data to the Binding List
-                    allUsers.Add(new User(reader.GetInt32("userId"), reader.GetString("username"), reader.GetString("password"),
-                            reader.GetInt32("active"), reader.GetDateTime("createDate"), reader.GetString("createdBy"),
-                            reader.GetDateTime("lastUpdate"), reader.GetString("lastUpdateBy")));
-                }
-            }
-            else
-            {
-                MessageBox.Show("The user table has no rows.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            BindingList<User> allUsers = User.GetAllUsers();
 
             // Iterates through the Binding List to find a username match
             foreach (User user in allUsers)
@@ -135,7 +109,6 @@ namespace Appointments_Scheduler
                     }
                 }
             }
-            reader.Close();
         }
     }
 }
