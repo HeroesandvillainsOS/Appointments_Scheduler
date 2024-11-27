@@ -38,8 +38,8 @@
             this.txtBox_CreateDate = new System.Windows.Forms.TextBox();
             this.lbl_CreateDate = new System.Windows.Forms.Label();
             this.lbl_Active = new System.Windows.Forms.Label();
-            this.txtBox_Address = new System.Windows.Forms.TextBox();
-            this.lbl_Address = new System.Windows.Forms.Label();
+            this.txtBox_AddressID = new System.Windows.Forms.TextBox();
+            this.lbl_AddressID = new System.Windows.Forms.Label();
             this.txtBox_CustomerName = new System.Windows.Forms.TextBox();
             this.lbl_CustomerName = new System.Windows.Forms.Label();
             this.txtBox_CustomerID = new System.Windows.Forms.TextBox();
@@ -143,24 +143,24 @@
             this.lbl_Active.TabIndex = 23;
             this.lbl_Active.Text = "Active";
             // 
-            // txtBox_Address
+            // txtBox_AddressID
             // 
-            this.txtBox_Address.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBox_Address.Location = new System.Drawing.Point(369, 166);
-            this.txtBox_Address.Name = "txtBox_Address";
-            this.txtBox_Address.ReadOnly = true;
-            this.txtBox_Address.Size = new System.Drawing.Size(270, 34);
-            this.txtBox_Address.TabIndex = 22;
+            this.txtBox_AddressID.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBox_AddressID.Location = new System.Drawing.Point(369, 166);
+            this.txtBox_AddressID.Name = "txtBox_AddressID";
+            this.txtBox_AddressID.ReadOnly = true;
+            this.txtBox_AddressID.Size = new System.Drawing.Size(124, 34);
+            this.txtBox_AddressID.TabIndex = 22;
             // 
-            // lbl_Address
+            // lbl_AddressID
             // 
-            this.lbl_Address.AutoSize = true;
-            this.lbl_Address.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Address.Location = new System.Drawing.Point(162, 166);
-            this.lbl_Address.Name = "lbl_Address";
-            this.lbl_Address.Size = new System.Drawing.Size(102, 29);
-            this.lbl_Address.TabIndex = 21;
-            this.lbl_Address.Text = "Address";
+            this.lbl_AddressID.AutoSize = true;
+            this.lbl_AddressID.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_AddressID.Location = new System.Drawing.Point(162, 166);
+            this.lbl_AddressID.Name = "lbl_AddressID";
+            this.lbl_AddressID.Size = new System.Drawing.Size(131, 29);
+            this.lbl_AddressID.TabIndex = 21;
+            this.lbl_AddressID.Text = "Address ID";
             // 
             // txtBox_CustomerName
             // 
@@ -225,8 +225,8 @@
             this.Controls.Add(this.txtBox_CreateDate);
             this.Controls.Add(this.lbl_CreateDate);
             this.Controls.Add(this.lbl_Active);
-            this.Controls.Add(this.txtBox_Address);
-            this.Controls.Add(this.lbl_Address);
+            this.Controls.Add(this.txtBox_AddressID);
+            this.Controls.Add(this.lbl_AddressID);
             this.Controls.Add(this.txtBox_CustomerName);
             this.Controls.Add(this.lbl_CustomerName);
             this.Controls.Add(this.txtBox_CustomerID);
@@ -250,8 +250,8 @@
         private System.Windows.Forms.TextBox txtBox_CreateDate;
         private System.Windows.Forms.Label lbl_CreateDate;
         private System.Windows.Forms.Label lbl_Active;
-        private System.Windows.Forms.TextBox txtBox_Address;
-        private System.Windows.Forms.Label lbl_Address;
+        private System.Windows.Forms.TextBox txtBox_AddressID;
+        private System.Windows.Forms.Label lbl_AddressID;
         private System.Windows.Forms.TextBox txtBox_CustomerName;
         private System.Windows.Forms.Label lbl_CustomerName;
         private System.Windows.Forms.TextBox txtBox_CustomerID;

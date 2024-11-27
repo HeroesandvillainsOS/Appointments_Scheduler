@@ -45,6 +45,7 @@
             this.dgv_Customers.RowTemplate.Height = 24;
             this.dgv_Customers.Size = new System.Drawing.Size(1147, 392);
             this.dgv_Customers.TabIndex = 0;
+            this.dgv_Customers.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.OnDataBindingComplete);
             // 
             // lbl_AllCustomerRecords
             // 
