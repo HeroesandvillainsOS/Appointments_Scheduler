@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 using Appointments_Scheduler.Customer_Forms;
+using Appointments_Scheduler.Database;
 using Appointments_Scheduler.Database_Table_Classes;
 using Appointments_Scheduler.Forms.Customer_Records;
+using MySql.Data.MySqlClient;
 
 
 namespace Appointments_Scheduler.Forms.Customer_Forms
@@ -14,16 +16,41 @@ namespace Appointments_Scheduler.Forms.Customer_Forms
         {
             InitializeComponent();
 
-            Customer customer = new Customer();
-            List<Customer> customerList = customer.GetCustomers();
-
-            // Loads the customer database table into the Data Grid View
-            dgv_Customers.DataSource = customerList;
-
             // Data Grid View settings
             dgv_Customers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_Customers.ReadOnly = true;  
+            dgv_Customers.ReadOnly = true;
             dgv_Customers.MultiSelect = false;
+
+            // Establishes the SQL query
+            string query = "SELECT * FROM customer";
+
+            // Creates a new MySQLCommand instance with the established query and database connection
+            MySqlCommand command = new MySqlCommand(query, DBConnection.connection);
+
+            // Creates a reader object for the MySQLCommand instance
+            var reader = command.ExecuteReader();
+
+            // Creates a Binding List to store the customer table data
+            BindingList<Customer> allCustomers = new BindingList<Customer>();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    // Adds the customer table data to the Binding List
+                    allCustomers.Add(new Customer(reader.GetInt32("customerID"), reader.GetString("customerName"), reader.GetInt32("addressId"),
+                        reader.GetInt32("active"), reader.GetDateTime("createDate"), reader.GetString("createdBy"), reader.GetDateTime("lastUpdate"),
+                        reader.GetString("lastUpdateBy")));
+                }
+            }
+            else
+            {
+                MessageBox.Show("The customer table has no rows.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            reader.Close();
+            // Displays the Binding List on the Data Grid View
+            dgv_Customers.DataSource = allCustomers;            
         }
 
         // Handles the Add button click event
