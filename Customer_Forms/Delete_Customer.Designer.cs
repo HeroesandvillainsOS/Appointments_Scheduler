@@ -44,7 +44,7 @@
             this.lbl_CustomerName = new System.Windows.Forms.Label();
             this.txtBox_CustomerID = new System.Windows.Forms.TextBox();
             this.lbl_CustomerID = new System.Windows.Forms.Label();
-            this.txtBox_Active = new System.Windows.Forms.TextBox();
+            this.radioBtn_Active = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // btn_Delete
@@ -59,6 +59,7 @@
             // 
             // txtBox_LastUpdateBy
             // 
+            this.txtBox_LastUpdateBy.Enabled = false;
             this.txtBox_LastUpdateBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox_LastUpdateBy.Location = new System.Drawing.Point(369, 471);
             this.txtBox_LastUpdateBy.Name = "txtBox_LastUpdateBy";
@@ -68,6 +69,7 @@
             // 
             // txtBox_LastUpdate
             // 
+            this.txtBox_LastUpdate.Enabled = false;
             this.txtBox_LastUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox_LastUpdate.Location = new System.Drawing.Point(369, 407);
             this.txtBox_LastUpdate.Name = "txtBox_LastUpdate";
@@ -97,6 +99,7 @@
             // 
             // txtBox_CreatedBy
             // 
+            this.txtBox_CreatedBy.Enabled = false;
             this.txtBox_CreatedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox_CreatedBy.Location = new System.Drawing.Point(369, 343);
             this.txtBox_CreatedBy.Name = "txtBox_CreatedBy";
@@ -116,6 +119,7 @@
             // 
             // txtBox_CreateDate
             // 
+            this.txtBox_CreateDate.Enabled = false;
             this.txtBox_CreateDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox_CreateDate.Location = new System.Drawing.Point(369, 281);
             this.txtBox_CreateDate.Name = "txtBox_CreateDate";
@@ -145,6 +149,7 @@
             // 
             // txtBox_AddressID
             // 
+            this.txtBox_AddressID.Enabled = false;
             this.txtBox_AddressID.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox_AddressID.Location = new System.Drawing.Point(369, 166);
             this.txtBox_AddressID.Name = "txtBox_AddressID";
@@ -164,6 +169,7 @@
             // 
             // txtBox_CustomerName
             // 
+            this.txtBox_CustomerName.Enabled = false;
             this.txtBox_CustomerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox_CustomerName.Location = new System.Drawing.Point(369, 105);
             this.txtBox_CustomerName.Name = "txtBox_CustomerName";
@@ -183,6 +189,8 @@
             // 
             // txtBox_CustomerID
             // 
+            this.txtBox_CustomerID.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtBox_CustomerID.Enabled = false;
             this.txtBox_CustomerID.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox_CustomerID.Location = new System.Drawing.Point(369, 44);
             this.txtBox_CustomerID.Name = "txtBox_CustomerID";
@@ -200,21 +208,25 @@
             this.lbl_CustomerID.TabIndex = 17;
             this.lbl_CustomerID.Text = "Customer ID";
             // 
-            // txtBox_Active
+            // radioBtn_Active
             // 
-            this.txtBox_Active.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBox_Active.Location = new System.Drawing.Point(369, 225);
-            this.txtBox_Active.Name = "txtBox_Active";
-            this.txtBox_Active.ReadOnly = true;
-            this.txtBox_Active.Size = new System.Drawing.Size(124, 34);
-            this.txtBox_Active.TabIndex = 34;
+            this.radioBtn_Active.AutoSize = true;
+            this.radioBtn_Active.Enabled = false;
+            this.radioBtn_Active.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioBtn_Active.Location = new System.Drawing.Point(369, 230);
+            this.radioBtn_Active.Name = "radioBtn_Active";
+            this.radioBtn_Active.Size = new System.Drawing.Size(181, 24);
+            this.radioBtn_Active.TabIndex = 34;
+            this.radioBtn_Active.TabStop = true;
+            this.radioBtn_Active.Text = "Customer is Active?";
+            this.radioBtn_Active.UseVisualStyleBackColor = true;
             // 
             // Delete_Customer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 647);
-            this.Controls.Add(this.txtBox_Active);
+            this.Controls.Add(this.radioBtn_Active);
             this.Controls.Add(this.btn_Delete);
             this.Controls.Add(this.txtBox_LastUpdateBy);
             this.Controls.Add(this.txtBox_LastUpdate);
@@ -256,6 +268,6 @@
         private System.Windows.Forms.Label lbl_CustomerName;
         private System.Windows.Forms.TextBox txtBox_CustomerID;
         private System.Windows.Forms.Label lbl_CustomerID;
-        private System.Windows.Forms.TextBox txtBox_Active;
+        private System.Windows.Forms.RadioButton radioBtn_Active;
     }
 }

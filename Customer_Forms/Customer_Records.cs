@@ -4,14 +4,21 @@ using System.Windows.Forms;
 using Appointments_Scheduler.Customer_Forms;
 using Appointments_Scheduler.Database_Table_Classes;
 using Appointments_Scheduler.Forms.Customer_Records;
+using System.Collections.Generic;
 
 namespace Appointments_Scheduler.Forms.Customer_Forms
 {
     public partial class Customer_Records : Form
     {
+        public static Customer_Records Instance { get; private set; } // Singleton instance
+        public BindingList<Customer> AllCustomers {  get; private set; }
+        public DataGridView DgvCustomers => dgv_Customers; // Expose the DataGridView
+
         public Customer_Records()
         {
             InitializeComponent();
+
+            Instance = this;
 
             // Data Grid View settings
             dgv_Customers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -19,9 +26,9 @@ namespace Appointments_Scheduler.Forms.Customer_Forms
             dgv_Customers.MultiSelect = false;
 
             // Gets all customers from the customer database table
-            BindingList<Customer> allCustomers = Customer.GetAllCustomers();
+            AllCustomers = Customer.GetAllCustomers();
             // Displays the Binding List of all customers on the Data Grid View
-            dgv_Customers.DataSource = allCustomers;            
+            dgv_Customers.DataSource = AllCustomers;
         }
 
         // Unselects the automatically selected first row on the Data Grid View
@@ -41,30 +48,49 @@ namespace Appointments_Scheduler.Forms.Customer_Forms
         // Handles the Edit Button click event
         private void btn_Edit_Click(object sender, EventArgs e)
         {
-            if (dgv_Customers.SelectedRows.Count > 0)
+            DataGridViewRow selectedRow;
+
+            try
             {
                 // Gets the selected Data Grid View row
-                DataGridViewRow selectedRow = dgv_Customers.SelectedRows[0];
-
-                // Retrieves a string List of the selected row's customer data
-                System.Collections.Generic.List<String> customerDetails = Customer.GetSelectedRowData(selectedRow);
-
-                // Opens the Edit_Customer form, passing on the List
-                var editCustomer = new Edit_Customer(customerDetails);
-                editCustomer.Show();
+                selectedRow = dgv_Customers.SelectedRows[0];
             }
-            else
+            catch (ArgumentOutOfRangeException)
             {
                 MessageBox.Show("Please select a customer to edit.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+
+            // Retrieves a string List of the selected row's customer data
+            List<String> customerDetails = Customer.GetSelectedRowData(selectedRow);
+
+            // Opens the Edit_Customer form, passing on the List
+            var editCustomer = new Edit_Customer(customerDetails);
+            editCustomer.Show();
+
         }
 
         // Handles the Delete Button click event
         private void btn_Delete_Click(object sender, EventArgs e)
         {
+            DataGridViewRow selectedRow;
+
+            try
+            {
+                // Gets the selected Data Grid View row
+                selectedRow = dgv_Customers.SelectedRows[0];
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Please select a customer to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Retrieves a string List of the selected row's customer data
+            List<String> customerDetails = Customer.GetSelectedRowData(selectedRow);
 
             // Opens the Delete_Customer form
-            var deleteCustomer = new Delete_Customer();
+            var deleteCustomer = new Delete_Customer(customerDetails);
             deleteCustomer.Show();
 
         }
