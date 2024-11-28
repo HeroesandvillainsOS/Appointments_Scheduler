@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Appointments_Scheduler.Database_Table_Classes
 {
-    internal class Customer
+    public class Customer
     {
         public int CustomerID { get; set; } // Primary Key
         public string CustomerName { get; set; }
@@ -18,10 +18,24 @@ namespace Appointments_Scheduler.Database_Table_Classes
         public DateTime LastUpdate { get; set; }
         public string LastUpdateBy { get; set; }
 
+        // Constructor for existing customers (requires customerID)
         public Customer(int customerID, string customerName, int addressID, int active, DateTime createDate, 
             string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
             CustomerID = customerID;
+            CustomerName = customerName;
+            AddressID = addressID;
+            Active = active;
+            CreateDate = createDate;
+            CreatedBy = createdBy;
+            LastUpdate = lastUpdate;
+            LastUpdateBy = lastUpdateBy;
+        }
+
+        // Constructor for new customers (doesn't requre customerID)
+        public Customer(string customerName, int addressID, int active, DateTime createDate,
+            string createdBy, DateTime lastUpdate, string lastUpdateBy)
+        {
             CustomerName = customerName;
             AddressID = addressID;
             Active = active;
@@ -93,6 +107,28 @@ namespace Appointments_Scheduler.Database_Table_Classes
 
             // Returns the List
             return customerDetails;       
+        }
+
+        // Inserts the added customer into the customer database table and returns the new customerID
+        public static int AddCustomerToDatabase(Customer customer)
+        {
+            string query = @"INSERT INTO customer (customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy)
+                            VALUES (@customerName, @addressID, @active, @createDate, @createdBy, @lastUpdate, @lastUpdateBy);
+                            SELECT LAST_INSERT_ID();"; // Gets the auto-generated customerID
+
+            using (var command = new MySqlCommand(query, DBConnection.connection))
+            {
+                command.Parameters.AddWithValue("@customerName", customer.CustomerName);
+                command.Parameters.AddWithValue("@addressId", customer.AddressID);
+                command.Parameters.AddWithValue("@active", customer.Active);
+                command.Parameters.AddWithValue("@createDate", customer.CreateDate);
+                command.Parameters.AddWithValue("@createdBy", customer.CreatedBy);
+                command.Parameters.AddWithValue("@lastUpdate", customer.LastUpdate);
+                command.Parameters.AddWithValue("@lastUpdateBy", customer.LastUpdateBy);
+
+                // Returns the auto-generated customerID
+                return Convert.ToInt32(command.ExecuteScalar());
+            }
         }
     }
 }

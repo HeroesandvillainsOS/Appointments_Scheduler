@@ -56,6 +56,7 @@
             this.btn_Add.TabIndex = 33;
             this.btn_Add.Text = "Add";
             this.btn_Add.UseVisualStyleBackColor = true;
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
             // 
             // txtBox_LastUpdateBy
             // 
