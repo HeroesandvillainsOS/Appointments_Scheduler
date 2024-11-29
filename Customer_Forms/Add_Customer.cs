@@ -15,7 +15,7 @@ namespace Appointments_Scheduler.Customer_Forms
         // Adds a customer to the customer database table, to the Binding List, and to the Data Grid View
         private void btn_Add_Click(object sender, System.EventArgs e)
         {
-            // Retrieves the input customer data
+            // Retrieves the user input customer data
             string customerName = txtBox_CustomerName.Text;
             int addressID = Convert.ToInt32(txtBox_AddressID.Text);
             int active;
@@ -34,7 +34,7 @@ namespace Appointments_Scheduler.Customer_Forms
             // Adds the customer to the database and retrieves the generated customerID
             newCustomer.CustomerID = Customer.AddCustomerToDatabase(newCustomer);
 
-            // Adds the new customer to the BindingList instance
+            // Adds the new customer to the BindingList instance with the returned customerID
             Customer_Records.Instance.AllCustomers.Add(newCustomer);
 
             // Ensures the form closes after adding the customer data

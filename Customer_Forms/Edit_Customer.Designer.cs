@@ -1,4 +1,4 @@
-﻿namespace Appointments_Scheduler.Forms.Customer_Records
+﻿namespace Appointments_Scheduler.Customer_Forms
 {
     partial class Edit_Customer
     {
@@ -56,6 +56,7 @@
             this.btn_Edit.TabIndex = 33;
             this.btn_Edit.Text = "Edit";
             this.btn_Edit.UseVisualStyleBackColor = true;
+            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
             // 
             // txtBox_LastUpdateBy
             // 

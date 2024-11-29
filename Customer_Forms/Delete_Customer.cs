@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace Appointments_Scheduler.Forms.Customer_Records
+namespace Appointments_Scheduler.Customer_Forms
 {
     public partial class Delete_Customer : Form
     {

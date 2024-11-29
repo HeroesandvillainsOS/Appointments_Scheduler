@@ -137,6 +137,7 @@
     <Compile Include="Customer_Forms\Edit_Customer.Designer.cs">
       <DependentUpon>Edit_Customer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Customer_Records\Instance.cs" />
     <Compile Include="PC_Info\Culture.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

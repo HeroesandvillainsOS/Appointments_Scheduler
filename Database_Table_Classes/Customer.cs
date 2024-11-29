@@ -81,7 +81,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
             return allCustomers;
         }
 
-        // Returns a string List of customer data from the selected Data Grid View row
+        // Returns a string List of a single customer's data from the selected Data Grid View row
         public static List<String> GetSelectedRowData(DataGridViewRow selectedRow)
         {
             // Extracts the data from the row
@@ -128,6 +128,26 @@ namespace Appointments_Scheduler.Database_Table_Classes
 
                 // Returns the auto-generated customerID
                 return Convert.ToInt32(command.ExecuteScalar());
+            }
+        }
+
+        public static void EditCustomerInDatabase(Customer customer)
+        {
+            string query = @"UPDATE customer 
+                            SET customerName = @customerName, addressID = @addressID, active = @active, createDate = @createDate,
+                                createdBy = @createdBy, lastUpdate = @lastUpdate, lastUpdateBy = @lastUpdateBy
+                            WHERE customerID = @customerID";
+
+            using (var command = new MySqlCommand(query, DBConnection.connection))
+            {
+                command.Parameters.AddWithValue("@customerID", customer.CustomerID);
+                command.Parameters.AddWithValue("@customerName", customer.CustomerName);
+                command.Parameters.AddWithValue("@addressID", customer.AddressID);
+                command.Parameters.AddWithValue("@active", customer.Active);
+                command.Parameters.AddWithValue("@createDate", customer.CreateDate);
+                command.Parameters.AddWithValue("@createdBy", customer.CreatedBy);
+                command.Parameters.AddWithValue("@lastUpdate", customer.LastUpdate);
+                command.Parameters.AddWithValue("@lastUpdateBy", customer.LastUpdateBy);
             }
         }
     }

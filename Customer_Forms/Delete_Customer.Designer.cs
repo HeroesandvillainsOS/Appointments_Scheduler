@@ -1,4 +1,4 @@
-﻿namespace Appointments_Scheduler.Forms.Customer_Records
+﻿namespace Appointments_Scheduler.Customer_Forms
 {
     partial class Delete_Customer
     {
