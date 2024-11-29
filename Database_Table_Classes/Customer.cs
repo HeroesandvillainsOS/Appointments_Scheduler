@@ -19,7 +19,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
         public string LastUpdateBy { get; set; }
 
         // Constructor for existing customers (requires customerID)
-        public Customer(int customerID, string customerName, int addressID, int active, DateTime createDate, 
+        public Customer(int customerID, string customerName, int addressID, int active, DateTime createDate,
             string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
             CustomerID = customerID;
@@ -106,7 +106,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
             customerDetails.Add(lastUpdateBy);
 
             // Returns the List
-            return customerDetails;       
+            return customerDetails;
         }
 
         // Inserts the added customer into the customer database table and returns the new customerID
@@ -174,6 +174,59 @@ namespace Appointments_Scheduler.Database_Table_Classes
                 // Executes the SQL command
                 command.ExecuteNonQuery();
             }
+        }
+
+        public static int GetCustomerAddressID(string address, string city, int postalCode, string phone)
+        {
+            int addressID = 0;
+
+            // Determines the SQL query
+            string getAddressQuery = @"SELECT addressID FROM address
+                            WHERE address = @address
+                            AND city = @city
+                            AND postalCode = @postalCode
+                            AND phone = @phone";
+
+            // Establishes a connection to the database with a querty to execute
+            using (var command = new MySqlCommand(getAddressQuery, DBConnection.connection))
+            {
+                // Defines values for the @variables
+                command.Parameters.AddWithValue("@address", address);
+                command.Parameters.AddWithValue("@cityID", city);
+                command.Parameters.AddWithValue("@postalCode", postalCode);
+                command.Parameters.AddWithValue("@phone", phone);
+
+                object result = command.ExecuteScalar(); // can return null so storing the result to "object" prevents an exception
+
+                if (result != null)
+                {
+                    // Finds and return the addressID
+                    addressID = Convert.ToInt32(result);
+                }
+
+            }
+
+            if (addressID == 0)
+            {
+                // Establishes a connection to the database with a querty to execute
+                string insertAddressQuery = @"
+                                            INSERT INTO address (address, cityID, postalCode, phone) 
+                                            VALUES (@address, @cityID, @postalCode, @phone);
+                                            SELECT LAST_INSERT_ID();";
+
+                // Establishes a connection to the database with a querty to execute
+                using (var command = new MySqlCommand(insertAddressQuery, DBConnection.connection))
+                {
+                    // Defines values for the @variables
+                    command.Parameters.AddWithValue("@address", address);
+                    command.Parameters.AddWithValue("@cityID", city);
+                    command.Parameters.AddWithValue("@postalCode", postalCode);
+                    command.Parameters.AddWithValue("@phone", phone);
+
+                    addressID = Convert.ToInt32(command.ExecuteScalar());
+                }
+            }
+            return addressID;
         }
     }
 }

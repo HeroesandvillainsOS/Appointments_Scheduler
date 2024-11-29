@@ -50,5 +50,10 @@ namespace Appointments_Scheduler.Customer_Forms
             // Closes the form once a customer has been deleted
             this.Close();
         }
+
+        private void txtBox_PhoneNumber_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
