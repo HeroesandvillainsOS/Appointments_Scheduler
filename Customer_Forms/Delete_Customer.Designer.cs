@@ -1,4 +1,4 @@
-﻿namespace Appointments_Scheduler.Forms.Customer_Records
+﻿namespace Appointments_Scheduler.Customer_Forms
 {
     partial class Delete_Customer
     {
@@ -56,6 +56,7 @@
             this.btn_Delete.TabIndex = 33;
             this.btn_Delete.Text = "Delete";
             this.btn_Delete.UseVisualStyleBackColor = true;
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
             // txtBox_LastUpdateBy
             // 

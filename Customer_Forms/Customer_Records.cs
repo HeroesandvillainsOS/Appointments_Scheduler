@@ -10,15 +10,16 @@ namespace Appointments_Scheduler.Forms.Customer_Forms
 {
     public partial class Customer_Records : Form
     {
-        public static Customer_Records Instance { get; private set; } // Singleton instance
-        public BindingList<Customer> AllCustomers {  get; private set; }
-        public DataGridView DgvCustomers => dgv_Customers; // Expose the DataGridView
+        // Properties to ensure the Data Grid View can display live updates when the Binding List values change
+        public static Customer_Records Instance { get; private set; } 
+        public BindingList<Customer> AllCustomers { get; private set; }
+        public DataGridView DgvCustomers => dgv_Customers; 
 
         public Customer_Records()
         {
             InitializeComponent();
 
-            Instance = this;
+            Instance = this; 
 
             // Data Grid View settings
             dgv_Customers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

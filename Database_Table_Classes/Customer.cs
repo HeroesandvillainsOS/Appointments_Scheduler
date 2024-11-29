@@ -81,7 +81,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
             return allCustomers;
         }
 
-        // Returns a string List of customer data from the selected Data Grid View row
+        // Returns a string List of a single customer's data from the selected Data Grid View row
         public static List<String> GetSelectedRowData(DataGridViewRow selectedRow)
         {
             // Extracts the data from the row
@@ -112,12 +112,15 @@ namespace Appointments_Scheduler.Database_Table_Classes
         // Inserts the added customer into the customer database table and returns the new customerID
         public static int AddCustomerToDatabase(Customer customer)
         {
+            // Establishes the SQL query
             string query = @"INSERT INTO customer (customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy)
                             VALUES (@customerName, @addressID, @active, @createDate, @createdBy, @lastUpdate, @lastUpdateBy);
                             SELECT LAST_INSERT_ID();"; // Gets the auto-generated customerID
 
+            // Opens a connection to the database and executes the query
             using (var command = new MySqlCommand(query, DBConnection.connection))
             {
+                // Defines the @ variable values
                 command.Parameters.AddWithValue("@customerName", customer.CustomerName);
                 command.Parameters.AddWithValue("@addressId", customer.AddressID);
                 command.Parameters.AddWithValue("@active", customer.Active);
@@ -126,8 +129,50 @@ namespace Appointments_Scheduler.Database_Table_Classes
                 command.Parameters.AddWithValue("@lastUpdate", customer.LastUpdate);
                 command.Parameters.AddWithValue("@lastUpdateBy", customer.LastUpdateBy);
 
-                // Returns the auto-generated customerID
+                // Returns the auto-generated customerID and executes the SQL command
                 return Convert.ToInt32(command.ExecuteScalar());
+            }
+        }
+
+        public static void EditCustomerInDatabase(Customer customer)
+        {
+            // Establishes the SQL query
+            string query = @"UPDATE customer 
+                            SET customerName = @customerName, addressID = @addressID, active = @active, createDate = @createDate,
+                                createdBy = @createdBy, lastUpdate = @lastUpdate, lastUpdateBy = @lastUpdateBy
+                            WHERE customerID = @customerID";
+
+            // Opens a connection to the database and executes the query
+            using (var command = new MySqlCommand(query, DBConnection.connection))
+            {
+                // Defines the @ variable values
+                command.Parameters.AddWithValue("@customerID", customer.CustomerID);
+                command.Parameters.AddWithValue("@customerName", customer.CustomerName);
+                command.Parameters.AddWithValue("@addressID", customer.AddressID);
+                command.Parameters.AddWithValue("@active", customer.Active);
+                command.Parameters.AddWithValue("@createDate", customer.CreateDate);
+                command.Parameters.AddWithValue("@createdBy", customer.CreatedBy);
+                command.Parameters.AddWithValue("@lastUpdate", customer.LastUpdate);
+                command.Parameters.AddWithValue("@lastUpdateBy", customer.LastUpdateBy);
+
+                // Executes the SQL command
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public static void DeleteCustomerFromDatabase(int customerID)
+        {
+            // Establishes the SQL query
+            string query = "DELETE FROM customer WHERE customerID = @customerID";
+
+            // Opens a connection to the database and executes the query
+            using (var command = new MySqlCommand(query, DBConnection.connection))
+            {
+                // Defines the @ variable values
+                command.Parameters.AddWithValue("@customerID", customerID);
+
+                // Executes the SQL command
+                command.ExecuteNonQuery();
             }
         }
     }
