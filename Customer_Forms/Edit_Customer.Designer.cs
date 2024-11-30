@@ -39,8 +39,8 @@
             this.lbl_CreateDate = new System.Windows.Forms.Label();
             this.radioBtn_Active = new System.Windows.Forms.RadioButton();
             this.lbl_Active = new System.Windows.Forms.Label();
-            this.txtBox_AddressID = new System.Windows.Forms.TextBox();
-            this.lbl_AddressID = new System.Windows.Forms.Label();
+            this.txtBox_Address = new System.Windows.Forms.TextBox();
+            this.lbl_Address = new System.Windows.Forms.Label();
             this.txtBox_CustomerName = new System.Windows.Forms.TextBox();
             this.lbl_CustomerName = new System.Windows.Forms.Label();
             this.txtBox_CustomerID = new System.Windows.Forms.TextBox();
@@ -53,6 +53,8 @@
             this.lbl_City = new System.Windows.Forms.Label();
             this.txtBox_Country = new System.Windows.Forms.TextBox();
             this.lbl_Country = new System.Windows.Forms.Label();
+            this.txtBox_Address2 = new System.Windows.Forms.TextBox();
+            this.lbl_Address2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_Edit
@@ -160,23 +162,23 @@
             this.lbl_Active.TabIndex = 23;
             this.lbl_Active.Text = "Active";
             // 
-            // txtBox_AddressID
+            // txtBox_Address
             // 
-            this.txtBox_AddressID.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBox_AddressID.Location = new System.Drawing.Point(245, 142);
-            this.txtBox_AddressID.Name = "txtBox_AddressID";
-            this.txtBox_AddressID.Size = new System.Drawing.Size(394, 34);
-            this.txtBox_AddressID.TabIndex = 22;
+            this.txtBox_Address.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBox_Address.Location = new System.Drawing.Point(245, 142);
+            this.txtBox_Address.Name = "txtBox_Address";
+            this.txtBox_Address.Size = new System.Drawing.Size(394, 34);
+            this.txtBox_Address.TabIndex = 22;
             // 
-            // lbl_AddressID
+            // lbl_Address
             // 
-            this.lbl_AddressID.AutoSize = true;
-            this.lbl_AddressID.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_AddressID.Location = new System.Drawing.Point(38, 142);
-            this.lbl_AddressID.Name = "lbl_AddressID";
-            this.lbl_AddressID.Size = new System.Drawing.Size(102, 29);
-            this.lbl_AddressID.TabIndex = 21;
-            this.lbl_AddressID.Text = "Address";
+            this.lbl_Address.AutoSize = true;
+            this.lbl_Address.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Address.Location = new System.Drawing.Point(38, 142);
+            this.lbl_Address.Name = "lbl_Address";
+            this.lbl_Address.Size = new System.Drawing.Size(102, 29);
+            this.lbl_Address.TabIndex = 21;
+            this.lbl_Address.Text = "Address";
             // 
             // txtBox_CustomerName
             // 
@@ -219,7 +221,7 @@
             // txtBox_Phone
             // 
             this.txtBox_Phone.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBox_Phone.Location = new System.Drawing.Point(245, 405);
+            this.txtBox_Phone.Location = new System.Drawing.Point(245, 480);
             this.txtBox_Phone.Name = "txtBox_Phone";
             this.txtBox_Phone.Size = new System.Drawing.Size(270, 34);
             this.txtBox_Phone.TabIndex = 37;
@@ -228,7 +230,7 @@
             // 
             this.lbl_Phone.AutoSize = true;
             this.lbl_Phone.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Phone.Location = new System.Drawing.Point(38, 405);
+            this.lbl_Phone.Location = new System.Drawing.Point(38, 480);
             this.lbl_Phone.Name = "lbl_Phone";
             this.lbl_Phone.Size = new System.Drawing.Size(176, 29);
             this.lbl_Phone.TabIndex = 36;
@@ -237,7 +239,7 @@
             // txtBox_PostalCode
             // 
             this.txtBox_PostalCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBox_PostalCode.Location = new System.Drawing.Point(245, 337);
+            this.txtBox_PostalCode.Location = new System.Drawing.Point(245, 412);
             this.txtBox_PostalCode.Name = "txtBox_PostalCode";
             this.txtBox_PostalCode.Size = new System.Drawing.Size(176, 34);
             this.txtBox_PostalCode.TabIndex = 47;
@@ -246,7 +248,7 @@
             // 
             this.lbl_PostalCode.AutoSize = true;
             this.lbl_PostalCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_PostalCode.Location = new System.Drawing.Point(38, 337);
+            this.lbl_PostalCode.Location = new System.Drawing.Point(38, 412);
             this.lbl_PostalCode.Name = "lbl_PostalCode";
             this.lbl_PostalCode.Size = new System.Drawing.Size(47, 29);
             this.lbl_PostalCode.TabIndex = 46;
@@ -255,7 +257,7 @@
             // txtBox_City
             // 
             this.txtBox_City.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBox_City.Location = new System.Drawing.Point(245, 205);
+            this.txtBox_City.Location = new System.Drawing.Point(245, 280);
             this.txtBox_City.Name = "txtBox_City";
             this.txtBox_City.Size = new System.Drawing.Size(270, 34);
             this.txtBox_City.TabIndex = 43;
@@ -264,7 +266,7 @@
             // 
             this.lbl_City.AutoSize = true;
             this.lbl_City.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_City.Location = new System.Drawing.Point(38, 205);
+            this.lbl_City.Location = new System.Drawing.Point(38, 280);
             this.lbl_City.Name = "lbl_City";
             this.lbl_City.Size = new System.Drawing.Size(53, 29);
             this.lbl_City.TabIndex = 42;
@@ -273,7 +275,7 @@
             // txtBox_Country
             // 
             this.txtBox_Country.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBox_Country.Location = new System.Drawing.Point(245, 271);
+            this.txtBox_Country.Location = new System.Drawing.Point(245, 346);
             this.txtBox_Country.Name = "txtBox_Country";
             this.txtBox_Country.Size = new System.Drawing.Size(270, 34);
             this.txtBox_Country.TabIndex = 49;
@@ -282,17 +284,37 @@
             // 
             this.lbl_Country.AutoSize = true;
             this.lbl_Country.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Country.Location = new System.Drawing.Point(38, 276);
+            this.lbl_Country.Location = new System.Drawing.Point(38, 351);
             this.lbl_Country.Name = "lbl_Country";
             this.lbl_Country.Size = new System.Drawing.Size(95, 29);
             this.lbl_Country.TabIndex = 48;
             this.lbl_Country.Text = "Country";
+            // 
+            // txtBox_Address2
+            // 
+            this.txtBox_Address2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBox_Address2.Location = new System.Drawing.Point(245, 214);
+            this.txtBox_Address2.Name = "txtBox_Address2";
+            this.txtBox_Address2.Size = new System.Drawing.Size(395, 34);
+            this.txtBox_Address2.TabIndex = 51;
+            // 
+            // lbl_Address2
+            // 
+            this.lbl_Address2.AutoSize = true;
+            this.lbl_Address2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Address2.Location = new System.Drawing.Point(38, 214);
+            this.lbl_Address2.Name = "lbl_Address2";
+            this.lbl_Address2.Size = new System.Drawing.Size(121, 29);
+            this.lbl_Address2.TabIndex = 50;
+            this.lbl_Address2.Text = "Address 2";
             // 
             // Edit_Customer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1311, 660);
+            this.Controls.Add(this.txtBox_Address2);
+            this.Controls.Add(this.lbl_Address2);
             this.Controls.Add(this.txtBox_Country);
             this.Controls.Add(this.lbl_Country);
             this.Controls.Add(this.txtBox_PostalCode);
@@ -312,8 +334,8 @@
             this.Controls.Add(this.lbl_CreateDate);
             this.Controls.Add(this.radioBtn_Active);
             this.Controls.Add(this.lbl_Active);
-            this.Controls.Add(this.txtBox_AddressID);
-            this.Controls.Add(this.lbl_AddressID);
+            this.Controls.Add(this.txtBox_Address);
+            this.Controls.Add(this.lbl_Address);
             this.Controls.Add(this.txtBox_CustomerName);
             this.Controls.Add(this.lbl_CustomerName);
             this.Controls.Add(this.txtBox_CustomerID);
@@ -338,8 +360,8 @@
         private System.Windows.Forms.Label lbl_CreateDate;
         private System.Windows.Forms.RadioButton radioBtn_Active;
         private System.Windows.Forms.Label lbl_Active;
-        private System.Windows.Forms.TextBox txtBox_AddressID;
-        private System.Windows.Forms.Label lbl_AddressID;
+        private System.Windows.Forms.TextBox txtBox_Address;
+        private System.Windows.Forms.Label lbl_Address;
         private System.Windows.Forms.TextBox txtBox_CustomerName;
         private System.Windows.Forms.Label lbl_CustomerName;
         private System.Windows.Forms.TextBox txtBox_CustomerID;
@@ -352,5 +374,7 @@
         private System.Windows.Forms.Label lbl_City;
         private System.Windows.Forms.TextBox txtBox_Country;
         private System.Windows.Forms.Label lbl_Country;
+        private System.Windows.Forms.TextBox txtBox_Address2;
+        private System.Windows.Forms.Label lbl_Address2;
     }
 }

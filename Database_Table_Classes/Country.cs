@@ -2,32 +2,30 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Appointments_Scheduler.Database_Table_Classes
 {
-    internal class City
+    internal class Country
     {
-       public static int GetCityID(string city, int countryID, DateTime createDate, string createdBy, 
-           DateTime lastUpdate, string lastUpdateBy)
+        public static int GetCountryID(string country, DateTime createDate, string createdBy, DateTime lastUpdate, 
+            string lastUpdateBy)
         {
-            int cityID = 0;
+            int countryID = 0;
 
-            string getCityQuery = @"SELECT cityID FROM city
-                                     WHERE city = @city
-                                     AND countryID = @countryID
+            string getCountryQuery = @"SELECT countryID FROM country
+                                     WHERE country = @country
                                      AND createDate = @createDate
                                      AND createdBy = @createdBy
                                      AND lastUpdate = @lastUpdate
                                      AND lastUpdateBY = @lastUpdateBy";
 
-            using (var command = new MySqlCommand(getCityQuery, DBConnection.connection))
+            using (var command = new MySqlCommand(getCountryQuery, DBConnection.connection))
             {
-                command.Parameters.AddWithValue("@city", city);
-                command.Parameters.AddWithValue("@countryID", countryID);
+                command.Parameters.AddWithValue("@country", country);
                 command.Parameters.AddWithValue("@createDate", createDate);
                 command.Parameters.AddWithValue("@createdBy", createdBy);
                 command.Parameters.AddWithValue("@lastUpdate", lastUpdate);
@@ -37,29 +35,28 @@ namespace Appointments_Scheduler.Database_Table_Classes
 
                 if (result != null)
                 {
-                    cityID = Convert.ToInt32(result);
+                    countryID = Convert.ToInt32(result);
                 }
             }
-
-            if (cityID == 0)
+            
+            if (countryID == 0)
             {
-                string insertCountryQuery = @"INSERT INTO city(city, countryID, createDate, createdBy, lastUpdate, lastUpdateBy)
-                                            VALUES(@city, @countryID, @createDate, @createdBy, @lastUpdate, @lastUpdateBy)
+                string insertCountryQuery = @"INSERT INTO country(country, createDate, createdBy, lastUpdate, lastUpdateBy)
+                                            VALUES(@country, @createDate, @createdBy, @lastUpdate, @lastUpdateBy)
                                             SELECT LAST_INSERT_ID();";
 
                 using (var command = new MySqlCommand(insertCountryQuery, DBConnection.connection))
                 {
-                    command.Parameters.AddWithValue("@city", city);
-                    command.Parameters.AddWithValue("@countryID", countryID);
+                    command.Parameters.AddWithValue("@country", country);
                     command.Parameters.AddWithValue("@createDate", createDate);
                     command.Parameters.AddWithValue("@createdBy", createdBy);
                     command.Parameters.AddWithValue("@lastUpdate", lastUpdate);
                     command.Parameters.AddWithValue("@lastUpdateBy", lastUpdateBy);
 
-                    cityID = Convert.ToInt32(command.ExecuteScalar());
+                    countryID = Convert.ToInt32(command.ExecuteScalar());
                 }
             }
-            return cityID;
-        } 
+            return countryID;
+        }
     }
 }

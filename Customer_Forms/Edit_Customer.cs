@@ -16,7 +16,7 @@ namespace Appointments_Scheduler.Customer_Forms
             // Fills the form with the selected customer's data
             txtBox_CustomerID.Text = customer[0];
             txtBox_CustomerName.Text = customer[1];
-            txtBox_AddressID.Text = customer[2];
+            txtBox_Address.Text = customer[2];
             if (Convert.ToInt32(customer[3]) == 0)
                 radioBtn_Active.Checked = false;
             else
@@ -35,7 +35,7 @@ namespace Appointments_Scheduler.Customer_Forms
             // Gets the user input customer values
             int customerID = Convert.ToInt32(txtBox_CustomerID.Text);
             string customerName = txtBox_CustomerName.Text;
-            int addressID = Convert.ToInt32(txtBox_AddressID.Text);
+            int addressID = Convert.ToInt32(txtBox_Address.Text);
             int active;
             if (radioBtn_Active.Checked)
                 active = 1;
