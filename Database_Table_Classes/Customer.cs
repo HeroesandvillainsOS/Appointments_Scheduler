@@ -176,53 +176,54 @@ namespace Appointments_Scheduler.Database_Table_Classes
             }
         }
 
-        public static int GetCustomerAddressID(string address, string city, int postalCode, string phone)
+        public static int GetAndSetCustomerAddressID(string address, int postalCode, string phone)
         {
             int addressID = 0;
 
+            // Handles what happens if the addressID already exists
+
             // Determines the SQL query
             string getAddressQuery = @"SELECT addressID FROM address
-                            WHERE address = @address
-                            AND city = @city
-                            AND postalCode = @postalCode
-                            AND phone = @phone";
+                                    WHERE address = @address
+                                    AND postalCode = @postalCode
+                                    AND phone = @phone";
 
             // Establishes a connection to the database with a querty to execute
             using (var command = new MySqlCommand(getAddressQuery, DBConnection.connection))
             {
                 // Defines values for the @variables
                 command.Parameters.AddWithValue("@address", address);
-                command.Parameters.AddWithValue("@cityID", city);
                 command.Parameters.AddWithValue("@postalCode", postalCode);
                 command.Parameters.AddWithValue("@phone", phone);
 
-                object result = command.ExecuteScalar(); // can return null so storing the result to "object" prevents an exception
+                // Executes the SQL query on the database and returns the first column of the first row of the table
+                object result = command.ExecuteScalar(); // can return null. Storing the result to "object" prevents an exception
 
                 if (result != null)
                 {
                     // Finds and return the addressID
                     addressID = Convert.ToInt32(result);
                 }
-
             }
+
+            // Handles what happens if the addressID doesn't already exist
 
             if (addressID == 0)
             {
                 // Establishes a connection to the database with a querty to execute
-                string insertAddressQuery = @"
-                                            INSERT INTO address (address, cityID, postalCode, phone) 
-                                            VALUES (@address, @cityID, @postalCode, @phone);
-                                            SELECT LAST_INSERT_ID();";
+                string insertAddressQuery = @"INSERT INTO address (address, postalCode, phone) 
+                                            VALUES (@address, @postalCode, @phone);
+                                            SELECT LAST_INSERT_ID();"; // Establishes a way to get the auto-generated addressID
 
                 // Establishes a connection to the database with a querty to execute
                 using (var command = new MySqlCommand(insertAddressQuery, DBConnection.connection))
                 {
                     // Defines values for the @variables
                     command.Parameters.AddWithValue("@address", address);
-                    command.Parameters.AddWithValue("@cityID", city);
                     command.Parameters.AddWithValue("@postalCode", postalCode);
                     command.Parameters.AddWithValue("@phone", phone);
 
+                    // Executes the SQL query on the database and returns the first column of the first row of the table
                     addressID = Convert.ToInt32(command.ExecuteScalar());
                 }
             }

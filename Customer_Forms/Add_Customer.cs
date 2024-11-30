@@ -17,7 +17,12 @@ namespace Appointments_Scheduler.Customer_Forms
         {
             // Retrieves the user input customer data
             string customerName = txtBox_CustomerName.Text;
-            int addressID = Convert.ToInt32(txtBox_AddressID.Text);
+            string address = txtBox_AddressID.Text;
+            string city = txtBox_City.Text;
+            string country = txtBox_Country.Text;
+            int postalCode = Convert.ToInt32(txtBox_PostalCode.Text);
+            string phoneNumber = txtBox_Phone.Text;
+            int addressID = Customer.GetAndSetCustomerAddressID(address, postalCode, phoneNumber);
             int active;
             if (radioBtn_Active.Checked)
                 active = 1;
