@@ -33,10 +33,10 @@ namespace Appointments_Scheduler.Customer_Forms
             DateTime lastUpdate = DateTime.Parse(txtBox_LastUpdate.Text);
             string lastUpdateBy = txtBox_LastUpdateBy.Text;
 
-            int countryID = Country.GetCountryID(country, createDate, createdBy, lastUpdate, lastUpdateBy);
-            int cityID = City.GetCityID(city, countryID, createDate, createdBy, lastUpdate, lastUpdateBy);
-            int addressID = Address.GetAddressID(address, address2, city, postalCode, phoneNumber, createDate,
-                createdBy, lastUpdate, lastUpdateBy);
+            int countryID = Country.GetCountryIDAndAddCountryToDatabase(country, createDate, createdBy, lastUpdate, lastUpdateBy);
+            int cityID = City.GetCityIDAndAddCityToDatabase(city, countryID, createDate, createdBy, lastUpdate, lastUpdateBy);
+            int addressID = Address.GetAddressIDAndAddAddressToDatabase(address, address2, cityID, postalCode, phoneNumber, 
+                createDate, createdBy, lastUpdate, lastUpdateBy);
 
             // Creates a new customer object
             Customer newCustomer = new Customer(customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy);

@@ -1,16 +1,13 @@
 ﻿using Appointments_Scheduler.Database;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Appointments_Scheduler.Database_Table_Classes
 {
     internal class Address
     {
-        public static int GetAddressID(string address, string address2, string city, int postalCode, string phone,
+        // Returns the addressID and adds the address to the database
+        public static int GetAddressIDAndAddAddressToDatabase(string address, string address2, int cityID, int postalCode, string phone,
            DateTime createDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
             int addressID = 0;
@@ -21,7 +18,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
             string getAddressQuery = @"SELECT addressID FROM address
                                     WHERE address = @address
                                     AND address2 = @address2
-                                    AND city = @city
+                                    AND cityID = @cityID
                                     AND postalCode = @postalCode
                                     AND phone = @phone
                                     AND createDate = @createDate
@@ -30,12 +27,12 @@ namespace Appointments_Scheduler.Database_Table_Classes
                                     AND lastUpdateBY = @lastUpdateBy;";
 
             // Establishes a connection to the database with a querty to execute
-            using (var command = new MySqlCommand(getAddressQuery, DBConnection.connection))
+            using (var command = new MySqlCommand(getAddressQuery, DBConnection.connection)) 
             {
                 // Defines values for the @variables
                 command.Parameters.AddWithValue("@address", address);
                 command.Parameters.AddWithValue("@address2", address2);
-                command.Parameters.AddWithValue("@city", city);
+                command.Parameters.AddWithValue("@cityID", cityID);
                 command.Parameters.AddWithValue("@postalCode", postalCode);
                 command.Parameters.AddWithValue("@phone", phone);
                 command.Parameters.AddWithValue("@createDate", createDate);
@@ -43,12 +40,11 @@ namespace Appointments_Scheduler.Database_Table_Classes
                 command.Parameters.AddWithValue("@lastUpdate", lastUpdate);
                 command.Parameters.AddWithValue("@lastUpdateBy", lastUpdateBy);
 
-                // Executes the SQL query on the database and returns the first column of the first row of the table
+                // Executes the SQL query on the database and returns the already established addressID
                 object result = command.ExecuteScalar(); // can return null. Storing the result to "object" prevents an exception
 
                 if (result != null)
                 {
-                    // Finds and return the addressID
                     addressID = Convert.ToInt32(result);
                 }
             }
@@ -58,9 +54,9 @@ namespace Appointments_Scheduler.Database_Table_Classes
             if (addressID == 0)
             {
                 // Establishes a connection to the database with a querty to execute
-                string insertAddressQuery = @"INSERT INTO address (address, address2, city, postalCode, phone, createDate, 
+                string insertAddressQuery = @"INSERT INTO address (address, address2, cityID, postalCode, phone, createDate, 
                                             createdBy, lastUpdate, lastUpdateBy) 
-                                            VALUES (@address, @address2, @city, @postalCode, @phone, @createDate, @createdBy, 
+                                            VALUES (@address, @address2, @cityID, @postalCode, @phone, @createDate, @createdBy, 
                                             @lastUpdate, @lastUpdateBy);
                                             SELECT LAST_INSERT_ID();"; // Establishes a way to get the auto-generated addressID
 
@@ -70,7 +66,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
                     // Defines values for the @variables
                     command.Parameters.AddWithValue("@address", address);
                     command.Parameters.AddWithValue("@address2", address2);
-                    command.Parameters.AddWithValue("@city", city);
+                    command.Parameters.AddWithValue("@cityID", cityID);
                     command.Parameters.AddWithValue("@postalCode", postalCode);
                     command.Parameters.AddWithValue("@phone", phone);
                     command.Parameters.AddWithValue("@createDate", createDate);
@@ -78,7 +74,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
                     command.Parameters.AddWithValue("@lastUpdate", lastUpdate);
                     command.Parameters.AddWithValue("@lastUpdateBy", lastUpdateBy);
 
-                    // Executes the SQL query on the database and returns the first column of the first row of the table
+                    // Executes the SQL query on the database and returns the first column of the first new row of the table
                     addressID = Convert.ToInt32(command.ExecuteScalar());
                 }
             }
