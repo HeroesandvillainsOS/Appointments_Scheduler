@@ -16,7 +16,7 @@ namespace Appointments_Scheduler.Customer_Forms
             // Fills the form with the selected customer's data
             txtBox_CustomerID.Text = customer[0];
             txtBox_CustomerName.Text = customer[1];
-            txtBox_AddressID.Text = customer[2];
+            txtBox_Address.Text = customer[2];
             if (Convert.ToInt32(customer[3]) == 0)
                 radioBtn_Active.Checked = false;
             else
@@ -49,6 +49,11 @@ namespace Appointments_Scheduler.Customer_Forms
 
             // Closes the form once a customer has been deleted
             this.Close();
+        }
+
+        private void txtBox_PhoneNumber_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

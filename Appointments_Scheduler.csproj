@@ -117,6 +117,9 @@
       <DependentUpon>Add_Customer.cs</DependentUpon>
     </Compile>
     <Compile Include="Database_Connection\DBConnection.cs" />
+    <Compile Include="Database_Table_Classes\Address.cs" />
+    <Compile Include="Database_Table_Classes\City.cs" />
+    <Compile Include="Database_Table_Classes\Country.cs" />
     <Compile Include="Database_Table_Classes\Customer.cs" />
     <Compile Include="Database_Table_Classes\User.cs" />
     <Compile Include="Customer_Forms\Customer_Records.cs">

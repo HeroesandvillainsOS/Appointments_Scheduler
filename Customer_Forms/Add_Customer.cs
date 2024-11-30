@@ -17,7 +17,12 @@ namespace Appointments_Scheduler.Customer_Forms
         {
             // Retrieves the user input customer data
             string customerName = txtBox_CustomerName.Text;
-            int addressID = Convert.ToInt32(txtBox_AddressID.Text);
+            string address = txtBox_Address.Text;
+            string address2 = txtBox_Address2.Text;
+            string city = txtBox_City.Text;
+            string country = txtBox_Country.Text;
+            int postalCode = Convert.ToInt32(txtBox_PostalCode.Text);
+            string phoneNumber = txtBox_Phone.Text;
             int active;
             if (radioBtn_Active.Checked)
                 active = 1;
@@ -27,6 +32,11 @@ namespace Appointments_Scheduler.Customer_Forms
             string createdBy = txtBox_CreateDate.Text; 
             DateTime lastUpdate = DateTime.Parse(txtBox_LastUpdate.Text);
             string lastUpdateBy = txtBox_LastUpdateBy.Text;
+
+            int countryID = Country.GetCountryIDAndAddCountryToDatabase(country, createDate, createdBy, lastUpdate, lastUpdateBy);
+            int cityID = City.GetCityIDAndAddCityToDatabase(city, countryID, createDate, createdBy, lastUpdate, lastUpdateBy);
+            int addressID = Address.GetAddressIDAndAddAddressToDatabase(address, address2, cityID, postalCode, phoneNumber, 
+                createDate, createdBy, lastUpdate, lastUpdateBy);
 
             // Creates a new customer object
             Customer newCustomer = new Customer(customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy);

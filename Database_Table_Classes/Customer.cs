@@ -19,7 +19,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
         public string LastUpdateBy { get; set; }
 
         // Constructor for existing customers (requires customerID)
-        public Customer(int customerID, string customerName, int addressID, int active, DateTime createDate, 
+        public Customer(int customerID, string customerName, int addressID, int active, DateTime createDate,
             string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
             CustomerID = customerID;
@@ -106,7 +106,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
             customerDetails.Add(lastUpdateBy);
 
             // Returns the List
-            return customerDetails;       
+            return customerDetails;
         }
 
         // Inserts the added customer into the customer database table and returns the new customerID
