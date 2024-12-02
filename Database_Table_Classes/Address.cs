@@ -16,15 +16,11 @@ namespace Appointments_Scheduler.Database_Table_Classes
 
             // Determines the SQL query
             string getAddressQuery = @"SELECT addressID FROM address
-                                    WHERE address = @address
-                                    AND address2 = @address2
-                                    AND cityID = @cityID
-                                    AND postalCode = @postalCode
-                                    AND phone = @phone
-                                    AND createDate = @createDate
-                                    AND createdBy = @createdBy
-                                    AND lastUpdate = @lastUpdate
-                                    AND lastUpdateBY = @lastUpdateBy;";
+                                       WHERE address = @address
+                                       AND address2 = @address2
+                                       AND cityID = @cityID
+                                       AND postalCode = @postalCode
+                                       AND phone = @phone";
 
             // Establishes a connection to the database with a querty to execute
             using (var command = new MySqlCommand(getAddressQuery, DBConnection.connection)) 
@@ -35,10 +31,6 @@ namespace Appointments_Scheduler.Database_Table_Classes
                 command.Parameters.AddWithValue("@cityID", cityID);
                 command.Parameters.AddWithValue("@postalCode", postalCode);
                 command.Parameters.AddWithValue("@phone", phone);
-                command.Parameters.AddWithValue("@createDate", createDate);
-                command.Parameters.AddWithValue("@createdBy", createdBy);
-                command.Parameters.AddWithValue("@lastUpdate", lastUpdate);
-                command.Parameters.AddWithValue("@lastUpdateBy", lastUpdateBy);
 
                 // Executes the SQL query on the database and returns the already established addressID
                 object result = command.ExecuteScalar(); // can return null. Storing the result to "object" prevents an exception
@@ -55,10 +47,10 @@ namespace Appointments_Scheduler.Database_Table_Classes
             {
                 // Establishes a connection to the database with a querty to execute
                 string insertAddressQuery = @"INSERT INTO address (address, address2, cityID, postalCode, phone, createDate, 
-                                            createdBy, lastUpdate, lastUpdateBy) 
-                                            VALUES (@address, @address2, @cityID, @postalCode, @phone, @createDate, @createdBy, 
-                                            @lastUpdate, @lastUpdateBy);
-                                            SELECT LAST_INSERT_ID();"; // Establishes a way to get the auto-generated addressID
+                                              createdBy, lastUpdate, lastUpdateBy) 
+                                              VALUES (@address, @address2, @cityID, @postalCode, @phone, @createDate, @createdBy, 
+                                              @lastUpdate, @lastUpdateBy);
+                                              SELECT LAST_INSERT_ID();"; // Establishes a way to get the auto-generated addressID
 
                 // Establishes a connection to the database with a querty to execute
                 using (var command = new MySqlCommand(insertAddressQuery, DBConnection.connection))

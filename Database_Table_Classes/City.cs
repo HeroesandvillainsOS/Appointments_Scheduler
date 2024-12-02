@@ -16,12 +16,8 @@ namespace Appointments_Scheduler.Database_Table_Classes
 
             // Determines the SQL query
             string getCityQuery = @"SELECT cityID FROM city
-                                     WHERE city = @city
-                                     AND countryID = @countryID
-                                     AND createDate = @createDate
-                                     AND createdBy = @createdBy
-                                     AND lastUpdate = @lastUpdate
-                                     AND lastUpdateBY = @lastUpdateBy";
+                                    WHERE city = @city
+                                    AND countryID = @countryID";
 
             // Establishes a connection to the database with a querty to execute
             using (var command = new MySqlCommand(getCityQuery, DBConnection.connection))
@@ -29,10 +25,6 @@ namespace Appointments_Scheduler.Database_Table_Classes
                 // Defines values for the @variables
                 command.Parameters.AddWithValue("@city", city);
                 command.Parameters.AddWithValue("@countryID", countryID);
-                command.Parameters.AddWithValue("@createDate", createDate);
-                command.Parameters.AddWithValue("@createdBy", createdBy);
-                command.Parameters.AddWithValue("@lastUpdate", lastUpdate);
-                command.Parameters.AddWithValue("@lastUpdateBy", lastUpdateBy);
 
                 // Executes the SQL query on the database and returns the already established countryID
                 object result = command.ExecuteScalar(); // can return null. Storing the result to "object" prevents an exception
@@ -49,8 +41,8 @@ namespace Appointments_Scheduler.Database_Table_Classes
             {
                 // Determines the SQL query
                 string insertCountryQuery = @"INSERT INTO city(city, countryID, createDate, createdBy, lastUpdate, lastUpdateBy)
-                                            VALUES(@city, @countryID, @createDate, @createdBy, @lastUpdate, @lastUpdateBy);
-                                            SELECT LAST_INSERT_ID();";
+                                              VALUES(@city, @countryID, @createDate, @createdBy, @lastUpdate, @lastUpdateBy);
+                                              SELECT LAST_INSERT_ID();";
 
                 // Establishes a connection to the database with a querty to execute
                 using (var command = new MySqlCommand(insertCountryQuery, DBConnection.connection))
