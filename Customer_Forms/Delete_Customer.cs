@@ -16,7 +16,6 @@ namespace Appointments_Scheduler.Customer_Forms
             // Fills the form with the selected customer's data
             txtBox_CustomerID.Text = customer[0];
             txtBox_CustomerName.Text = customer[1];
-            txtBox_Address.Text = customer[2];
             if (Convert.ToInt32(customer[3]) == 0)
                 radioBtn_Active.Checked = false;
             else
@@ -25,6 +24,17 @@ namespace Appointments_Scheduler.Customer_Forms
             txtBox_CreatedBy.Text = customer[5];
             txtBox_LastUpdate.Text = customer[6];
             txtBox_LastUpdateBy.Text = customer[7];
+
+            // Gets the customer's address, address2, city, country, postalCode, and phone
+            List<string> additionalCustomerData = Customer.GetAdditionalCustomerData(customer[2]);
+
+            // Fills the form with this additional customer data
+            txtBox_Address.Text = additionalCustomerData[0];
+            txtBox_Address2.Text = additionalCustomerData[1];
+            txtBox_City.Text = additionalCustomerData[2];
+            txtBox_Country.Text = additionalCustomerData[3];
+            txtBox_PostalCode.Text = additionalCustomerData[4];
+            txtBox_Phone.Text = additionalCustomerData[5];
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
@@ -49,11 +59,6 @@ namespace Appointments_Scheduler.Customer_Forms
 
             // Closes the form once a customer has been deleted
             this.Close();
-        }
-
-        private void txtBox_PhoneNumber_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

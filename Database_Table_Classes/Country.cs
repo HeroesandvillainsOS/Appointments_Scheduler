@@ -1,13 +1,14 @@
 ﻿using Appointments_Scheduler.Database;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 
 namespace Appointments_Scheduler.Database_Table_Classes
 {
     internal class Country
     {
         // Returns the countryID and adds the country to the database
-        public static int GetCountryIDAndAddCountryToDatabase(string country, DateTime createDate, string createdBy, 
+        public static int GetCountryIDAndAddCountryToDatabase(string country, DateTime createDate, string createdBy,
             DateTime lastUpdate, string lastUpdateBy)
         {
             int countryID = 0;
@@ -56,6 +57,28 @@ namespace Appointments_Scheduler.Database_Table_Classes
                 }
             }
             return countryID;
+        }
+
+        public static List<String> GetCountryName(int countryID)
+        {
+            List<String> country = new List<String>();
+            string query = @"SELECT country
+                             FROM country
+                             WHERE countryId = @countryID;";
+
+            using (var command = new MySqlCommand(query, DBConnection.connection))
+            {
+                command.Parameters.AddWithValue("@countryID", countryID);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        country.Add(reader["country"].ToString());
+                    }
+                }
+            }
+            return country;
         }
     }
 }

@@ -241,7 +241,6 @@
             this.txtBox_Phone.ReadOnly = true;
             this.txtBox_Phone.Size = new System.Drawing.Size(270, 34);
             this.txtBox_Phone.TabIndex = 37;
-            this.txtBox_Phone.TextChanged += new System.EventHandler(this.txtBox_PhoneNumber_TextChanged);
             // 
             // lbl_Phone
             // 

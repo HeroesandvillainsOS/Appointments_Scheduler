@@ -1,14 +1,15 @@
 ﻿using Appointments_Scheduler.Database;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 
 namespace Appointments_Scheduler.Database_Table_Classes
 {
     internal class City
     {
-       // Returns the cityID and adds the city to the database
-       public static int GetCityIDAndAddCityToDatabase(string city, int countryID, DateTime createDate, string createdBy, 
-           DateTime lastUpdate, string lastUpdateBy)
+        // Returns the cityID and adds the city to the database
+        public static int GetCityIDAndAddCityToDatabase(string city, int countryID, DateTime createDate, string createdBy,
+            DateTime lastUpdate, string lastUpdateBy)
         {
             int cityID = 0;
 
@@ -60,6 +61,30 @@ namespace Appointments_Scheduler.Database_Table_Classes
                 }
             }
             return cityID;
-        } 
+        }
+
+        public static List<String> GetCityAndCountryID(int cityID)
+        {
+            var cityData = new List<String>();
+
+            string query = @"SELECT city, countryId
+                             FROM city
+                             WHERE cityId = @cityID;";
+
+            using (var command = new MySqlCommand(query, DBConnection.connection))
+            {
+                command.Parameters.AddWithValue("@cityID", cityID);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        cityData.Add(reader["city"].ToString());
+                        cityData.Add(reader["countryId"].ToString());
+                    }
+                }
+            }
+            return cityData;
+        }
     }
 }
