@@ -42,6 +42,16 @@ namespace Appointments_Scheduler.Customer_Forms
             // Retrieves the selected customer's customerID
             int customerID = Convert.ToInt32(txtBox_CustomerID.Text);
 
+            // Asks the user to verify they want to delete this customer
+            DialogResult result = MessageBox.Show(@"Are you sure you want to delete this customer from the database? This action cannot be undone.",
+                "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             // Executes the SQL query and deletes the customer from the database
             Customer.DeleteCustomerFromDatabase(customerID);
 

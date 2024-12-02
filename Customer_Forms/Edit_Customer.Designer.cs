@@ -55,6 +55,11 @@
             this.lbl_Country = new System.Windows.Forms.Label();
             this.txtBox_Address2 = new System.Windows.Forms.TextBox();
             this.lbl_Address2 = new System.Windows.Forms.Label();
+            this.lbl_AsteriskMessage = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_Astrisk = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_Edit
@@ -308,11 +313,66 @@
             this.lbl_Address2.TabIndex = 50;
             this.lbl_Address2.Text = "Address 2";
             // 
+            // lbl_AsteriskMessage
+            // 
+            this.lbl_AsteriskMessage.AutoSize = true;
+            this.lbl_AsteriskMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_AsteriskMessage.Location = new System.Drawing.Point(562, 608);
+            this.lbl_AsteriskMessage.Name = "lbl_AsteriskMessage";
+            this.lbl_AsteriskMessage.Size = new System.Drawing.Size(192, 20);
+            this.lbl_AsteriskMessage.TabIndex = 56;
+            this.lbl_AsteriskMessage.Text = "Indicates a required field";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(537, 608);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 29);
+            this.label3.TabIndex = 55;
+            this.label3.Text = "* ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(15, 478);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(23, 29);
+            this.label2.TabIndex = 54;
+            this.label2.Text = "*";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(15, 140);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(23, 29);
+            this.label1.TabIndex = 53;
+            this.label1.Text = "*";
+            // 
+            // lbl_Astrisk
+            // 
+            this.lbl_Astrisk.AutoSize = true;
+            this.lbl_Astrisk.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Astrisk.Location = new System.Drawing.Point(15, 79);
+            this.lbl_Astrisk.Name = "lbl_Astrisk";
+            this.lbl_Astrisk.Size = new System.Drawing.Size(23, 29);
+            this.lbl_Astrisk.TabIndex = 52;
+            this.lbl_Astrisk.Text = "*";
+            // 
             // Edit_Customer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1311, 660);
+            this.Controls.Add(this.lbl_AsteriskMessage);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbl_Astrisk);
             this.Controls.Add(this.txtBox_Address2);
             this.Controls.Add(this.lbl_Address2);
             this.Controls.Add(this.txtBox_Country);
@@ -376,5 +436,10 @@
         private System.Windows.Forms.Label lbl_Country;
         private System.Windows.Forms.TextBox txtBox_Address2;
         private System.Windows.Forms.Label lbl_Address2;
+        private System.Windows.Forms.Label lbl_AsteriskMessage;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_Astrisk;
     }
 }
