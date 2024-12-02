@@ -1,6 +1,7 @@
 ﻿using Appointments_Scheduler.Database;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 
 namespace Appointments_Scheduler.Database_Table_Classes
 {
@@ -71,6 +72,34 @@ namespace Appointments_Scheduler.Database_Table_Classes
                 }
             }
             return addressID;
+        }
+
+        // Returns a List<String> containing a customer's address, address2, cityId, postalCode, and phone.
+        public static List<String> GetAddressCityIDZipAndPhone(int addressID)
+        {
+            var addressData = new List<String>();
+
+            string query = @"SELECT address, address2, cityId, postalCode, phone
+                             FROM address
+                             WHERE addressId = @addressID;";
+
+            using (var command = new MySqlCommand(query, DBConnection.connection))
+            {
+                command.Parameters.AddWithValue("@addressID", addressID);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        addressData.Add(reader["address"].ToString());
+                        addressData.Add(reader["address2"].ToString());
+                        addressData.Add(reader["cityId"].ToString());
+                        addressData.Add(reader["postalCode"].ToString());
+                        addressData.Add(reader["phone"].ToString());
+                    }
+                }
+            }
+            return addressData;
         }
     }
 }

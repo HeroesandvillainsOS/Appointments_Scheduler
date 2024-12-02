@@ -109,6 +109,47 @@ namespace Appointments_Scheduler.Database_Table_Classes
             return customerDetails;
         }
 
+        // Returns a List<String> of additional customer data needed to pre-fill the Edit and Delete customer forms
+        public static List<String> GetAdditionalCustomerData(string addressIDString)
+        {
+            List<String> additionalCustomerData = new List<String>();
+            string address;
+            string address2;
+            string city;
+            string country;
+            string postalCode;
+            string phone;
+
+            // Gets additional details needed from the address database table
+            int addressID = Convert.ToInt32(addressIDString);
+            List<String> additionalAddressData = Address.GetAddressCityIDZipAndPhone(addressID);
+            address = additionalAddressData[0];
+            address2 = additionalAddressData[1];
+            int cityID = Convert.ToInt32(additionalAddressData[2]);
+            postalCode = additionalAddressData[3];
+            phone = additionalAddressData[4];
+
+            // Gets additional details needed from the city database table
+            List<String> additionalCityData = City.GetCityAndCountryID(cityID);
+            city = additionalCityData[0];
+            int countryID = Convert.ToInt32(additionalCityData[1]);
+
+            // Gets additional details needed from the country database table
+            List<String> additionalCountryData = Country.GetCountryName(countryID);
+            country = additionalCountryData[0];
+
+            // Adds the details to the List<String>
+            additionalCustomerData.Add(address);
+            additionalCustomerData.Add(address2);
+            additionalCustomerData.Add(city);
+            additionalCustomerData.Add(country);
+            additionalCustomerData.Add(postalCode);
+            additionalCustomerData.Add(phone);
+
+            // Returns the List<String>
+            return additionalCustomerData;
+        }
+
         // Inserts the added customer into the customer database table and returns the new customerID
         public static int AddCustomerToDatabase(Customer customer)
         {
