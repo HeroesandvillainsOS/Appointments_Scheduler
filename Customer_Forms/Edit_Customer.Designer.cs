@@ -255,9 +255,9 @@
             this.lbl_PostalCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_PostalCode.Location = new System.Drawing.Point(38, 412);
             this.lbl_PostalCode.Name = "lbl_PostalCode";
-            this.lbl_PostalCode.Size = new System.Drawing.Size(47, 29);
+            this.lbl_PostalCode.Size = new System.Drawing.Size(145, 29);
             this.lbl_PostalCode.TabIndex = 46;
-            this.lbl_PostalCode.Text = "Zip";
+            this.lbl_PostalCode.Text = "Postal Code";
             // 
             // txtBox_City
             // 

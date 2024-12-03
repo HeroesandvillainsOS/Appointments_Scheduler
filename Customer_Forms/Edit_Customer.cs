@@ -40,6 +40,7 @@ namespace Appointments_Scheduler.Customer_Forms
             txtBox_CustomerName.Select(0, 0);
         }
 
+        // Edits a customer's data in the customer, address, city, and country database tables and updates the Binding List
         private void btn_Edit_Click(object sender, EventArgs e)
         {
             // Gets the user input customer values
@@ -49,16 +50,16 @@ namespace Appointments_Scheduler.Customer_Forms
             string address2 = txtBox_Address2.Text.Trim();
             string city = txtBox_City.Text.Trim();
             string country = txtBox_Country.Text.Trim();
-            int postalCode = Convert.ToInt32(txtBox_PostalCode.Text.Trim());
+            int postalCode;
             string phoneNumber = txtBox_Phone.Text.Trim();
             int active;
             if (radioBtn_Active.Checked)
                 active = 1;
             else
                 active = 0;
-            DateTime createDate = Convert.ToDateTime(txtBox_CreateDate.Text.Trim());
+            DateTime createDate;
             string createdBy = txtBox_CreatedBy.Text.Trim();
-            DateTime lastUpdate = Convert.ToDateTime(txtBox_LastUpdate.Text.Trim());
+            DateTime lastUpdate;
             string lastUpdateBy = txtBox_LastUpdateBy.Text.Trim();
 
             // Enforces formatting rules for the customer data
@@ -68,6 +69,16 @@ namespace Appointments_Scheduler.Customer_Forms
             {
                 MessageBox.Show("Customer Name cannot be left empty.", "Warning", MessageBoxButtons.OK,
                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Customer Name cannot contain numbers
+            bool customerNameHasNumbers = customerName.Any(x => char.IsDigit(x));
+            if (customerNameHasNumbers)
+            {
+                MessageBox.Show("Customer Name cannot contain numbers.", "Warning", MessageBoxButtons.OK,
+                   MessageBoxIcon.Warning);
+                return;
             }
 
             // Address cannot be left blank
@@ -75,28 +86,69 @@ namespace Appointments_Scheduler.Customer_Forms
             {
                 MessageBox.Show("Address cannot be left empty.", "Warning", MessageBoxButtons.OK,
                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            // City cannot contain numbers
+            bool cityHasNumbers = city.Any(x => char.IsDigit(x)); 
+            if (cityHasNumbers)
+            {
+                MessageBox.Show("City cannot contain numbers.", "Warning", MessageBoxButtons.OK,
+                  MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Country cannot contain numbers
+            bool countryHasNumbers = country.Any(x => char.IsDigit(x));
+            if (countryHasNumbers)
+            {
+                MessageBox.Show("Country cannot contain numbers.", "Warning", MessageBoxButtons.OK,
+                 MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Postal Code cannot contain letters
+            bool postalCodeIsValid = int.TryParse(txtBox_PostalCode.Text.Trim(), out postalCode);
+            if (!postalCodeIsValid)
+            {
+                MessageBox.Show("Postal Code cannot contain letters.", "Warning", MessageBoxButtons.OK,
+                 MessageBoxIcon.Warning);
+                return;
             }
 
             // Phone Number cannot be left blank
             if (String.IsNullOrEmpty(phoneNumber))
             {
-                MessageBox.Show("Address cannot be left empty.", "Warning", MessageBoxButtons.OK,
+                MessageBox.Show("Phone Number cannot be left empty.", "Warning", MessageBoxButtons.OK,
                    MessageBoxIcon.Warning);
+                return;
             }
 
-            bool validPhoneNumber = phoneNumber.Any(x => x != '-' && char.IsDigit(x));
-
             // A Phone Number can only contain digits and dashes
-            if (!validPhoneNumber)
+            string phoneNumberAsString = phoneNumber.ToString();
+            bool invalidPhoneNumber = phoneNumberAsString.Any(x => x != '-' || !char.IsDigit(x));
+            if (invalidPhoneNumber)
             {
                 MessageBox.Show("Phone numbers can only contain digits and dashes.", "Warning", MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+                return;
             }
 
-            // Asks the user to verify they want to edit this customer
+            // Create Date cannot be left blank
+            if (string.IsNullOrWhiteSpace(txtBox_CreateDate.Text) || !DateTime.TryParse(txtBox_CreateDate.Text, out createDate))
+            {
+                createDate = DateTime.Now.Date;  // Ensures today's date is used if the field is left blank
+            }
+
+            // Last Update cannot be left blank
+            if (string.IsNullOrWhiteSpace(txtBox_LastUpdate.Text) || !DateTime.TryParse(txtBox_LastUpdate.Text, out lastUpdate))
+            {
+                lastUpdate = DateTime.Now.Date;  // Ensures today's date is used if the field is left blank
+            }
+
+            // Asks the user to verify they want to permanently edit this customer
             DialogResult result = MessageBox.Show(@"Are you sure you want to edit this customer in the database? This action cannot be undone.", 
                 "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-
             if (result == DialogResult.Cancel)
             {
                 return;
