@@ -57,10 +57,18 @@ namespace Appointments_Scheduler.Forms
             }
         }
 
+        // Opens the Customer Records form when the respective button is clicked
         private void btn_CustomerRecords_Click(object sender, EventArgs e)
         {
             var customerRecords = new Customer_Forms.Customer_Records();
             customerRecords.Show();
+        }
+
+        // Opens the Appointment Records form when the respective button is clicked
+        private void btn_Appointments_Click(object sender, EventArgs e)
+        {
+            var appointmentRecords = new Appointment_Forms.Appointment_Records();
+            appointmentRecords.Show();
         }
     }
 }

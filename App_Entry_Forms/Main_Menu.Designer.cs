@@ -57,6 +57,7 @@
             this.btn_Appointments.TabIndex = 1;
             this.btn_Appointments.Text = "Appointments";
             this.btn_Appointments.UseVisualStyleBackColor = true;
+            this.btn_Appointments.Click += new System.EventHandler(this.btn_Appointments_Click);
             // 
             // btn_Calendar
             // 

@@ -45,7 +45,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
             LastUpdateBy = lastUpdateBy;
         }
 
-        // Returns a Binding List of all customers from the cusomer database table
+        // Returns a Binding List of all customers from the customer database table
         public static BindingList<Customer> GetAllCustomers()
         {
             // Establishes the SQL query
@@ -65,9 +65,9 @@ namespace Appointments_Scheduler.Database_Table_Classes
                 while (reader.Read())
                 {
                     // Adds the customer table data to the Binding List
-                    allCustomers.Add(new Customer(reader.GetInt32("customerID"), reader.GetString("customerName"), reader.GetInt32("addressId"),
-                        reader.GetInt32("active"), reader.GetDateTime("createDate"), reader.GetString("createdBy"), reader.GetDateTime("lastUpdate"),
-                        reader.GetString("lastUpdateBy")));
+                    allCustomers.Add(new Customer(reader.GetInt32("customerID"), reader.GetString("customerName"), 
+                        reader.GetInt32("addressId"), reader.GetInt32("active"), reader.GetDateTime("createDate"), 
+                        reader.GetString("createdBy"), reader.GetDateTime("lastUpdate"), reader.GetString("lastUpdateBy")));
                 }
             }
             else
@@ -154,7 +154,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
         public static int AddCustomerToDatabase(Customer customer)
         {
             // Establishes the SQL query
-            string query = @"INSERT INTO customer (customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy)
+            string query = @"INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy)
                             VALUES (@customerName, @addressID, @active, @createDate, @createdBy, @lastUpdate, @lastUpdateBy);
                             SELECT LAST_INSERT_ID();"; // Gets the auto-generated customerID
 
@@ -163,7 +163,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
             {
                 // Defines the @ variable values
                 command.Parameters.AddWithValue("@customerName", customer.CustomerName);
-                command.Parameters.AddWithValue("@addressId", customer.AddressID);
+                command.Parameters.AddWithValue("@addressID", customer.AddressID);
                 command.Parameters.AddWithValue("@active", customer.Active);
                 command.Parameters.AddWithValue("@createDate", customer.CreateDate);
                 command.Parameters.AddWithValue("@createdBy", customer.CreatedBy);
@@ -175,11 +175,12 @@ namespace Appointments_Scheduler.Database_Table_Classes
             }
         }
 
+        // Edits a customer record in the database
         public static void EditCustomerInDatabase(Customer customer)
         {
             // Establishes the SQL query
             string query = @"UPDATE customer 
-                            SET customerName = @customerName, addressID = @addressID, active = @active, createDate = @createDate,
+                            SET customerName = @customerName, addressId = @addressID, active = @active, createDate = @createDate,
                                 createdBy = @createdBy, lastUpdate = @lastUpdate, lastUpdateBy = @lastUpdateBy
                             WHERE customerID = @customerID";
 
@@ -201,6 +202,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
             }
         }
 
+        // Deletes a customer record from the Database
         public static void DeleteCustomerFromDatabase(int customerID)
         {
             // Establishes the SQL query
