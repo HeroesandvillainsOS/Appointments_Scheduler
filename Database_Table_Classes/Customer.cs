@@ -81,6 +81,47 @@ namespace Appointments_Scheduler.Database_Table_Classes
             return allCustomers;
         }
 
+        // Returns a List<String> of all customer names from a BindingList<Customer>
+        public static List<String> GetAllCustomerNames(BindingList<Customer> allCustomers)
+        {
+            List<String> allCustomerNames = new List<String>();
+
+            foreach (Customer customer in allCustomers)
+            {
+                allCustomerNames.Add(customer.CustomerName);
+            }
+
+            return allCustomerNames;
+        }
+
+        // Returns a customer's name from a customerID
+        public static string GetCustomerNameFromCustomerID(int customerID)
+        {
+            string customerName = null;
+
+            // Establishes the SQL Query
+            string query = @"SELECT customerName
+                             FROM customer
+                             WHERE customerId = @customerID";
+
+            // Creates a new MySQL Command object and opens a connection to the database
+            using (var command = new MySqlCommand(query, DBConnection.connection))
+            {
+                // Assigns the @variable's value
+                command.Parameters.AddWithValue("@customerID", customerID);
+
+                // Executes the query
+                object result = command.ExecuteScalar();    
+
+                if(result != null)
+                {
+                    customerName = result.ToString();
+                }
+            }
+            // Returns the result
+            return customerName;
+        }
+
         // Returns a string List of a single customer's data from the selected Data Grid View row
         public static List<String> GetSelectedRowData(DataGridViewRow selectedRow)
         {
@@ -206,7 +247,8 @@ namespace Appointments_Scheduler.Database_Table_Classes
         public static void DeleteCustomerFromDatabase(int customerID)
         {
             // Establishes the SQL query
-            string query = "DELETE FROM customer WHERE customerID = @customerID";
+            string query = @"DELETE FROM customer 
+                             WHERE customerID = @customerID";
 
             // Opens a connection to the database and executes the query
             using (var command = new MySqlCommand(query, DBConnection.connection))

@@ -1,4 +1,5 @@
 ﻿using Appointments_Scheduler.Database;
+using Appointments_Scheduler.Database_Table_Classes;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Appointments_Scheduler
 {
-    internal class User
+    public class User
     {
         // Stores the values of the user database table
         public int UserId { get; set; }
@@ -68,6 +69,46 @@ namespace Appointments_Scheduler
             return allUsers;
         }
 
+        // Returns a List<String> of all user names from a BindingList<User>
+        public static List<String> GetAllUserNames(BindingList<User> allUsers)
+        {
+            List<String> allUserNames = new List<String>();
+
+            foreach (User user in allUsers)
+            {
+                allUserNames.Add(user.UserName);
+            }
+
+            return allUserNames;
+        }
+
+        // Returns a customer's name from a customerID
+        public static string GetUserNameFromUserID(int userID)
+        {
+            string userName = null;
+
+            // Establishes the SQL Query
+            string query = @"SELECT userName
+                             FROM user
+                             WHERE userId = @userID";
+
+            // Creates a new MySQL Command object and opens a connection to the database
+            using (var command = new MySqlCommand(query, DBConnection.connection))
+            {
+                // Assigns the @variable's value
+                command.Parameters.AddWithValue("@userID", userID);
+
+                // Executes the query
+                object result = command.ExecuteScalar();
+
+                if (result != null)
+                {
+                    userName = result.ToString();
+                }
+            }
+            // Returns the result
+            return userName;
+        }
 
         // Returns a string List of customer data from the selected Data Grid View row
         public static List<String> GetSelectedRowData(DataGridViewRow selectedRow)
