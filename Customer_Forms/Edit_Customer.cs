@@ -126,7 +126,7 @@ namespace Appointments_Scheduler.Customer_Forms
 
             // A Phone Number can only contain digits and dashes
             string phoneNumberAsString = phoneNumber.ToString();
-            bool invalidPhoneNumber = phoneNumberAsString.Any(x => x != '-' || !char.IsDigit(x));
+            bool invalidPhoneNumber = phoneNumberAsString.Any(x => x != '-' && !char.IsDigit(x));
             if (invalidPhoneNumber)
             {
                 MessageBox.Show("Phone numbers can only contain digits and dashes.", "Warning", MessageBoxButtons.OK,

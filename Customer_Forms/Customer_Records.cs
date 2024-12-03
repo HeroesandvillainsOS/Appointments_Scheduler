@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Appointments_Scheduler.Customer_Forms;
 using Appointments_Scheduler.Database_Table_Classes;
-using Appointments_Scheduler.Forms.Customer_Records;
 using System.Collections.Generic;
 
 namespace Appointments_Scheduler.Forms.Customer_Forms
@@ -28,6 +27,7 @@ namespace Appointments_Scheduler.Forms.Customer_Forms
 
             // Gets all customers from the customer database table
             AllCustomers = Customer.GetAllCustomers();
+
             // Displays the Binding List of all customers on the Data Grid View
             dgv_Customers.DataSource = AllCustomers;
         }
@@ -39,7 +39,7 @@ namespace Appointments_Scheduler.Forms.Customer_Forms
         }
 
         // Handles the Add button click event
-        private void buttonAdd_Click(object sender, EventArgs e)
+        private void btn_Add_Click(object sender, EventArgs e)
         {
             // Opens the Add_Customer form
             var addCustomer = new Add_Customer();
