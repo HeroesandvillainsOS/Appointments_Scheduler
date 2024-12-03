@@ -1,4 +1,6 @@
 ﻿using Appointments_Scheduler.Database_Table_Classes;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -47,14 +49,48 @@ namespace Appointments_Scheduler.Appointment_Forms
         // Handles the Edit button click event
         private void btn_Edit_Click(object sender, System.EventArgs e)
         {
-            Edit_Appointment edit_Appointment = new Edit_Appointment();
+            DataGridViewRow selectedRow;
+
+            try
+            {
+                // Gets the selected Data Grid View row
+                selectedRow = dgv_Appointments.SelectedRows[0];
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Please select an appointment to edit.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Retrieves a string List of the selected row's appointment data
+            List<String> appointmentDetails = Appointment.GetSelectedRowData(selectedRow);
+
+            // Opens the Edit Appointment form
+            Edit_Appointment edit_Appointment = new Edit_Appointment(appointmentDetails);
             edit_Appointment.Show();
         }
 
         // Handles the Delete button click event
         private void btn_Delete_Click(object sender, System.EventArgs e)
         {
-            Delete_Appointment delete_Appointment = new Delete_Appointment();
+            DataGridViewRow selectedRow;
+
+            try
+            {
+                // Gets the selected Data Grid View row
+                selectedRow = dgv_Appointments.SelectedRows[0];
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Please select an appointment to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Retrieves a string List of the selected row's appointment data
+            List<String> appointmentDetails = Appointment.GetSelectedRowData(selectedRow);
+
+            // Opens the Delete Appointment form
+            Delete_Appointment delete_Appointment = new Delete_Appointment(appointmentDetails);
             delete_Appointment.Show();
         }
     }
