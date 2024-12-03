@@ -36,6 +36,27 @@ namespace Appointments_Scheduler.Appointment_Forms
         {
             dgv_Appointments.ClearSelection();
         }
+
+        // Handles the Add button click event
+        private void btn_Add_Click(object sender, System.EventArgs e)
+        {
+            Add_Appointment add_Appointment = new Add_Appointment();
+            add_Appointment.Show();
+        }
+
+        // Handles the Edit button click event
+        private void btn_Edit_Click(object sender, System.EventArgs e)
+        {
+            Edit_Appointment edit_Appointment = new Edit_Appointment();
+            edit_Appointment.Show();
+        }
+
+        // Handles the Delete button click event
+        private void btn_Delete_Click(object sender, System.EventArgs e)
+        {
+            Delete_Appointment delete_Appointment = new Delete_Appointment();
+            delete_Appointment.Show();
+        }
     }
 }
 

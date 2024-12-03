@@ -98,11 +98,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appointment_Forms\Add_Appointment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Appointment_Forms\Add_Appointment.Designer.cs">
+      <DependentUpon>Add_Appointment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Appointment_Forms\Appointment_Records.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Appointment_Forms\Appointment_Records.Designer.cs">
       <DependentUpon>Appointment_Records.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Appointment_Forms\Delete_Appointment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Appointment_Forms\Delete_Appointment.Designer.cs">
+      <DependentUpon>Delete_Appointment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Appointment_Forms\Edit_Appointment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Appointment_Forms\Edit_Appointment.Designer.cs">
+      <DependentUpon>Edit_Appointment.cs</DependentUpon>
     </Compile>
     <Compile Include="App_Entry_Forms\Login.cs">
       <SubType>Form</SubType>
@@ -151,8 +169,17 @@
     <Compile Include="PC_Info\Culture.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Appointment_Forms\Add_Appointment.resx">
+      <DependentUpon>Add_Appointment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Appointment_Forms\Appointment_Records.resx">
       <DependentUpon>Appointment_Records.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Appointment_Forms\Delete_Appointment.resx">
+      <DependentUpon>Delete_Appointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Appointment_Forms\Edit_Appointment.resx">
+      <DependentUpon>Edit_Appointment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App_Entry_Forms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
