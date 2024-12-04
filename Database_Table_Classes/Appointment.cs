@@ -109,7 +109,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
         public static List<(DateTime Start, DateTime End)> GetAllAppointmentTimes()
         {
             // Establishes the SQL query
-            string query = "SELECT * FROM appointment";
+            string query = @"SELECT * FROM appointment";
 
             // Creates a new MySQLCommand instance with the established query and database connection
             var command = new MySqlCommand(query, DBConnection.connection);
@@ -124,9 +124,60 @@ namespace Appointments_Scheduler.Database_Table_Classes
             {
                 while (reader.Read())
                 {
-                    // Add the start and end times as a tuple to the list
+                    // Retrieves the times as UTC time
                     DateTime start = reader.GetDateTime("start");
                     DateTime end = reader.GetDateTime("end");
+
+                    // Converts the times from UTC to local time
+                    start = TimeZoneInfo.ConvertTimeFromUtc(start, TimeZoneInfo.Local);
+                    end = TimeZoneInfo.ConvertTimeFromUtc(end, TimeZoneInfo.Local);
+
+                    // Adds the times to the List
+                    allAppointmentTimes.Add((start, end));
+                }
+            }
+            else
+            {
+                MessageBox.Show("The appointment table has no rows.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // Close the reader after use
+            reader.Close();
+            return allAppointmentTimes;
+        }
+
+        // Returns a List of tuples containing appointment start and end times EXCLUDING the input appointmentID
+        public static List<(DateTime Start, DateTime End)> GetAllAppointmentTimes(int appointmentID)
+        {
+            // Establishes the SQL query
+            string query = @"SELECT * FROM appointment
+                             WHERE appointmentId != @appointmentID";
+
+            // Creates a new MySQLCommand instance with the established query and database connection
+            var command = new MySqlCommand(query, DBConnection.connection);
+
+            // Defines the @variable values
+            command.Parameters.AddWithValue("@appointmentID", appointmentID);
+
+            // Creates a reader object for the MySQLCommand instance
+            var reader = command.ExecuteReader();
+
+            // Creates a List to store the appointment start and end times as tuples
+            List<(DateTime Start, DateTime End)> allAppointmentTimes = new List<(DateTime Start, DateTime End)>();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    // Retrieves the times as UTC time
+                    DateTime start = reader.GetDateTime("start");
+                    DateTime end = reader.GetDateTime("end");
+
+                    // Converts the times from UTC to local time
+                    start = TimeZoneInfo.ConvertTimeFromUtc(start, TimeZoneInfo.Local);
+                    end = TimeZoneInfo.ConvertTimeFromUtc(end, TimeZoneInfo.Local);
+
+                    // Adds the times to the List
                     allAppointmentTimes.Add((start, end));
                 }
             }
@@ -242,7 +293,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
                              SET customerId = @customerID, userId = @userID, title = @title, 
                                  description = @description, location = @location, contact = @contact, type = @type, url = @url, 
                                  start = @start, end = @end, createDate = @createDate, createdBy = @createdBy, 
-                                 lastUpdate = @lastUpdate, lastUpdateBy = @lastUpdateBy;
+                                 lastUpdate = @lastUpdate, lastUpdateBy = @lastUpdateBy
                              WHERE appointmentId = @appointmentID";
 
             // Opens a connection to the database and executes the query

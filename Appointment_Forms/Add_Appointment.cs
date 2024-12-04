@@ -192,14 +192,22 @@ namespace Appointments_Scheduler.Appointment_Forms
             }
 
             // Creates a new appointment object
-            Appointment newAppointment = new Appointment(customerID, userID, title, description, location, contact,
+            Appointment newAppointmentWithUTC = new Appointment(customerID, userID, title, description, location, contact,
                 type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy);
 
             // Adds the new appointment to the Database and retrieves the auto-generated appointmentID
-            newAppointment.AppointmentID = Appointment.AddAppointmentToDatabase(newAppointment);
+            newAppointmentWithUTC.AppointmentID = Appointment.AddAppointmentToDatabase(newAppointmentWithUTC);
+            int newAppointmentID = newAppointmentWithUTC.AppointmentID;
+
+            // Converts the UTC times to local times so they display correctly on the Data Grid View
+            DateTime startLocal = TimeZoneInfo.ConvertTimeFromUtc(start, TimeZoneInfo.Local);
+            DateTime endLocal = TimeZoneInfo.ConvertTimeFromUtc(end, TimeZoneInfo.Local);
 
             // Adds the new appointment to the BindingList instance with the returned appointmentID
-            Appointment_Records.Instance.AllAppointments.Add(newAppointment);
+            Appointment newAppointmentWithLocalTime = new Appointment(newAppointmentID, customerID, userID, title, description, location, contact,
+                type, url, startLocal, endLocal, createDate, createdBy, lastUpdate, lastUpdateBy);
+            
+            Appointment_Records.Instance.AllAppointments.Add(newAppointmentWithLocalTime);
 
             // Ensures the form closes after adding the customer data
             this.Close();
