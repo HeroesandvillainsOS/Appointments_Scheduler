@@ -137,13 +137,13 @@ namespace Appointments_Scheduler.Customer_Forms
             // Create Date cannot be left blank
             if (string.IsNullOrWhiteSpace(txtBox_CreateDate.Text) || !DateTime.TryParse(txtBox_CreateDate.Text, out createDate))
             {
-                createDate = DateTime.Now.Date;  // Ensures today's date is used if the field is left blank
+                createDate = DateTime.UtcNow;  // Ensures today's date is used if the field is left blank
             }
 
             // Last Update cannot be left blank
             if (string.IsNullOrWhiteSpace(txtBox_LastUpdate.Text) || !DateTime.TryParse(txtBox_LastUpdate.Text, out lastUpdate))
             {
-                lastUpdate = DateTime.Now.Date;  // Ensures today's date is used if the field is left blank
+                lastUpdate = DateTime.UtcNow;  // Ensures today's date is used if the field is left blank
             }
 
             // Asks the user to verify they want to permanently edit this customer

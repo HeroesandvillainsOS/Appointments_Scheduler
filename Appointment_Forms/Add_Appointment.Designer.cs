@@ -62,6 +62,8 @@
             this.lbl_End = new System.Windows.Forms.Label();
             this.cmboBox_CustomerName = new System.Windows.Forms.ComboBox();
             this.cmboBox_UserName = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl_AsteriskMessage
@@ -195,6 +197,7 @@
             this.btn_Add.TabIndex = 65;
             this.btn_Add.Text = "Add";
             this.btn_Add.UseVisualStyleBackColor = true;
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
             // 
             // txtBox_LastUpdateBy
             // 
@@ -384,11 +387,33 @@
             this.cmboBox_UserName.TabIndex = 88;
             this.cmboBox_UserName.DropDown += new System.EventHandler(this.cmboBox_UserName_DropDown);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(747, 70);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 29);
+            this.label4.TabIndex = 89;
+            this.label4.Text = "* ";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(747, 131);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 29);
+            this.label5.TabIndex = 90;
+            this.label5.Text = "* ";
+            // 
             // Add_Appointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1353, 813);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.cmboBox_UserName);
             this.Controls.Add(this.cmboBox_CustomerName);
             this.Controls.Add(this.txtBox_End);
@@ -466,5 +491,7 @@
         private System.Windows.Forms.Label lbl_End;
         private System.Windows.Forms.ComboBox cmboBox_CustomerName;
         private System.Windows.Forms.ComboBox cmboBox_UserName;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }

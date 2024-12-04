@@ -38,6 +38,9 @@ namespace Appointments_Scheduler.Appointment_Forms
             txtBox_CreatedBy.Text = appointmentDetails[12];
             txtBox_LastUpdate.Text = appointmentDetails[13];
             txtBox_LastUpdateBy.Text = appointmentDetails[14];
+
+            // Deselects the Create Date text box which is highlighted by default
+            txtBox_CreateDate.Select(0, 0);
         }
 
         // Ensures only current customers in the database appear in the Customer Name dropdown
