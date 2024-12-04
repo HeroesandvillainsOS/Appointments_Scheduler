@@ -9,7 +9,7 @@ namespace Appointments_Scheduler.Appointment_Forms
     public partial class Appointment_Records : Form
     {
         // Properties to ensure the Data Grid View can display live updates when the Binding List values change
-        public static Appointment_Records instance { get; private set; }
+        public static Appointment_Records Instance { get; private set; }
 
         public BindingList<Appointment> AllAppointments { get; private set; }
 
@@ -19,7 +19,7 @@ namespace Appointments_Scheduler.Appointment_Forms
         {
             InitializeComponent();
 
-            instance = this;
+            Instance = this;
 
             // Data Grid View settings
             dgv_Appointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

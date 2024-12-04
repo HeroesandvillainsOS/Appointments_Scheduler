@@ -2,11 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Appointments_Scheduler.Appointment_Forms
@@ -43,9 +38,9 @@ namespace Appointments_Scheduler.Appointment_Forms
             cmboBox_UserName.DataSource = allUserNames;
         }
 
+        // Handles the Add button click event
         private void btn_Add_Click(object sender, EventArgs e)
         {
-            int appointmentID = Convert.ToInt32(txtBox_AppointmentID.Text);
             string customerName = cmboBox_CustomerName.Text;
             int customerID = Convert.ToInt32(Customer.GetCustomerIDFromCustomerName(customerName));
             string userName = cmboBox_UserName.Text;
@@ -60,12 +55,36 @@ namespace Appointments_Scheduler.Appointment_Forms
             DateTime end;
             DateTime createDate;
             string createdBy = txtBox_CreatedBy.Text;
-            DateTime lastUpdate = Convert.ToDateTime(txtBox_LastUpdate.Text);
+            DateTime lastUpdate;
             string lastUpdateBy = txtBox_LastUpdateBy.Text;
 
             // Enforces formatting rules for the appointment data
 
-            // Start cannot be in an invalid DateTime format
+            // Customer Name cannot be left blank
+            if (String.IsNullOrEmpty(customerName))
+            {
+                MessageBox.Show("Customer Name cannot be left blank.", "Warning", MessageBoxButtons.OK,
+                  MessageBoxIcon.Warning);
+                return;
+            }
+
+            // User Name cannot be left blank
+            if (String.IsNullOrEmpty(userName))
+            {
+                MessageBox.Show("User Name cannot be left blank.", "Warning", MessageBoxButtons.OK,
+                  MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Appointment Type cannot be left blank
+            if (String.IsNullOrEmpty(type))
+            {
+                MessageBox.Show("Appointment Type cannot be left blank.", "Warning", MessageBoxButtons.OK,
+                  MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Start time cannot be in an invalid DateTime format
             if (!DateTime.TryParse(txtBox_Start.Text, out start))
             {
                 MessageBox.Show("Appointment Start is using an invalid date format.", "Warning", MessageBoxButtons.OK,
@@ -73,7 +92,7 @@ namespace Appointments_Scheduler.Appointment_Forms
                 return;
             }
 
-            // End cannot be in an invalid DateTime format
+            // End time cannot be in an invalid DateTime format
             if (!DateTime.TryParse(txtBox_End.Text, out end))
             {
                 MessageBox.Show("Appointment End is using an invalid date format.", "Warning", MessageBoxButtons.OK,
@@ -81,16 +100,21 @@ namespace Appointments_Scheduler.Appointment_Forms
                 return;
             }
 
-            // Variables for enforcing Appointment Start and End DateTime rules
+            // Variables for converting local time to EST time
             TimeZoneInfo estZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-            DateTime startEst = TimeZoneInfo.ConvertTimeFromUtc(start, estZone);
-            DateTime endEst = TimeZoneInfo.ConvertTimeFromUtc(end, estZone);
+            DateTime startEst = TimeZoneInfo.ConvertTime(start, TimeZoneInfo.Local, estZone);
+            DateTime endEst = TimeZoneInfo.ConvertTime(end, TimeZoneInfo.Local, estZone);
             TimeSpan startOfWorkDay = new TimeSpan(9, 0, 0);
             TimeSpan endOfWorkDay = new TimeSpan(17, 0, 0);
             TimeSpan inputStartTime = startEst.TimeOfDay;
             TimeSpan inputEndTime = endEst.TimeOfDay;
+
+            // Variables for verifying the days of the week
             DayOfWeek startDayOfWeek = startEst.DayOfWeek;
             DayOfWeek endDayOfWeek = endEst.DayOfWeek;
+
+            // Variable for converting local time to UTC time
+            TimeZoneInfo utcZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
 
             // Appointments cannot start before 9AM EST or after 5PM EST
             if (inputStartTime < startOfWorkDay || inputStartTime > endOfWorkDay)
@@ -125,21 +149,60 @@ namespace Appointments_Scheduler.Appointment_Forms
                 return;
             }
 
+            // Appointments cannot overlap one another
+            List<(DateTime, DateTime)> allAppointmentTimes = Appointment.GetAllAppointmentTimes();
+            bool isAppointmentOverlappingAnyAppointments = Appointment.IsAppointmentOverlappingAnyAppointments(start, end, 
+                allAppointmentTimes);
+
+            if (isAppointmentOverlappingAnyAppointments)
+            {
+                MessageBox.Show("New appointments cannot overlap any existing appointments.", "Warning", MessageBoxButtons.OK,
+                  MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Appointments must be saved to the Database in UTC time
+            DateTime utcStart = TimeZoneInfo.ConvertTimeToUtc(start);
+            DateTime utcEnd = TimeZoneInfo.ConvertTimeToUtc(end);
+            start = utcStart;
+            end = utcEnd;
+
             // Create Date cannot be left blank
             if (string.IsNullOrWhiteSpace(txtBox_CreateDate.Text) || !DateTime.TryParse(txtBox_CreateDate.Text, out createDate))
             {
-                createDate = DateTime.UtcNow;  // Ensures today's date is used if the field is left blank
+                createDate = DateTime.Now.Date;  // Ensures today's date is used if the field is left blank
             }
 
             // Last Update cannot be left blank
             if (string.IsNullOrWhiteSpace(txtBox_LastUpdate.Text) || !DateTime.TryParse(txtBox_LastUpdate.Text, out lastUpdate))
             {
-                lastUpdate = DateTime.UtcNow;  // Ensures today's date is used if the field is left blank
+                lastUpdate = DateTime.Now.Date;  // Ensures today's date is used if the field is left blank
             }
 
-            //DateTime utcStart = TimeZoneInfo.ConvertTimeToUtc(start);
-            //DateTime utcEnd = TimeZoneInfo.ConvertTimeToUtc(end);
+            // Create Date and Last Update must be converted from local time to UTC time
+            createDate = TimeZoneInfo.ConvertTime(createDate, TimeZoneInfo.Local, utcZone);
+            lastUpdate = TimeZoneInfo.ConvertTime(lastUpdate, TimeZoneInfo.Local, utcZone);
 
+            // Asks the user to verify they want to permanently add this appointment
+            DialogResult result = MessageBox.Show(@"Are you sure you want to add this appointment to the database? This action cannot be undone.",
+                "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            // Creates a new appointment object
+            Appointment newAppointment = new Appointment(customerID, userID, title, description, location, contact,
+                type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy);
+
+            // Adds the new appointment to the Database and retrieves the auto-generated appointmentID
+            newAppointment.AppointmentID = Appointment.AddAppointmentToDatabase(newAppointment);
+
+            // Adds the new appointment to the BindingList instance with the returned appointmentID
+            Appointment_Records.Instance.AllAppointments.Add(newAppointment);
+
+            // Ensures the form closes after adding the customer data
+            this.Close();
         }
     }
 }
