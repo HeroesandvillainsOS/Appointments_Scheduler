@@ -29,11 +29,13 @@ namespace Appointments_Scheduler.Appointment_Forms
             // Gets all appointments from the appointment database table
             AllAppointments = Appointment.GetAllAppointments();
 
-            // Converts the Data Grid View Start and End times to Local time (Binding List only)
+            // Converts the Data Grid View DateTime records to Local time (Binding List only)
             foreach (Appointment appointment in AllAppointments)
             {
                 appointment.Start = TimeZoneInfo.ConvertTimeFromUtc(appointment.Start, TimeZoneInfo.Local);
                 appointment.End = TimeZoneInfo.ConvertTimeFromUtc(appointment.End, TimeZoneInfo.Local);
+                appointment.CreateDate = TimeZoneInfo.ConvertTimeFromUtc(appointment.CreateDate, TimeZoneInfo.Local);
+                appointment.LastUpdate = TimeZoneInfo.ConvertTimeFromUtc(appointment.LastUpdate, TimeZoneInfo.Local);
             }
 
             // Displays the Binding List of all appointments on the Data Grid View

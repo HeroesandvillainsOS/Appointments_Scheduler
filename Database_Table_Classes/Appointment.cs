@@ -87,12 +87,24 @@ namespace Appointments_Scheduler.Database_Table_Classes
             {
                 while (reader.Read())
                 {
-                    allAppointments.Add(new Appointment(reader.GetInt32("appointmentId"), reader.GetInt32("customerId"),
-                        reader.GetInt32("userId"), reader.GetString("title"), reader.GetString("description"),
-                        reader.GetString("location"), reader.GetString("contact"), reader.GetString("type"),
-                        reader.GetString("url"), reader.GetDateTime("start"), reader.GetDateTime("end"),
-                        reader.GetDateTime("createDate"), reader.GetString("createdBy"), reader.GetDateTime("lastUpdate"),
-                        reader.GetString("lastUpdateBy")));
+                    allAppointments.Add(new Appointment(
+                        reader.GetInt32("appointmentId"),
+                        reader.GetInt32("customerId"),
+                        reader.GetInt32("userId"),
+                        reader.GetString("title"),
+                        reader.GetString("description"),
+                        reader.GetString("location"),
+                        reader.GetString("contact"),
+                        reader.GetString("type"),
+                        reader.GetString("url"),
+                        // Set DateTimeKind explicitly for each DateTime field
+                        DateTime.SpecifyKind(reader.GetDateTime("start"), DateTimeKind.Utc),
+                        DateTime.SpecifyKind(reader.GetDateTime("end"), DateTimeKind.Utc),
+                        DateTime.SpecifyKind(reader.GetDateTime("createDate"), DateTimeKind.Utc),
+                        reader.GetString("createdBy"),
+                        DateTime.SpecifyKind(reader.GetDateTime("lastUpdate"), DateTimeKind.Utc),
+                        reader.GetString("lastUpdateBy")
+                    ));
                 }
             }
             else

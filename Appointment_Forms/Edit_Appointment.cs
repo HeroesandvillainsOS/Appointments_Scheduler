@@ -192,13 +192,13 @@ namespace Appointments_Scheduler.Appointment_Forms
             // Create Date cannot be left blank
             if (string.IsNullOrWhiteSpace(txtBox_CreateDate.Text) || !DateTime.TryParse(txtBox_CreateDate.Text, out createDate))
             {
-                createDate = DateTime.Now.Date;  // Ensures today's date is used if the field is left blank
+                createDate = DateTime.Now;  // Ensures today's date is used if the field is left blank
             }
 
             // Last Update cannot be left blank
             if (string.IsNullOrWhiteSpace(txtBox_LastUpdate.Text) || !DateTime.TryParse(txtBox_LastUpdate.Text, out lastUpdate))
             {
-                lastUpdate = DateTime.Now.Date;  // Ensures today's date is used if the field is left blank
+                lastUpdate = DateTime.Now;  // Ensures today's date is used if the field is left blank
             }
 
             // Create Date and Last Update must be converted from local time to UTC time
@@ -223,6 +223,8 @@ namespace Appointments_Scheduler.Appointment_Forms
             // Converts the UTC times to local times so they display correctly on the Data Grid View
             DateTime startLocal = TimeZoneInfo.ConvertTimeFromUtc(start, TimeZoneInfo.Local);
             DateTime endLocal = TimeZoneInfo.ConvertTimeFromUtc(end, TimeZoneInfo.Local);
+            DateTime createDateLocal = TimeZoneInfo.ConvertTimeFromUtc(createDate, TimeZoneInfo.Local);
+            DateTime lastUpdateLocal = TimeZoneInfo.ConvertTimeFromUtc(lastUpdate, TimeZoneInfo.Local);
 
             // Uses LINQ to find the first appointment in the Binding List that matches the edited appointment's appointmentID
             var appointmentToEdit = Appointment_Records.Instance.AllAppointments.FirstOrDefault(a => a.AppointmentID == appointmentID);
@@ -241,9 +243,9 @@ namespace Appointments_Scheduler.Appointment_Forms
                 appointmentToEdit.Url = url;
                 appointmentToEdit.Start = startLocal;
                 appointmentToEdit.End = endLocal;
-                appointmentToEdit.CreateDate = createDate;
+                appointmentToEdit.CreateDate = createDateLocal;
                 appointmentToEdit.CreatedBy = createdBy;
-                appointmentToEdit.LastUpdate = lastUpdate;
+                appointmentToEdit.LastUpdate = lastUpdateLocal;
                 appointmentToEdit.LastUpdateBy = lastUpdateBy;
             }
             else

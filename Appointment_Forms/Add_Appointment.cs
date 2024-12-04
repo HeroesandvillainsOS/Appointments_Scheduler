@@ -170,13 +170,13 @@ namespace Appointments_Scheduler.Appointment_Forms
             // Create Date cannot be left blank
             if (string.IsNullOrWhiteSpace(txtBox_CreateDate.Text) || !DateTime.TryParse(txtBox_CreateDate.Text, out createDate))
             {
-                createDate = DateTime.Now.Date;  // Ensures today's date is used if the field is left blank
+                createDate = DateTime.Now;  // Ensures today's date is used if the field is left blank
             }
 
             // Last Update cannot be left blank
             if (string.IsNullOrWhiteSpace(txtBox_LastUpdate.Text) || !DateTime.TryParse(txtBox_LastUpdate.Text, out lastUpdate))
             {
-                lastUpdate = DateTime.Now.Date;  // Ensures today's date is used if the field is left blank
+                lastUpdate = DateTime.Now;  // Ensures today's date is used if the field is left blank
             }
 
             // Create Date and Last Update must be converted from local time to UTC time
@@ -202,10 +202,12 @@ namespace Appointments_Scheduler.Appointment_Forms
             // Converts the UTC times to local times so they display correctly on the Data Grid View
             DateTime startLocal = TimeZoneInfo.ConvertTimeFromUtc(start, TimeZoneInfo.Local);
             DateTime endLocal = TimeZoneInfo.ConvertTimeFromUtc(end, TimeZoneInfo.Local);
+            DateTime createDateLocal = TimeZoneInfo.ConvertTimeFromUtc(createDate, TimeZoneInfo.Local);
+            DateTime lastUpdateLocal = TimeZoneInfo.ConvertTimeFromUtc(lastUpdate, TimeZoneInfo.Local);
 
             // Adds the new appointment to the BindingList instance with the returned appointmentID
-            Appointment newAppointmentWithLocalTime = new Appointment(newAppointmentID, customerID, userID, title, description, location, contact,
-                type, url, startLocal, endLocal, createDate, createdBy, lastUpdate, lastUpdateBy);
+            Appointment newAppointmentWithLocalTime = new Appointment(newAppointmentID, customerID, userID, title, description, 
+                location, contact, type, url, startLocal, endLocal, createDateLocal, createdBy, lastUpdateLocal, lastUpdateBy);
             
             Appointment_Records.Instance.AllAppointments.Add(newAppointmentWithLocalTime);
 

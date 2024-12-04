@@ -137,14 +137,21 @@ namespace Appointments_Scheduler.Customer_Forms
             // Create Date cannot be left blank
             if (string.IsNullOrWhiteSpace(txtBox_CreateDate.Text) || !DateTime.TryParse(txtBox_CreateDate.Text, out createDate))
             {
-                createDate = DateTime.UtcNow;  // Ensures today's date is used if the field is left blank
+                createDate = DateTime.Now;  // Ensures today's date is used if the field is left blank
             }
 
             // Last Update cannot be left blank
             if (string.IsNullOrWhiteSpace(txtBox_LastUpdate.Text) || !DateTime.TryParse(txtBox_LastUpdate.Text, out lastUpdate))
             {
-                lastUpdate = DateTime.UtcNow;  // Ensures today's date is used if the field is left blank
+                lastUpdate = DateTime.Now;  // Ensures today's date is used if the field is left blank
             }
+
+            // Variable for converting local time to UTC time
+            TimeZoneInfo utcZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
+
+            // Create Date and Last Update must be converted from local time to UTC time
+            createDate = TimeZoneInfo.ConvertTime(createDate, TimeZoneInfo.Local, utcZone);
+            lastUpdate = TimeZoneInfo.ConvertTime(lastUpdate, TimeZoneInfo.Local, utcZone);
 
             // Asks the user to verify they want to permanently edit this customer
             DialogResult result = MessageBox.Show(@"Are you sure you want to edit this customer in the database? This action cannot be undone.", 
@@ -161,11 +168,15 @@ namespace Appointments_Scheduler.Customer_Forms
                 createDate, createdBy, lastUpdate, lastUpdateBy);
 
             // Creates a new customer object based on the user input customer values
-            Customer editCustomer = new Customer(customerID, customerName, addressID, active, createDate, createdBy, lastUpdate, 
+            Customer editCustomerWithUTC = new Customer(customerID, customerName, addressID, active, createDate, createdBy, lastUpdate, 
                 lastUpdateBy);
 
             // Updates the database with the customer's new information
-            Customer.EditCustomerInDatabase(editCustomer);
+            Customer.EditCustomerInDatabase(editCustomerWithUTC);
+
+            // Converts the UTC times to local times so they display correctly on the Data Grid View
+            DateTime createDateLocal = TimeZoneInfo.ConvertTimeFromUtc(createDate, TimeZoneInfo.Local);
+            DateTime lastUpdateLocal = TimeZoneInfo.ConvertTimeFromUtc(lastUpdate, TimeZoneInfo.Local);
 
             // Uses LINQ to find the first customer in the Binding List that matches the edited customer's customerID
             var customerToEdit = Customer_Records.Instance.AllCustomers.FirstOrDefault(c => c.CustomerID == customerID);
@@ -177,9 +188,9 @@ namespace Appointments_Scheduler.Customer_Forms
                 customerToEdit.CustomerName = customerName;
                 customerToEdit.AddressID = addressID;
                 customerToEdit.Active = active;
-                customerToEdit.CreateDate = createDate;
+                customerToEdit.CreateDate = createDateLocal;
                 customerToEdit.CreatedBy = createdBy;
-                customerToEdit.LastUpdate = lastUpdate;
+                customerToEdit.LastUpdate = lastUpdateLocal;
                 customerToEdit.LastUpdateBy = lastUpdateBy;
             }
             else

@@ -109,14 +109,21 @@ namespace Appointments_Scheduler.Customer_Forms
             // Create Date cannot be left blank
             if (string.IsNullOrWhiteSpace(txtBox_CreateDate.Text) || !DateTime.TryParse(txtBox_CreateDate.Text, out createDate))
             {
-                createDate = DateTime.UtcNow;  // Ensures today's date is used if the field is left blank
+                createDate = DateTime.Now; 
             }
 
             // Last Update cannot be left blank
             if (string.IsNullOrWhiteSpace(txtBox_LastUpdate.Text) || !DateTime.TryParse(txtBox_LastUpdate.Text, out lastUpdate))
             {
-                lastUpdate = DateTime.UtcNow;  // Ensures today's date is used if the field is left blank
+                lastUpdate = DateTime.Now;  
             }
+
+            // Variable for converting local time to UTC time
+            TimeZoneInfo utcZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
+
+            // Create Date and Last Update must be converted from local time to UTC time
+            createDate = TimeZoneInfo.ConvertTime(createDate, TimeZoneInfo.Local, utcZone);
+            lastUpdate = TimeZoneInfo.ConvertTime(lastUpdate, TimeZoneInfo.Local, utcZone);
 
             // Asks the user to verify they want to permanently add this customer
             DialogResult result = MessageBox.Show(@"Are you sure you want to add this customer to the database? This action cannot be undone.",
@@ -133,13 +140,23 @@ namespace Appointments_Scheduler.Customer_Forms
                 createDate, createdBy, lastUpdate, lastUpdateBy);
 
             // Creates a new customer object
-            Customer newCustomer = new Customer(customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy);
+            Customer newCustomerWithUTC = new Customer(customerName, addressID, active, createDate, createdBy, lastUpdate, 
+                lastUpdateBy);
 
             // Adds the customer to the database and retrieves the generated customerID
-            newCustomer.CustomerID = Customer.AddCustomerToDatabase(newCustomer);
+            newCustomerWithUTC.CustomerID = Customer.AddCustomerToDatabase(newCustomerWithUTC);
+            int newCustomerID = newCustomerWithUTC.CustomerID;
+
+            // Converts the UTC times to local times so they display correctly on the Data Grid View
+            DateTime createDateLocal = TimeZoneInfo.ConvertTimeFromUtc(createDate, TimeZoneInfo.Local);
+            DateTime lastUpdateLocal = TimeZoneInfo.ConvertTimeFromUtc(lastUpdate, TimeZoneInfo.Local);
 
             // Adds the new customer to the BindingList instance with the returned customerID
-            Customer_Records.Instance.AllCustomers.Add(newCustomer);
+            Customer newCustomerWithLocalTime = new Customer(newCustomerID, customerName, addressID, active, createDateLocal,
+                createdBy, lastUpdateLocal, lastUpdateBy);
+
+            // Adds the new customer to the BindingList instance with the returned customerID
+            Customer_Records.Instance.AllCustomers.Add(newCustomerWithLocalTime);
 
             // Ensures the form closes after adding the customer data
             this.Close();
