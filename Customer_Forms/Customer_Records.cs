@@ -28,6 +28,13 @@ namespace Appointments_Scheduler.Forms.Customer_Forms
             // Gets all customers from the customer database table
             AllCustomers = Customer.GetAllCustomers();
 
+            // Converts the Data Grid View DateTime records to Local time (Binding List only)
+            foreach (Customer customer in AllCustomers)
+            {
+                customer.CreateDate = TimeZoneInfo.ConvertTimeFromUtc(customer.CreateDate, TimeZoneInfo.Local);
+                customer.LastUpdate = TimeZoneInfo.ConvertTimeFromUtc(customer.LastUpdate, TimeZoneInfo.Local);
+            }
+
             // Displays the Binding List of all customers on the Data Grid View
             dgv_Customers.DataSource = AllCustomers;
         }

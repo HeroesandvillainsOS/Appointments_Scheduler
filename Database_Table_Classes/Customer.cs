@@ -65,9 +65,16 @@ namespace Appointments_Scheduler.Database_Table_Classes
                 while (reader.Read())
                 {
                     // Adds the customer table data to the Binding List
-                    allCustomers.Add(new Customer(reader.GetInt32("customerID"), reader.GetString("customerName"), 
-                        reader.GetInt32("addressId"), reader.GetInt32("active"), reader.GetDateTime("createDate"), 
-                        reader.GetString("createdBy"), reader.GetDateTime("lastUpdate"), reader.GetString("lastUpdateBy")));
+                    allCustomers.Add(new Customer(
+                        reader.GetInt32("customerID"),
+                        reader.GetString("customerName"),
+                        reader.GetInt32("addressId"),
+                        reader.GetInt32("active"),
+                        DateTime.SpecifyKind(reader.GetDateTime("createDate"), DateTimeKind.Utc), 
+                        reader.GetString("createdBy"),
+                        DateTime.SpecifyKind(reader.GetDateTime("lastUpdate"), DateTimeKind.Utc),
+                        reader.GetString("lastUpdateBy")
+                    ));
                 }
             }
             else

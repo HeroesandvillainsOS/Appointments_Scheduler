@@ -53,9 +53,15 @@ namespace Appointments_Scheduler
                 while (reader.Read())
                 {
                     // Adds the user table data to the Binding List
-                    allUsers.Add(new User(reader.GetInt32("userId"), reader.GetString("username"), reader.GetString("password"),
-                            reader.GetInt32("active"), reader.GetDateTime("createDate"), reader.GetString("createdBy"),
-                            reader.GetDateTime("lastUpdate"), reader.GetString("lastUpdateBy")));
+                    allUsers.Add(new User(
+                        reader.GetInt32("userId"), 
+                        reader.GetString("username"), 
+                        reader.GetString("password"),
+                        reader.GetInt32("active"),
+                        DateTime.SpecifyKind(reader.GetDateTime("createDate"), DateTimeKind.Utc), 
+                        reader.GetString("createdBy"),
+                        DateTime.SpecifyKind(reader.GetDateTime("lastUpdate"), DateTimeKind.Utc), 
+                        reader.GetString("lastUpdateBy")));
                 }
             }
             else
