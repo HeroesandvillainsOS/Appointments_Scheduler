@@ -15,10 +15,10 @@ namespace Appointments_Scheduler.Database_Table_Classes
         public string Title { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
-        public string Contact {  get; set; }
+        public string Contact { get; set; }
         public string Type { get; set; }
         public string Url { get; set; }
-        public DateTime Start {  get; set; }
+        public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public DateTime CreateDate { get; set; }
         public string CreatedBy { get; set; }
@@ -26,8 +26,8 @@ namespace Appointments_Scheduler.Database_Table_Classes
         public string LastUpdateBy { get; set; }
 
         // Constructor for existing appointments (requires appointmentID)
-        public Appointment(int appointmentID, int customerID, int userID, string title, string description, string location, 
-            string contact, string type, string url, DateTime start, DateTime end, DateTime createDate, string createdBy, 
+        public Appointment(int appointmentID, int customerID, int userID, string title, string description, string location,
+            string contact, string type, string url, DateTime start, DateTime end, DateTime createDate, string createdBy,
             DateTime lastUpdate, string lastUpdateBy)
         {
             AppointmentID = appointmentID;
@@ -44,7 +44,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
             CreateDate = createDate;
             CreatedBy = createdBy;
             LastUpdate = lastUpdate;
-            LastUpdateBy = lastUpdateBy;        
+            LastUpdateBy = lastUpdateBy;
         }
 
         // Constructor for new appointments (doesn't require appointmentID)
@@ -88,10 +88,10 @@ namespace Appointments_Scheduler.Database_Table_Classes
                 while (reader.Read())
                 {
                     allAppointments.Add(new Appointment(reader.GetInt32("appointmentId"), reader.GetInt32("customerId"),
-                        reader.GetInt32("userId"), reader.GetString("title"), reader.GetString("description"), 
-                        reader.GetString("location"), reader.GetString("contact"), reader.GetString("type"), 
-                        reader.GetString("url"), reader.GetDateTime("start"), reader.GetDateTime("end"), 
-                        reader.GetDateTime("createDate"), reader.GetString("createdBy"),reader.GetDateTime("lastUpdate"), 
+                        reader.GetInt32("userId"), reader.GetString("title"), reader.GetString("description"),
+                        reader.GetString("location"), reader.GetString("contact"), reader.GetString("type"),
+                        reader.GetString("url"), reader.GetDateTime("start"), reader.GetDateTime("end"),
+                        reader.GetDateTime("createDate"), reader.GetString("createdBy"), reader.GetDateTime("lastUpdate"),
                         reader.GetString("lastUpdateBy")));
                 }
             }
@@ -103,6 +103,109 @@ namespace Appointments_Scheduler.Database_Table_Classes
 
             // Returns a Binding List of all appointments from the appointment database table
             return allAppointments;
+        }
+
+        // Returns a List of tuples containing appointment start and end times
+        public static List<(DateTime Start, DateTime End)> GetAllAppointmentTimes()
+        {
+            // Establishes the SQL query
+            string query = @"SELECT * FROM appointment";
+
+            // Creates a new MySQLCommand instance with the established query and database connection
+            var command = new MySqlCommand(query, DBConnection.connection);
+
+            // Creates a reader object for the MySQLCommand instance
+            var reader = command.ExecuteReader();
+
+            // Creates a List to store the appointment start and end times as tuples
+            List<(DateTime Start, DateTime End)> allAppointmentTimes = new List<(DateTime Start, DateTime End)>();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    // Retrieves the times as UTC time
+                    DateTime start = reader.GetDateTime("start");
+                    DateTime end = reader.GetDateTime("end");
+
+                    // Converts the times from UTC to local time
+                    start = TimeZoneInfo.ConvertTimeFromUtc(start, TimeZoneInfo.Local);
+                    end = TimeZoneInfo.ConvertTimeFromUtc(end, TimeZoneInfo.Local);
+
+                    // Adds the times to the List
+                    allAppointmentTimes.Add((start, end));
+                }
+            }
+            else
+            {
+                MessageBox.Show("The appointment table has no rows.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // Close the reader after use
+            reader.Close();
+            return allAppointmentTimes;
+        }
+
+        // Returns a List of tuples containing appointment start and end times EXCLUDING the input appointmentID
+        public static List<(DateTime Start, DateTime End)> GetAllAppointmentTimes(int appointmentID)
+        {
+            // Establishes the SQL query
+            string query = @"SELECT * FROM appointment
+                             WHERE appointmentId != @appointmentID";
+
+            // Creates a new MySQLCommand instance with the established query and database connection
+            var command = new MySqlCommand(query, DBConnection.connection);
+
+            // Defines the @variable values
+            command.Parameters.AddWithValue("@appointmentID", appointmentID);
+
+            // Creates a reader object for the MySQLCommand instance
+            var reader = command.ExecuteReader();
+
+            // Creates a List to store the appointment start and end times as tuples
+            List<(DateTime Start, DateTime End)> allAppointmentTimes = new List<(DateTime Start, DateTime End)>();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    // Retrieves the times as UTC time
+                    DateTime start = reader.GetDateTime("start");
+                    DateTime end = reader.GetDateTime("end");
+
+                    // Converts the times from UTC to local time
+                    start = TimeZoneInfo.ConvertTimeFromUtc(start, TimeZoneInfo.Local);
+                    end = TimeZoneInfo.ConvertTimeFromUtc(end, TimeZoneInfo.Local);
+
+                    // Adds the times to the List
+                    allAppointmentTimes.Add((start, end));
+                }
+            }
+            else
+            {
+                MessageBox.Show("The appointment table has no rows.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // Close the reader after use
+            reader.Close();
+            return allAppointmentTimes;
+        }
+
+        // Returns a bool indicating whether new or edited appointments overlap any existing appointments
+        public static bool IsAppointmentOverlappingAnyAppointments(DateTime newStart, DateTime newEnd,
+            List<(DateTime start, DateTime end)> allAppointments)
+        {
+            foreach (var appointment in allAppointments)
+            {
+                if ((newStart >= appointment.start && newStart <= appointment.end) ||
+                    (newEnd >= appointment.start && newEnd <= appointment.end) ||
+                    (newStart < appointment.start && newEnd > appointment.end))
+
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         // Returns a string List of a single appointment's data from the selected Data Grid View row
@@ -190,7 +293,7 @@ namespace Appointments_Scheduler.Database_Table_Classes
                              SET customerId = @customerID, userId = @userID, title = @title, 
                                  description = @description, location = @location, contact = @contact, type = @type, url = @url, 
                                  start = @start, end = @end, createDate = @createDate, createdBy = @createdBy, 
-                                 lastUpdate = @lastUpdate, lastUpdateBy = @lastUpdateBy;
+                                 lastUpdate = @lastUpdate, lastUpdateBy = @lastUpdateBy
                              WHERE appointmentId = @appointmentID";
 
             // Opens a connection to the database and executes the query

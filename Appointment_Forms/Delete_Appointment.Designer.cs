@@ -41,7 +41,7 @@
             this.lbl_Description = new System.Windows.Forms.Label();
             this.txtBox_Type = new System.Windows.Forms.TextBox();
             this.lbl_Type = new System.Windows.Forms.Label();
-            this.btn_Add = new System.Windows.Forms.Button();
+            this.btn_Delete = new System.Windows.Forms.Button();
             this.txtBox_LastUpdateBy = new System.Windows.Forms.TextBox();
             this.txtBox_LastUpdate = new System.Windows.Forms.TextBox();
             this.lbl_LastUpdateBy = new System.Windows.Forms.Label();
@@ -189,15 +189,16 @@
             this.lbl_Type.TabIndex = 102;
             this.lbl_Type.Text = "Type";
             // 
-            // btn_Add
+            // btn_Delete
             // 
-            this.btn_Add.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Add.Location = new System.Drawing.Point(625, 638);
-            this.btn_Add.Name = "btn_Add";
-            this.btn_Add.Size = new System.Drawing.Size(149, 52);
-            this.btn_Add.TabIndex = 101;
-            this.btn_Add.Text = "Delete";
-            this.btn_Add.UseVisualStyleBackColor = true;
+            this.btn_Delete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Delete.Location = new System.Drawing.Point(625, 638);
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.Size = new System.Drawing.Size(149, 52);
+            this.btn_Delete.TabIndex = 101;
+            this.btn_Delete.Text = "Delete";
+            this.btn_Delete.UseVisualStyleBackColor = true;
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
             // txtBox_LastUpdateBy
             // 
@@ -371,7 +372,7 @@
             this.Controls.Add(this.lbl_Description);
             this.Controls.Add(this.txtBox_Type);
             this.Controls.Add(this.lbl_Type);
-            this.Controls.Add(this.btn_Add);
+            this.Controls.Add(this.btn_Delete);
             this.Controls.Add(this.txtBox_LastUpdateBy);
             this.Controls.Add(this.txtBox_LastUpdate);
             this.Controls.Add(this.lbl_LastUpdateBy);
@@ -405,7 +406,7 @@
         private System.Windows.Forms.Label lbl_Description;
         private System.Windows.Forms.TextBox txtBox_Type;
         private System.Windows.Forms.Label lbl_Type;
-        private System.Windows.Forms.Button btn_Add;
+        private System.Windows.Forms.Button btn_Delete;
         private System.Windows.Forms.TextBox txtBox_LastUpdateBy;
         private System.Windows.Forms.TextBox txtBox_LastUpdate;
         private System.Windows.Forms.Label lbl_LastUpdateBy;

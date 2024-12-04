@@ -1,4 +1,5 @@
 ﻿using Appointments_Scheduler.Database_Table_Classes;
+using Appointments_Scheduler.Forms.Customer_Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,6 +39,37 @@ namespace Appointments_Scheduler.Appointment_Forms
             txtBox_CreatedBy.Text = appointmentDetails[12];
             txtBox_LastUpdate.Text = appointmentDetails[13];
             txtBox_LastUpdateBy.Text = appointmentDetails[14];
+        }
+
+        private void btn_Delete_Click(object sender, EventArgs e)
+        {
+            int appointmentID = Convert.ToInt32(txtBox_AppointmentID.Text);
+            
+            // Asks the user to verify they want to permanently delete this appointment
+            DialogResult result = MessageBox.Show(@"Are you sure you want to delete this appointment from the database? This action cannot be undone.",
+                "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            // Deletes the appointment from the Database
+            Appointment.DeleteAppointmentFromDatabase(appointmentID);
+
+            // Deletes the appointment entry from the Binding List'
+            foreach (Appointment appointment in Appointment_Records.Instance.AllAppointments.ToList())
+            {
+                if (appointment.AppointmentID == appointmentID)
+                {
+                    Appointment_Records.Instance.AllAppointments.Remove(appointment);
+                }
+            }
+
+            // Refreshes the Data Grid view's data
+            Appointment_Records.Instance.DgvAppointments.Refresh();
+
+            // Ensures the form closes after adding the customer data
+            this.Close();
         }
     }
 }

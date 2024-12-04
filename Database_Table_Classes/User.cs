@@ -110,6 +110,34 @@ namespace Appointments_Scheduler
             return userName;
         }
 
+        // Returns a customerID as a string from a customer's name
+        public static string GetUserIDFromUserName(string userName)
+        {
+            string userID = null;
+
+            // Establishes the SQL Query
+            string query = @"SELECT userID
+                             FROM user
+                             WHERE userName = @userName";
+
+            // Creates a new MySQL Command object and opens a connection to the database
+            using (var command = new MySqlCommand(query, DBConnection.connection))
+            {
+                // Assigns the @variable's value
+                command.Parameters.AddWithValue("@userName", userName);
+
+                // Executes the query
+                object result = command.ExecuteScalar();
+
+                if (result != null)
+                {
+                    userID = result.ToString();
+                }
+            }
+            // Returns the result
+            return userID;
+        }
+
         // Returns a string List of customer data from the selected Data Grid View row
         public static List<String> GetSelectedRowData(DataGridViewRow selectedRow)
         {

@@ -62,6 +62,8 @@
             this.txtBox_AppointmentID = new System.Windows.Forms.TextBox();
             this.lbl_AppointmentID = new System.Windows.Forms.Label();
             this.lbl_Url = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cmboBox_UserName
@@ -259,6 +261,7 @@
             this.btn_Edit.TabIndex = 101;
             this.btn_Edit.Text = "Edit";
             this.btn_Edit.UseVisualStyleBackColor = true;
+            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
             // 
             // txtBox_LastUpdateBy
             // 
@@ -383,11 +386,33 @@
             this.lbl_Url.TabIndex = 122;
             this.lbl_Url.Text = "Url";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(758, 136);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 29);
+            this.label5.TabIndex = 124;
+            this.label5.Text = "* ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(758, 75);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 29);
+            this.label4.TabIndex = 123;
+            this.label4.Text = "* ";
+            // 
             // Edit_Appointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1360, 812);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.lbl_Url);
             this.Controls.Add(this.cmboBox_UserName);
             this.Controls.Add(this.cmboBox_CustomerName);
@@ -465,5 +490,7 @@
         private System.Windows.Forms.TextBox txtBox_AppointmentID;
         private System.Windows.Forms.Label lbl_AppointmentID;
         private System.Windows.Forms.Label lbl_Url;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
     }
 }
