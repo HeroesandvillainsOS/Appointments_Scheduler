@@ -179,7 +179,7 @@ namespace Appointments_Scheduler.Appointment_Forms
                 }
             }
             // Certain months can only contain 30 days
-            else if (CurrentlySelectedMonth == "April" || CurrentlySelectedMonth == "June" || 
+            else if (CurrentlySelectedMonth == "April" || CurrentlySelectedMonth == "June" ||
                 CurrentlySelectedMonth == "September" || CurrentlySelectedMonth == "November")
             {
                 for (int i = 0; i < days30.Length; i++)
@@ -217,19 +217,68 @@ namespace Appointments_Scheduler.Appointment_Forms
         // Ensures the user Month selection is tracked live as the selection is made or changes
         private void cmboBox_Month_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CurrentlySelectedMonth = cmboBox_Month.SelectedItem?.ToString();       
+            CurrentlySelectedMonth = cmboBox_Month.SelectedItem?.ToString();
         }
 
-        // Ensures the user Day selection is tracked live as the selection is made or changes
+        // Ensures the user Day selection is tracked live as the dropdown changes
         private void cmboBox_Day_SelectedIndexChanged(object sender, EventArgs e)
         {
             CurrentlySelectedDay = cmboBox_Day.SelectedItem?.ToString();
         }
 
-        // Ensures the user Year selection is tracked live as the selection is made or changes
+        // Ensures the user Year selection is tracked live as the dropdown value changes
         private void cmboBox_Year_SelectedIndexChanged(object sender, EventArgs e)
         {
             CurrentlySelectedYear = cmboBox_Year.SelectedItem?.ToString();
+        }
+
+        // Handles the Filter Appointments click event
+        private void btn_FilterAppointments_Click(object sender, EventArgs e)
+        {
+            string month = cmboBox_Month.Text;
+            string day = cmboBox_Day.Text;
+            string year = cmboBox_Year.Text;
+
+            // All appointments must be shown if the dropdown values are all empty or contain "--"
+            if (String.IsNullOrEmpty(month) || month == "--" && String.IsNullOrEmpty(day) || day == "--" ||
+                    String.IsNullOrEmpty(year) || year == "--")
+            {
+                Appointment_Records.Instance.DgvAppointments.DataSource = AllAppointments;              
+            }
+
+            // A month and a year must be selected in the dropdowns to filter through appointments
+            if (!String.IsNullOrEmpty(day) && day != "--")
+            {
+                if (String.IsNullOrEmpty(month) || month == "--")
+                {
+                    MessageBox.Show("A valid month is required to filter appointments.", "Warning", MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                    return;
+                }
+
+                else if (String.IsNullOrEmpty(year) || year == "--")
+                {
+                    MessageBox.Show("A valid year is required to filter appointments.", "Warning", MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                    return;
+                }            
+            }
+
+            // Handles when only a month and a year are selected in the dropdowns
+            if (!String.IsNullOrEmpty(month) && String.IsNullOrEmpty(day) || day == "--" && !String.IsNullOrEmpty(year))
+            {
+                FilteredAppointments.Clear();
+                FilteredAppointments = Appointment.GetFilteredAppointments(month, year);
+                Appointment_Records.Instance.DgvAppointments.DataSource = FilteredAppointments;
+            }
+
+            // Handles when a month, a day, and a year are selected in the dropdowns
+            if (!String.IsNullOrEmpty(month) && month!= "--" && !String.IsNullOrEmpty(day) && day != "--" 
+                && !String.IsNullOrEmpty(year) && year != "--")
+            {
+                FilteredAppointments = Appointment.GetFilteredAppointments(month, day, year);
+                Appointment_Records.Instance.DgvAppointments.DataSource = FilteredAppointments;
+            }
         }
     }
 }

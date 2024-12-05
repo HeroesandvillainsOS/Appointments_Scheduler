@@ -169,6 +169,7 @@
             this.btn_FilterAppointments.TabIndex = 14;
             this.btn_FilterAppointments.Text = "Filter Appointments";
             this.btn_FilterAppointments.UseVisualStyleBackColor = true;
+            this.btn_FilterAppointments.Click += new System.EventHandler(this.btn_FilterAppointments_Click);
             // 
             // Appointment_Records
             // 
