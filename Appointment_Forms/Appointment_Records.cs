@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace Appointments_Scheduler.Appointment_Forms
@@ -13,7 +14,17 @@ namespace Appointments_Scheduler.Appointment_Forms
 
         public BindingList<Appointment> AllAppointments { get; private set; }
 
+        public BindingList<Appointment> FilteredAppointments { get; private set; }
+
         public DataGridView DgvAppointments => dgv_Appointments;
+
+        public string CurrentlySelectedMonth { get; private set; }
+
+        public string CurrentlySelectedDay { get; private set; }
+
+        public string CurrentlySelectedYear { get; private set; }
+
+        public bool IsLeapYear { get; private set; } = false;
 
         public Appointment_Records()
         {
@@ -101,6 +112,124 @@ namespace Appointments_Scheduler.Appointment_Forms
             // Opens the Delete Appointment form
             Delete_Appointment delete_Appointment = new Delete_Appointment(appointmentDetails);
             delete_Appointment.Show();
+        }
+
+        // Handles the Month dropdown event
+        private void cmboBox_Month_DropDown(object sender, EventArgs e)
+        {
+            // Clears the dropdown values and adds the array items to the dropdown list
+            cmboBox_Month.Items.Clear();
+
+            string[] months = new string[] {"--", "January", "February", "March", "April", "May", "June", "July", "August",
+                "September", "October", "November", "December"};
+
+            for (int i = 0; i < months.Length; i++)
+            {
+                cmboBox_Month.Items.Add(months[i]);
+            }
+
+            CurrentlySelectedMonth = cmboBox_Month.Text;
+        }
+
+        // Handles the Day dropdown event
+        private void cmboBox_Day_DropDown(object sender, EventArgs e)
+        {
+            // Clears the dropdown values and adds the array items to the dropdown list
+            cmboBox_Day.Items.Clear();
+
+            string[] days31 = new string[] { "--", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+                "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+
+            string[] days30 = new string[] { "--", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+                "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"};
+
+            string[] febDays = new string[] { "--", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+                "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29"};
+
+            string[] leapFebDays = new string[] { "--", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+                "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"};
+
+            // Determines if the current year is a leap year
+            if (CurrentlySelectedYear != null && int.TryParse(CurrentlySelectedYear, out int currentlySelectedYearInt))
+            {
+                if (currentlySelectedYearInt % 4 == 0)
+                {
+                    IsLeapYear = true;
+                }
+                else
+                {
+                    IsLeapYear = false;
+                }
+            }
+
+            // February can only contain 28 days if the Year is a leap year
+            if (CurrentlySelectedMonth == "February" && IsLeapYear)
+            {
+                for (int i = 0; i < leapFebDays.Length; i++)
+                {
+                    cmboBox_Day.Items.Add(leapFebDays[i]);
+                }
+            }
+            // February can only contain 29 days if the Year is not a leap year
+            else if (CurrentlySelectedMonth == "February" && !IsLeapYear)
+            {
+                for (int i = 0; i < febDays.Length; i++)
+                {
+                    cmboBox_Day.Items.Add(febDays[i]);
+                }
+            }
+            // Certain months can only contain 30 days
+            else if (CurrentlySelectedMonth == "April" || CurrentlySelectedMonth == "June" || 
+                CurrentlySelectedMonth == "September" || CurrentlySelectedMonth == "November")
+            {
+                for (int i = 0; i < days30.Length; i++)
+                {
+                    cmboBox_Day.Items.Add(days30[i]);
+                }
+            }
+            // Certain months can only contain 31 days
+            else
+            {
+                for (int i = 0; i < days31.Length; i++)
+                {
+                    cmboBox_Day.Items.Add(days31[i]);
+                }
+            }
+        }
+
+        // Handles the Year dropdown event
+        private void cmboBox_Year_DropDown(object sender, EventArgs e)
+        {
+            // Clears the dropdown values and adds the array items to the dropdown list
+            cmboBox_Year.Items.Clear();
+
+            string[] years = new string[] {"--", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028",
+                "2029", "2030", "2031", "2032", "2033", "2034", "2035"};
+
+            for (int i = 0; i < years.Length; i++)
+            {
+                cmboBox_Year.Items.Add(years[i]);
+            }
+
+            CurrentlySelectedYear = cmboBox_Year.Text;
+        }
+
+        // Ensures the user Month selection is tracked live as the selection is made or changes
+        private void cmboBox_Month_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CurrentlySelectedMonth = cmboBox_Month.SelectedItem?.ToString();       
+        }
+
+        // Ensures the user Day selection is tracked live as the selection is made or changes
+        private void cmboBox_Day_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CurrentlySelectedDay = cmboBox_Day.SelectedItem?.ToString();
+        }
+
+        // Ensures the user Year selection is tracked live as the selection is made or changes
+        private void cmboBox_Year_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CurrentlySelectedYear = cmboBox_Year.SelectedItem?.ToString();
         }
     }
 }

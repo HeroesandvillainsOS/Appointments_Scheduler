@@ -14,7 +14,6 @@ namespace Appointments_Scheduler.Forms
                 btn_CustomerRecords.Text = "Registros de Clientes";
                 btn_Appointments.Text = "Citas";
                 btn_Reports.Text = "Informes";
-                btn_Calendar.Text = "Calendario";
                 btn_Exit.Text = "Salida";
             }
             else
@@ -22,7 +21,6 @@ namespace Appointments_Scheduler.Forms
                 btn_CustomerRecords.Text = "Customer Records";
                 btn_Appointments.Text = "Appointments";
                 btn_Reports.Text = "Reports";
-                btn_Calendar.Text = "Calendar";
                 btn_Exit.Text = "Exit";
             }
         }
