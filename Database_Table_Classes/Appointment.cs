@@ -203,6 +203,165 @@ namespace Appointments_Scheduler.Database_Table_Classes
             return allAppointmentTimes;
         }
 
+        // Returns a Binding List of appointments based on the user's Filter Appointments criteria
+        public static BindingList<Appointment> GetFilteredAppointments(string month, string day, string year)
+        {
+            int inputMonth;
+
+            switch (month)
+            {
+                case "January": inputMonth = 1; break;
+                case "February": inputMonth = 2; break;
+                case "March": inputMonth = 3; break;
+                case "April": inputMonth = 4; break;
+                case "May": inputMonth = 5; break;
+                case "June": inputMonth = 6; break;
+                case "July": inputMonth = 7; break;
+                case "August": inputMonth = 8; break;
+                case "September": inputMonth = 9; break;
+                case "October": inputMonth = 10; break;
+                case "November": inputMonth = 11; break;
+                case "December": inputMonth = 12; break;
+                default:
+                    throw new ArgumentException("Invalid month provided.");
+            }
+
+            int inputDay = int.Parse(day);
+            int inputYear = int.Parse(year);
+
+            // Establishes the SQL query
+            string query = @"SELECT * 
+                            FROM appointment
+                            WHERE MONTH(start) = @Month
+                            AND DAY(start) = @Day
+                            AND YEAR(start) = @Year";
+
+            // Creates a new MySQLCommand instance with the established query and database connection
+            var command = new MySqlCommand(query, DBConnection.connection);
+
+            // Defines the @variable values
+            command.Parameters.AddWithValue("@Month", inputMonth);
+            command.Parameters.AddWithValue("@Day", inputDay);
+            command.Parameters.AddWithValue("@Year", inputYear);
+
+            // Creates a reader object for the MySQLCommand instance
+            var reader = command.ExecuteReader();
+
+            // Creates a Binding List to store the returned appointments
+            BindingList<Appointment> filteredAppointments = new BindingList<Appointment>();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    filteredAppointments.Add(new Appointment(
+                         reader.GetInt32("appointmentId"),
+                         reader.GetInt32("customerId"),
+                         reader.GetInt32("userId"),
+                         reader.GetString("title"),
+                         reader.GetString("description"),
+                         reader.GetString("location"),
+                         reader.GetString("contact"),
+                         reader.GetString("type"),
+                         reader.GetString("url"),
+                         // Set DateTimeKind explicitly for each DateTime field
+                         DateTime.SpecifyKind(reader.GetDateTime("start"), DateTimeKind.Utc),
+                         DateTime.SpecifyKind(reader.GetDateTime("end"), DateTimeKind.Utc),
+                         DateTime.SpecifyKind(reader.GetDateTime("createDate"), DateTimeKind.Utc),
+                         reader.GetString("createdBy"),
+                         DateTime.SpecifyKind(reader.GetDateTime("lastUpdate"), DateTimeKind.Utc),
+                         reader.GetString("lastUpdateBy")
+                    ));
+                }
+            }
+            else
+            {
+                MessageBox.Show("No appointments match this criteria.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // Close the reader after use and returns the Binding List
+            reader.Close();
+            return filteredAppointments;
+        }
+
+        // Returns a Binding List of appointments based on the user's Filter Appointments criteria
+        public static BindingList<Appointment> GetFilteredAppointments(string month, string year)
+        {
+            int inputMonth;
+
+            switch (month)
+            {
+                case "January": inputMonth = 1; break;
+                case "February": inputMonth = 2; break;
+                case "March": inputMonth = 3; break;
+                case "April": inputMonth = 4; break;
+                case "May": inputMonth = 5; break;
+                case "June": inputMonth = 6; break;
+                case "July": inputMonth = 7; break;
+                case "August": inputMonth = 8; break;
+                case "September": inputMonth = 9; break;
+                case "October": inputMonth = 10; break;
+                case "November": inputMonth = 11; break;
+                case "December": inputMonth = 12; break;
+                default:
+                    throw new ArgumentException("Invalid month provided.");
+            }
+
+            int inputYear = int.Parse(year);
+
+            // Establishes the SQL query
+            string query = @"SELECT * 
+                            FROM appointment
+                            WHERE MONTH(start) = @Month
+                            AND YEAR(start) = @Year";
+
+            // Creates a new MySQLCommand instance with the established query and database connection
+            var command = new MySqlCommand(query, DBConnection.connection);
+
+            // Defines the @variable values
+            command.Parameters.AddWithValue("@Month", inputMonth);
+            command.Parameters.AddWithValue("@Year", inputYear);
+
+            // Creates a reader object for the MySQLCommand instance
+            var reader = command.ExecuteReader();
+
+            // Creates a Binding List to store the returned appointments
+            BindingList<Appointment> filteredAppointments = new BindingList<Appointment>();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    filteredAppointments.Add(new Appointment(
+                         reader.GetInt32("appointmentId"),
+                         reader.GetInt32("customerId"),
+                         reader.GetInt32("userId"),
+                         reader.GetString("title"),
+                         reader.GetString("description"),
+                         reader.GetString("location"),
+                         reader.GetString("contact"),
+                         reader.GetString("type"),
+                         reader.GetString("url"),
+                         // Set DateTimeKind explicitly for each DateTime field
+                         DateTime.SpecifyKind(reader.GetDateTime("start"), DateTimeKind.Utc),
+                         DateTime.SpecifyKind(reader.GetDateTime("end"), DateTimeKind.Utc),
+                         DateTime.SpecifyKind(reader.GetDateTime("createDate"), DateTimeKind.Utc),
+                         reader.GetString("createdBy"),
+                         DateTime.SpecifyKind(reader.GetDateTime("lastUpdate"), DateTimeKind.Utc),
+                         reader.GetString("lastUpdateBy")
+                    ));
+                }
+            }
+            else
+            {
+                MessageBox.Show("No appointments match this criteria.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // Close the reader after use and returns the Binding List
+            reader.Close();
+            return filteredAppointments;
+        }
+
         // Returns a bool indicating whether new or edited appointments overlap any existing appointments
         public static bool IsAppointmentOverlappingAnyAppointments(DateTime newStart, DateTime newEnd,
             List<(DateTime start, DateTime end)> allAppointments)
