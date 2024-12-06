@@ -254,6 +254,38 @@ namespace Appointments_Scheduler.Appointment_Forms
                     MessageBoxIcon.Error);
             }
 
+            if (Appointment_Records.Instance.FilteredAppointments != null)
+            {
+                // Uses LINQ to find the first appointment in the Binding List that matches the edited appointment's appointmentID
+                var filteredAppointmentToEdit = Appointment_Records.Instance.FilteredAppointments.FirstOrDefault
+                    (a => a.AppointmentID == appointmentID);
+
+                if (filteredAppointmentToEdit != null)
+                {
+                    // Updates the Binding List record for the appointment being edited
+                    filteredAppointmentToEdit.AppointmentID = appointmentID;
+                    filteredAppointmentToEdit.CustomerID = customerID;
+                    filteredAppointmentToEdit.UserID = userID;
+                    filteredAppointmentToEdit.Title = title;
+                    filteredAppointmentToEdit.Description = description;
+                    filteredAppointmentToEdit.Location = location;
+                    filteredAppointmentToEdit.Contact = contact;
+                    filteredAppointmentToEdit.Type = type;
+                    filteredAppointmentToEdit.Url = url;
+                    filteredAppointmentToEdit.Start = startLocal;
+                    filteredAppointmentToEdit.End = endLocal;
+                    filteredAppointmentToEdit.CreateDate = createDateLocal;
+                    filteredAppointmentToEdit.CreatedBy = createdBy;
+                    filteredAppointmentToEdit.LastUpdate = lastUpdateLocal;
+                    filteredAppointmentToEdit.LastUpdateBy = lastUpdateBy;
+                }
+                else
+                {
+                    MessageBox.Show("The appointment you're trying to edit cannot be found.", "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+
             // Refreshes the Data Grid View
             Appointment_Records.Instance.DgvAppointments.Refresh();
 
