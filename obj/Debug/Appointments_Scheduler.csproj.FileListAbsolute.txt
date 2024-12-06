@@ -50,3 +50,5 @@ C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Sche
 C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Scheduler.Appointment_Forms.Add_Appointment.resources
 C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Scheduler.Appointment_Forms.Delete_Appointment.resources
 C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Scheduler.Appointment_Forms.Edit_Appointment.resources
+C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Scheduler.Report_Forms.AppointmentTypesByMonth.resources
+C:\Users\Beher\Desktop\Coding\Appointments_Scheduler\obj\Debug\Appointments_Scheduler.Report_Forms.Reports.resources
