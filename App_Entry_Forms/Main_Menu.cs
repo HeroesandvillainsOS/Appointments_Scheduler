@@ -1,14 +1,16 @@
-﻿using System;
+﻿using Appointments_Scheduler.Database_Table_Classes;
+using System;
 using System.Windows.Forms;
 
 namespace Appointments_Scheduler.Forms
 {
     public partial class Main_Menu : Form
     {
-        public Main_Menu()
+        public Main_Menu(string userName)
         {
             InitializeComponent();
 
+            // Translates the Main Menu into Spanish if the Spanish culture is detected 
             if (Culture.CultureName == "es-ES")
             {
                 btn_CustomerRecords.Text = "Registros de Clientes";
@@ -22,6 +24,15 @@ namespace Appointments_Scheduler.Forms
                 btn_Appointments.Text = "Appointments";
                 btn_Reports.Text = "Reports";
                 btn_Exit.Text = "Exit";
+            }
+
+            // Sends a message to the logged in user if they have an appointment within 15 minutes of logging in
+            bool hasAppointmentWithin15Minutes = Appointment.UserHasAppointmentWithin15Minutes(userName, DateTime.Now);
+
+            if (hasAppointmentWithin15Minutes)
+            {
+                MessageBox.Show("Reminder that you have an appointment within 15 minutes.", "Appointment Reminder",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

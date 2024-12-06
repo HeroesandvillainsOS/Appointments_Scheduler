@@ -16,6 +16,7 @@ namespace Appointments_Scheduler
         {
             InitializeComponent();
 
+
             // Stores the system's current culture info
             CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
             CultureInfo currentUICulture = Thread.CurrentThread.CurrentUICulture;
@@ -78,7 +79,7 @@ namespace Appointments_Scheduler
                     if (allUsers[currentIndex].Password == currentPassword)
                     {
                         // Opens the Main Menu form
-                        var mainMenu = new Main_Menu();
+                        var mainMenu = new Main_Menu(user.UserName); // Passes the currently logged in user into the main program
                         mainMenu.Show();
                         // Closes the Login form
                         this.Hide();
