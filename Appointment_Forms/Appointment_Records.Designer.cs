@@ -105,6 +105,7 @@
             this.cmboBox_Month.Name = "cmboBox_Month";
             this.cmboBox_Month.Size = new System.Drawing.Size(145, 33);
             this.cmboBox_Month.TabIndex = 8;
+            this.cmboBox_Month.Text = "--";
             this.cmboBox_Month.DropDown += new System.EventHandler(this.cmboBox_Month_DropDown);
             this.cmboBox_Month.SelectedIndexChanged += new System.EventHandler(this.cmboBox_Month_SelectedIndexChanged);
             // 
@@ -116,6 +117,7 @@
             this.cmboBox_Day.Name = "cmboBox_Day";
             this.cmboBox_Day.Size = new System.Drawing.Size(145, 33);
             this.cmboBox_Day.TabIndex = 9;
+            this.cmboBox_Day.Text = "--";
             this.cmboBox_Day.DropDown += new System.EventHandler(this.cmboBox_Day_DropDown);
             this.cmboBox_Day.SelectedIndexChanged += new System.EventHandler(this.cmboBox_Day_SelectedIndexChanged);
             // 
@@ -127,6 +129,7 @@
             this.cmboBox_Year.Name = "cmboBox_Year";
             this.cmboBox_Year.Size = new System.Drawing.Size(145, 33);
             this.cmboBox_Year.TabIndex = 10;
+            this.cmboBox_Year.Text = "--";
             this.cmboBox_Year.DropDown += new System.EventHandler(this.cmboBox_Year_DropDown);
             this.cmboBox_Year.SelectedIndexChanged += new System.EventHandler(this.cmboBox_Year_SelectedIndexChanged);
             // 

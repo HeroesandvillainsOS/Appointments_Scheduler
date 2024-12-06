@@ -41,13 +41,7 @@ namespace Appointments_Scheduler.Appointment_Forms
             AllAppointments = Appointment.GetAllAppointments();
 
             // Converts the Data Grid View DateTime records to Local time (Binding List only)
-            foreach (Appointment appointment in AllAppointments)
-            {
-                appointment.Start = TimeZoneInfo.ConvertTimeFromUtc(appointment.Start, TimeZoneInfo.Local);
-                appointment.End = TimeZoneInfo.ConvertTimeFromUtc(appointment.End, TimeZoneInfo.Local);
-                appointment.CreateDate = TimeZoneInfo.ConvertTimeFromUtc(appointment.CreateDate, TimeZoneInfo.Local);
-                appointment.LastUpdate = TimeZoneInfo.ConvertTimeFromUtc(appointment.LastUpdate, TimeZoneInfo.Local);
-            }
+            ConvertAppointmentsToLocalTime(AllAppointments);
 
             // Displays the Binding List of all appointments on the Data Grid View
             dgv_Appointments.DataSource = AllAppointments;
@@ -239,45 +233,73 @@ namespace Appointments_Scheduler.Appointment_Forms
             string day = cmboBox_Day.Text;
             string year = cmboBox_Year.Text;
 
-            // All appointments must be shown if the dropdown values are all empty or contain "--"
-            if (String.IsNullOrEmpty(month) || month == "--" && String.IsNullOrEmpty(day) || day == "--" ||
-                    String.IsNullOrEmpty(year) || year == "--")
+            bool isMonthEmpty = String.IsNullOrEmpty(month) || month == "--";
+            bool isDayEmpty = String.IsNullOrEmpty(day) || day == "--";
+            bool isYearEmpty = String.IsNullOrEmpty(year) || year == "--";
+
+            // Show all appointments if all dropdowns are empty or contain "--"
+            if (isMonthEmpty && isDayEmpty && isYearEmpty)
             {
-                Appointment_Records.Instance.DgvAppointments.DataSource = AllAppointments;              
+                Appointment_Records.Instance.DgvAppointments.DataSource = AllAppointments;
+                return;
             }
 
-            // A month and a year must be selected in the dropdowns to filter through appointments
-            if (!String.IsNullOrEmpty(day) && day != "--")
+            // If a day is selected, both month and year must also be selected
+            if (!isDayEmpty)
             {
-                if (String.IsNullOrEmpty(month) || month == "--")
+                if (isMonthEmpty)
                 {
                     MessageBox.Show("A valid month is required to filter appointments.", "Warning", MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
+                        MessageBoxIcon.Warning);
                     return;
                 }
 
-                else if (String.IsNullOrEmpty(year) || year == "--")
+                if (isYearEmpty)
                 {
                     MessageBox.Show("A valid year is required to filter appointments.", "Warning", MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
+                        MessageBoxIcon.Warning);
                     return;
-                }            
+                }
             }
 
-            // Handles when only a month and a year are selected in the dropdowns
-            if (!String.IsNullOrEmpty(month) && String.IsNullOrEmpty(day) || day == "--" && !String.IsNullOrEmpty(year))
+            // If only a month is selected, a year must also be selected
+            if (!isMonthEmpty && isDayEmpty && isYearEmpty)
             {
-                FilteredAppointments.Clear();
-                FilteredAppointments = Appointment.GetFilteredAppointments(month, year);
-                Appointment_Records.Instance.DgvAppointments.DataSource = FilteredAppointments;
+                MessageBox.Show("A valid year is required to filter appointments.", "Warning", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
             }
 
-            // Handles when a month, a day, and a year are selected in the dropdowns
-            if (!String.IsNullOrEmpty(month) && month!= "--" && !String.IsNullOrEmpty(day) && day != "--" 
-                && !String.IsNullOrEmpty(year) && year != "--")
+            // Handles filtering by month and year (when day not selected)
+            if (!isMonthEmpty && isDayEmpty && !isYearEmpty)
+            {
+                FilteredAppointments = Appointment.GetFilteredAppointments(month, year);
+
+                ConvertAppointmentsToLocalTime(FilteredAppointments);
+                Appointment_Records.Instance.DgvAppointments.DataSource = FilteredAppointments;
+                return;
+            }
+
+            // Handles filtering by month, day, and year
+            if (!isMonthEmpty && !isDayEmpty && !isYearEmpty)
             {
                 FilteredAppointments = Appointment.GetFilteredAppointments(month, day, year);
+
+                ConvertAppointmentsToLocalTime(FilteredAppointments);
                 Appointment_Records.Instance.DgvAppointments.DataSource = FilteredAppointments;
+            }
+        }
+
+        // Converts appointments to local time in the Data Grid View
+        // TimeZoneInfo.Local accounts for both Daylight Saving Time user time zones
+        private void ConvertAppointmentsToLocalTime(BindingList<Appointment> appointments)
+        {
+            foreach (Appointment appointment in appointments)
+            {
+                appointment.Start = TimeZoneInfo.ConvertTimeFromUtc(appointment.Start, TimeZoneInfo.Local);
+                appointment.End = TimeZoneInfo.ConvertTimeFromUtc(appointment.End, TimeZoneInfo.Local);
+                appointment.CreateDate = TimeZoneInfo.ConvertTimeFromUtc(appointment.CreateDate, TimeZoneInfo.Local);
+                appointment.LastUpdate = TimeZoneInfo.ConvertTimeFromUtc(appointment.LastUpdate, TimeZoneInfo.Local);
             }
         }
     }

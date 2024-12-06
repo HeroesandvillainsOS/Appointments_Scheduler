@@ -1,24 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Beher\\Desktop\\Coding\\Appointments_Scheduler\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{DC8748E4-4DCA-4D13-BA90-12642B5F6172}|Appointments_Scheduler.csproj|C:\\Users\\Beher\\Desktop\\Coding\\Appointments_Scheduler\\appointment_forms\\appointment_records.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC8748E4-4DCA-4D13-BA90-12642B5F6172}|Appointments_Scheduler.csproj|solutionrelative:appointment_forms\\appointment_records.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC8748E4-4DCA-4D13-BA90-12642B5F6172}|Appointments_Scheduler.csproj|c:\\users\\beher\\desktop\\coding\\appointments_scheduler\\database_table_classes\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC8748E4-4DCA-4D13-BA90-12642B5F6172}|Appointments_Scheduler.csproj|solutionrelative:database_table_classes\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC8748E4-4DCA-4D13-BA90-12642B5F6172}|Appointments_Scheduler.csproj|c:\\users\\beher\\desktop\\coding\\appointments_scheduler\\appointment_forms\\edit_appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC8748E4-4DCA-4D13-BA90-12642B5F6172}|Appointments_Scheduler.csproj|solutionrelative:appointment_forms\\edit_appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC8748E4-4DCA-4D13-BA90-12642B5F6172}|Appointments_Scheduler.csproj|C:\\Users\\Beher\\Desktop\\Coding\\Appointments_Scheduler\\appointment_forms\\appointment_records.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DC8748E4-4DCA-4D13-BA90-12642B5F6172}|Appointments_Scheduler.csproj|solutionrelative:appointment_forms\\appointment_records.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -26,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -35,57 +18,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Edit_Appointment.cs",
-              "DocumentMoniker": "C:\\Users\\Beher\\Desktop\\Coding\\Appointments_Scheduler\\Appointment_Forms\\Edit_Appointment.cs",
-              "RelativeDocumentMoniker": "Appointment_Forms\\Edit_Appointment.cs",
-              "ToolTip": "C:\\Users\\Beher\\Desktop\\Coding\\Appointments_Scheduler\\Appointment_Forms\\Edit_Appointment.cs",
-              "RelativeToolTip": "Appointment_Forms\\Edit_Appointment.cs",
-              "ViewState": "AgIAAOMAAAAAAAAAAAAswAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-05T23:08:42.476Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Appointment.cs",
-              "DocumentMoniker": "C:\\Users\\Beher\\Desktop\\Coding\\Appointments_Scheduler\\Database_Table_Classes\\Appointment.cs",
-              "RelativeDocumentMoniker": "Database_Table_Classes\\Appointment.cs",
-              "ToolTip": "C:\\Users\\Beher\\Desktop\\Coding\\Appointments_Scheduler\\Database_Table_Classes\\Appointment.cs",
-              "RelativeToolTip": "Database_Table_Classes\\Appointment.cs",
-              "ViewState": "AgIAAMcAAAAAAAAAAAAgwEEBAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-05T17:30:58.512Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Appointment_Records.cs",
-              "DocumentMoniker": "C:\\Users\\Beher\\Desktop\\Coding\\Appointments_Scheduler\\Appointment_Forms\\Appointment_Records.cs",
-              "RelativeDocumentMoniker": "Appointment_Forms\\Appointment_Records.cs",
-              "ToolTip": "C:\\Users\\Beher\\Desktop\\Coding\\Appointments_Scheduler\\Appointment_Forms\\Appointment_Records.cs",
-              "RelativeToolTip": "Appointment_Forms\\Appointment_Records.cs",
-              "ViewState": "AgIAAOsAAAAAAAAAAAA7wAQBAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-05T15:35:01.381Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Appointment_Records.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Beher\\Desktop\\Coding\\Appointments_Scheduler\\Appointment_Forms\\Appointment_Records.cs",
-              "RelativeDocumentMoniker": "Appointment_Forms\\Appointment_Records.cs",
-              "ToolTip": "C:\\Users\\Beher\\Desktop\\Coding\\Appointments_Scheduler\\Appointment_Forms\\Appointment_Records.cs [Design]",
-              "RelativeToolTip": "Appointment_Forms\\Appointment_Records.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-05T15:28:45.809Z",
-              "EditorCaption": " [Design]"
             }
           ]
         }
