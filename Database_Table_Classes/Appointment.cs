@@ -117,6 +117,47 @@ namespace Appointments_Scheduler.Database_Table_Classes
             return allAppointments;
         }
 
+        public static bool UserHasAppointmentWithin15Minutes(string username, DateTime currentTime)
+        {
+            DateTime currentTimePlus15Minutes = currentTime.AddMinutes(15);
+
+            // Retrieves the userID from the input userName
+            string user = User.GetUserIDFromUserName(username);
+            int userID = Convert.ToInt32(user);
+
+            // Establishes the SQL query
+            string query = @"SELECT start 
+                     FROM appointment
+                     WHERE userId = @userID";
+
+            using (var command = new MySqlCommand(query, DBConnection.connection))
+            {
+                // Defines the @variables values
+                command.Parameters.AddWithValue("@userID", userID);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if (!reader.HasRows)
+                        return false;
+
+                    while (reader.Read())
+                    {
+                        // Converts the times from UTC to Local time
+                        DateTime appointmentUtc = DateTime.SpecifyKind(reader.GetDateTime("start"), DateTimeKind.Utc);
+                        DateTime appointmentLocal = TimeZoneInfo.ConvertTimeFromUtc(appointmentUtc, TimeZoneInfo.Local);
+
+                        // Checks if the appointment is within 15 minutes
+                        if (appointmentLocal >= currentTime && appointmentLocal <= currentTimePlus15Minutes)
+                        {
+                            return true; 
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+
         // Returns a List of tuples containing appointment start and end times
         public static List<(DateTime Start, DateTime End)> GetAllAppointmentTimes()
         {
