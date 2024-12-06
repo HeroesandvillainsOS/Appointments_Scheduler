@@ -34,10 +34,12 @@
             this.lbl_Month = new System.Windows.Forms.Label();
             this.cmboBox_Year = new System.Windows.Forms.ComboBox();
             this.cmboBox_Month = new System.Windows.Forms.ComboBox();
-            this.lbl_FilterAppointmentsByType = new System.Windows.Forms.Label();
-            this.dgv_AppointmentsByType = new System.Windows.Forms.DataGridView();
+            this.lbl_AppointmentsTypesByMonth = new System.Windows.Forms.Label();
+            this.dgv_AppointmentTypesByMonth = new System.Windows.Forms.DataGridView();
             this.cmboBox_Type = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_AppointmentsByType)).BeginInit();
+            this.lbl_TotalResults = new System.Windows.Forms.Label();
+            this.txtBox_TotalResults = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_AppointmentTypesByMonth)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_GenerateReport
@@ -102,26 +104,26 @@
             this.cmboBox_Month.Text = "--";
             this.cmboBox_Month.DropDown += new System.EventHandler(this.cmboBox_Month_DropDown);
             // 
-            // lbl_FilterAppointmentsByType
+            // lbl_AppointmentsTypesByMonth
             // 
-            this.lbl_FilterAppointmentsByType.AutoSize = true;
-            this.lbl_FilterAppointmentsByType.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_FilterAppointmentsByType.Location = new System.Drawing.Point(479, 32);
-            this.lbl_FilterAppointmentsByType.Name = "lbl_FilterAppointmentsByType";
-            this.lbl_FilterAppointmentsByType.Size = new System.Drawing.Size(389, 36);
-            this.lbl_FilterAppointmentsByType.TabIndex = 16;
-            this.lbl_FilterAppointmentsByType.Text = "Filter Appointments By Type";
+            this.lbl_AppointmentsTypesByMonth.AutoSize = true;
+            this.lbl_AppointmentsTypesByMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_AppointmentsTypesByMonth.Location = new System.Drawing.Point(461, 35);
+            this.lbl_AppointmentsTypesByMonth.Name = "lbl_AppointmentsTypesByMonth";
+            this.lbl_AppointmentsTypesByMonth.Size = new System.Drawing.Size(407, 36);
+            this.lbl_AppointmentsTypesByMonth.TabIndex = 16;
+            this.lbl_AppointmentsTypesByMonth.Text = "Appointment Types By Month";
             // 
-            // dgv_AppointmentsByType
+            // dgv_AppointmentTypesByMonth
             // 
-            this.dgv_AppointmentsByType.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_AppointmentsByType.Location = new System.Drawing.Point(22, 208);
-            this.dgv_AppointmentsByType.Name = "dgv_AppointmentsByType";
-            this.dgv_AppointmentsByType.RowHeadersWidth = 51;
-            this.dgv_AppointmentsByType.RowTemplate.Height = 24;
-            this.dgv_AppointmentsByType.Size = new System.Drawing.Size(1288, 404);
-            this.dgv_AppointmentsByType.TabIndex = 15;
-            this.dgv_AppointmentsByType.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.OnDataBindingComplete);
+            this.dgv_AppointmentTypesByMonth.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_AppointmentTypesByMonth.Location = new System.Drawing.Point(22, 208);
+            this.dgv_AppointmentTypesByMonth.Name = "dgv_AppointmentTypesByMonth";
+            this.dgv_AppointmentTypesByMonth.RowHeadersWidth = 51;
+            this.dgv_AppointmentTypesByMonth.RowTemplate.Height = 24;
+            this.dgv_AppointmentTypesByMonth.Size = new System.Drawing.Size(1288, 404);
+            this.dgv_AppointmentTypesByMonth.TabIndex = 15;
+            this.dgv_AppointmentTypesByMonth.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.OnDataBindingComplete);
             // 
             // cmboBox_Type
             // 
@@ -134,11 +136,33 @@
             this.cmboBox_Type.Text = "--";
             this.cmboBox_Type.DropDown += new System.EventHandler(this.cmboBox_Type_DropDown);
             // 
+            // lbl_TotalResults
+            // 
+            this.lbl_TotalResults.AutoSize = true;
+            this.lbl_TotalResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_TotalResults.Location = new System.Drawing.Point(92, 107);
+            this.lbl_TotalResults.Name = "lbl_TotalResults";
+            this.lbl_TotalResults.Size = new System.Drawing.Size(125, 25);
+            this.lbl_TotalResults.TabIndex = 25;
+            this.lbl_TotalResults.Text = "Total Results";
+            // 
+            // txtBox_TotalResults
+            // 
+            this.txtBox_TotalResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBox_TotalResults.Location = new System.Drawing.Point(114, 146);
+            this.txtBox_TotalResults.Name = "txtBox_TotalResults";
+            this.txtBox_TotalResults.Size = new System.Drawing.Size(72, 34);
+            this.txtBox_TotalResults.TabIndex = 26;
+            this.txtBox_TotalResults.Text = "--";
+            this.txtBox_TotalResults.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // AppointmentTypesByMonth
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1334, 796);
+            this.Controls.Add(this.txtBox_TotalResults);
+            this.Controls.Add(this.lbl_TotalResults);
             this.Controls.Add(this.cmboBox_Type);
             this.Controls.Add(this.btn_GenerateReport);
             this.Controls.Add(this.lbl_Year);
@@ -146,11 +170,11 @@
             this.Controls.Add(this.lbl_Month);
             this.Controls.Add(this.cmboBox_Year);
             this.Controls.Add(this.cmboBox_Month);
-            this.Controls.Add(this.lbl_FilterAppointmentsByType);
-            this.Controls.Add(this.dgv_AppointmentsByType);
+            this.Controls.Add(this.lbl_AppointmentsTypesByMonth);
+            this.Controls.Add(this.dgv_AppointmentTypesByMonth);
             this.Name = "AppointmentTypesByMonth";
-            this.Text = "Appointment Types By Month";
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_AppointmentsByType)).EndInit();
+            this.Text = "Appointments Types By Month";
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_AppointmentTypesByMonth)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,8 +188,10 @@
         private System.Windows.Forms.Label lbl_Month;
         private System.Windows.Forms.ComboBox cmboBox_Year;
         private System.Windows.Forms.ComboBox cmboBox_Month;
-        private System.Windows.Forms.Label lbl_FilterAppointmentsByType;
-        private System.Windows.Forms.DataGridView dgv_AppointmentsByType;
+        private System.Windows.Forms.Label lbl_AppointmentsTypesByMonth;
+        private System.Windows.Forms.DataGridView dgv_AppointmentTypesByMonth;
         private System.Windows.Forms.ComboBox cmboBox_Type;
+        private System.Windows.Forms.Label lbl_TotalResults;
+        private System.Windows.Forms.TextBox txtBox_TotalResults;
     }
 }

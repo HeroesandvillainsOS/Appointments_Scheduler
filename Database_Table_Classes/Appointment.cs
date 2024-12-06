@@ -244,6 +244,24 @@ namespace Appointments_Scheduler.Database_Table_Classes
             return allAppointmentTimes;
         }
 
+        // Returns a Binding List of all unique appointment types from the database
+        public static BindingList<String> GetAllUniqueAppointmentTypes()
+        {
+            BindingList<Appointment> allAppointments = GetAllAppointments();
+            BindingList<String> allUniqueAppointmentTypes = new BindingList<String>();
+
+            foreach (var appointment in allAppointments)
+            {
+                // Ensures the List only has unique appointment types added
+                if (!allUniqueAppointmentTypes.Contains(appointment.Type))
+                {
+                    allUniqueAppointmentTypes.Add(appointment.Type);
+                } 
+            }
+
+            return allUniqueAppointmentTypes;
+        }
+
         // Returns a Binding List of appointments based on the user's Filter Appointments criteria
         public static BindingList<Appointment> GetFilteredAppointments(string month, string day, string year)
         {

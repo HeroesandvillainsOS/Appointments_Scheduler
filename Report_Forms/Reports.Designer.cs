@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btn_Exit = new System.Windows.Forms.Button();
-            this.btn_Misc = new System.Windows.Forms.Button();
+            this.btn_CustomersByCountry = new System.Windows.Forms.Button();
             this.btn_UserSchedules = new System.Windows.Forms.Button();
             this.btn_AppointmentTypesByMonth = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -45,16 +45,17 @@
             this.btn_Exit.Text = "Exit";
             this.btn_Exit.UseVisualStyleBackColor = true;
             // 
-            // btn_Misc
+            // btn_CustomersByCountry
             // 
-            this.btn_Misc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Misc.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Misc.Location = new System.Drawing.Point(841, 155);
-            this.btn_Misc.Name = "btn_Misc";
-            this.btn_Misc.Size = new System.Drawing.Size(330, 291);
-            this.btn_Misc.TabIndex = 7;
-            this.btn_Misc.Text = "Misc";
-            this.btn_Misc.UseVisualStyleBackColor = true;
+            this.btn_CustomersByCountry.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_CustomersByCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_CustomersByCountry.Location = new System.Drawing.Point(841, 155);
+            this.btn_CustomersByCountry.Name = "btn_CustomersByCountry";
+            this.btn_CustomersByCountry.Size = new System.Drawing.Size(330, 291);
+            this.btn_CustomersByCountry.TabIndex = 7;
+            this.btn_CustomersByCountry.Text = "Customers By Country";
+            this.btn_CustomersByCountry.UseVisualStyleBackColor = true;
+            this.btn_CustomersByCountry.Click += new System.EventHandler(this.btn_CustomersByCountry_Click);
             // 
             // btn_UserSchedules
             // 
@@ -66,6 +67,7 @@
             this.btn_UserSchedules.TabIndex = 6;
             this.btn_UserSchedules.Text = "User Schedules";
             this.btn_UserSchedules.UseVisualStyleBackColor = true;
+            this.btn_UserSchedules.Click += new System.EventHandler(this.btn_UserSchedules_Click);
             // 
             // btn_AppointmentTypesByMonth
             // 
@@ -75,7 +77,7 @@
             this.btn_AppointmentTypesByMonth.Name = "btn_AppointmentTypesByMonth";
             this.btn_AppointmentTypesByMonth.Size = new System.Drawing.Size(330, 291);
             this.btn_AppointmentTypesByMonth.TabIndex = 5;
-            this.btn_AppointmentTypesByMonth.Text = "Appointments Types By Month";
+            this.btn_AppointmentTypesByMonth.Text = "Appointment Types By Month";
             this.btn_AppointmentTypesByMonth.UseVisualStyleBackColor = true;
             this.btn_AppointmentTypesByMonth.Click += new System.EventHandler(this.btn_AppointmentTypesByMonth_Click);
             // 
@@ -85,7 +87,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1207, 761);
             this.Controls.Add(this.btn_Exit);
-            this.Controls.Add(this.btn_Misc);
+            this.Controls.Add(this.btn_CustomersByCountry);
             this.Controls.Add(this.btn_UserSchedules);
             this.Controls.Add(this.btn_AppointmentTypesByMonth);
             this.Name = "Reports";
@@ -97,7 +99,7 @@
         #endregion
 
         private System.Windows.Forms.Button btn_Exit;
-        private System.Windows.Forms.Button btn_Misc;
+        private System.Windows.Forms.Button btn_CustomersByCountry;
         private System.Windows.Forms.Button btn_UserSchedules;
         private System.Windows.Forms.Button btn_AppointmentTypesByMonth;
     }

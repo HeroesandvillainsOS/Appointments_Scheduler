@@ -175,11 +175,23 @@
     <Compile Include="Report_Forms\AppointmentTypesByMonth.Designer.cs">
       <DependentUpon>AppointmentTypesByMonth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report_Forms\CustomersByCountry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report_Forms\CustomersByCountry.Designer.cs">
+      <DependentUpon>CustomersByCountry.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report_Forms\Reports.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Report_Forms\Reports.Designer.cs">
       <DependentUpon>Reports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report_Forms\UserSchedules.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report_Forms\UserSchedules.Designer.cs">
+      <DependentUpon>UserSchedules.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Appointment_Forms\Add_Appointment.resx">
       <DependentUpon>Add_Appointment.cs</DependentUpon>
@@ -223,8 +235,14 @@
     <EmbeddedResource Include="Report_Forms\AppointmentTypesByMonth.resx">
       <DependentUpon>AppointmentTypesByMonth.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report_Forms\CustomersByCountry.resx">
+      <DependentUpon>CustomersByCountry.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report_Forms\Reports.resx">
       <DependentUpon>Reports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report_Forms\UserSchedules.resx">
+      <DependentUpon>UserSchedules.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="_Configs\packages.config" />
     <None Include="Database_Connection\App.config" />

@@ -19,7 +19,7 @@ namespace Appointments_Scheduler.Report_Forms
 
         public BindingList<Appointment> FilteredAppointments { get; private set; }
 
-        public DataGridView DgvAppointmentsByType => dgv_AppointmentsByType;
+        public DataGridView DgvAppointmentTypesByMonth => dgv_AppointmentTypesByMonth;
 
         public string CurrentlySelectedMonth { get; private set; }
 
@@ -34,15 +34,15 @@ namespace Appointments_Scheduler.Report_Forms
             Instance = this;
 
             // Data Grid View settings
-            dgv_AppointmentsByType.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_AppointmentsByType.ReadOnly = true;
-            dgv_AppointmentsByType.MultiSelect = false;
+            dgv_AppointmentTypesByMonth.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_AppointmentTypesByMonth.ReadOnly = true;
+            dgv_AppointmentTypesByMonth.MultiSelect = false;
         }
 
         // Unselects the automatically selected first row on the Data Grid View
         private void OnDataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            dgv_AppointmentsByType.ClearSelection();
+            dgv_AppointmentTypesByMonth.ClearSelection();
         }
 
 
@@ -86,9 +86,18 @@ namespace Appointments_Scheduler.Report_Forms
             // Clears the dropdown values and adds the array items to the dropdown list
             cmboBox_Type.Items.Clear();
 
-            // ADD LOGIC HERE
+            BindingList<String> allUniqueAppointmentTypes = Appointment.GetAllUniqueAppointmentTypes();
 
-            CurrentlySelectedYear = cmboBox_Year.Text;
+            /*foreach (String type in allUniqueAppointmentTypes)
+            {
+                cmboBox_Type.Items.Add(type);
+            }*/
+
+            // Uses a lambda to add items to the dropdown
+            // ToList() used here because ForEach is invalid with Binding List (is valid with regular List)
+            allUniqueAppointmentTypes.ToList().ForEach(type => cmboBox_Type.Items.Add(type));
+
+            CurrentlySelectedType = cmboBox_Year.Text;
         }
 
         // Ensures the user Month selection is tracked live as the selection is made or changes
