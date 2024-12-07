@@ -152,8 +152,10 @@
             this.txtBox_TotalResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox_TotalResults.Location = new System.Drawing.Point(114, 146);
             this.txtBox_TotalResults.Name = "txtBox_TotalResults";
+            this.txtBox_TotalResults.ReadOnly = true;
             this.txtBox_TotalResults.Size = new System.Drawing.Size(72, 34);
             this.txtBox_TotalResults.TabIndex = 26;
+            this.txtBox_TotalResults.TabStop = false;
             this.txtBox_TotalResults.Text = "--";
             this.txtBox_TotalResults.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
