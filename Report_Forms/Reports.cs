@@ -23,10 +23,10 @@ namespace Appointments_Scheduler.Report_Forms
             userSchedules.Show();
         }
 
-        private void btn_CustomersByCountry_Click(object sender, EventArgs e)
+        private void btn_CountriesServed_Click(object sender, EventArgs e)
         {
-            CustomersByCountry customersByCountry = new CustomersByCountry();
-            customersByCountry.Show();  
+            CountriesServed countriesServed = new CountriesServed();    
+            countriesServed.Show();
         }
     }
 }

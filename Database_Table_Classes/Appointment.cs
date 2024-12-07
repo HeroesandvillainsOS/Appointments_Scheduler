@@ -157,7 +157,6 @@ namespace Appointments_Scheduler.Database_Table_Classes
             return false;
         }
 
-
         // Returns a List of tuples containing appointment start and end times
         public static List<(DateTime Start, DateTime End)> GetAllAppointmentTimes()
         {

@@ -88,13 +88,7 @@ namespace Appointments_Scheduler.Report_Forms
 
             BindingList<String> allUniqueAppointmentTypes = Appointment.GetAllUniqueAppointmentTypes();
 
-            /*foreach (String type in allUniqueAppointmentTypes)
-            {
-                cmboBox_Type.Items.Add(type);
-            }*/
-
-            // Uses a lambda to add items to the dropdown
-            // ToList() used here because ForEach is invalid with Binding List (is valid with regular List)
+            // Uses a lambda to add items to the Type dropdown
             allUniqueAppointmentTypes.ToList().ForEach(type => cmboBox_Type.Items.Add(type));
 
             CurrentlySelectedType = cmboBox_Year.Text;

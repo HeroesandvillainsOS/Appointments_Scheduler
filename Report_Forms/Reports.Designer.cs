@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btn_Exit = new System.Windows.Forms.Button();
-            this.btn_CustomersByCountry = new System.Windows.Forms.Button();
+            this.btn_CountriesServed = new System.Windows.Forms.Button();
             this.btn_UserSchedules = new System.Windows.Forms.Button();
             this.btn_AppointmentTypesByMonth = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -45,17 +45,17 @@
             this.btn_Exit.Text = "Exit";
             this.btn_Exit.UseVisualStyleBackColor = true;
             // 
-            // btn_CustomersByCountry
+            // btn_CountriesServed
             // 
-            this.btn_CustomersByCountry.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_CustomersByCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_CustomersByCountry.Location = new System.Drawing.Point(841, 155);
-            this.btn_CustomersByCountry.Name = "btn_CustomersByCountry";
-            this.btn_CustomersByCountry.Size = new System.Drawing.Size(330, 291);
-            this.btn_CustomersByCountry.TabIndex = 7;
-            this.btn_CustomersByCountry.Text = "Customers By Country";
-            this.btn_CustomersByCountry.UseVisualStyleBackColor = true;
-            this.btn_CustomersByCountry.Click += new System.EventHandler(this.btn_CustomersByCountry_Click);
+            this.btn_CountriesServed.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_CountriesServed.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_CountriesServed.Location = new System.Drawing.Point(841, 155);
+            this.btn_CountriesServed.Name = "btn_CountriesServed";
+            this.btn_CountriesServed.Size = new System.Drawing.Size(330, 291);
+            this.btn_CountriesServed.TabIndex = 7;
+            this.btn_CountriesServed.Text = "Countries Served";
+            this.btn_CountriesServed.UseVisualStyleBackColor = true;
+            this.btn_CountriesServed.Click += new System.EventHandler(this.btn_CountriesServed_Click);
             // 
             // btn_UserSchedules
             // 
@@ -87,7 +87,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1207, 761);
             this.Controls.Add(this.btn_Exit);
-            this.Controls.Add(this.btn_CustomersByCountry);
+            this.Controls.Add(this.btn_CountriesServed);
             this.Controls.Add(this.btn_UserSchedules);
             this.Controls.Add(this.btn_AppointmentTypesByMonth);
             this.Name = "Reports";
@@ -99,7 +99,7 @@
         #endregion
 
         private System.Windows.Forms.Button btn_Exit;
-        private System.Windows.Forms.Button btn_CustomersByCountry;
+        private System.Windows.Forms.Button btn_CountriesServed;
         private System.Windows.Forms.Button btn_UserSchedules;
         private System.Windows.Forms.Button btn_AppointmentTypesByMonth;
     }

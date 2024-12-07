@@ -175,11 +175,11 @@
     <Compile Include="Report_Forms\AppointmentTypesByMonth.Designer.cs">
       <DependentUpon>AppointmentTypesByMonth.cs</DependentUpon>
     </Compile>
-    <Compile Include="Report_Forms\CustomersByCountry.cs">
+    <Compile Include="Report_Forms\CountriesServed.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Report_Forms\CustomersByCountry.Designer.cs">
-      <DependentUpon>CustomersByCountry.cs</DependentUpon>
+    <Compile Include="Report_Forms\CountriesServed.Designer.cs">
+      <DependentUpon>CountriesServed.cs</DependentUpon>
     </Compile>
     <Compile Include="Report_Forms\Reports.cs">
       <SubType>Form</SubType>
@@ -235,8 +235,8 @@
     <EmbeddedResource Include="Report_Forms\AppointmentTypesByMonth.resx">
       <DependentUpon>AppointmentTypesByMonth.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report_Forms\CustomersByCountry.resx">
-      <DependentUpon>CustomersByCountry.cs</DependentUpon>
+    <EmbeddedResource Include="Report_Forms\CountriesServed.resx">
+      <DependentUpon>CountriesServed.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report_Forms\Reports.resx">
       <DependentUpon>Reports.cs</DependentUpon>
