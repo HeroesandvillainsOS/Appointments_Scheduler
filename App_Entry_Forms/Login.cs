@@ -16,7 +16,6 @@ namespace Appointments_Scheduler
         {
             InitializeComponent();
 
-
             // Stores the system's current culture info
             CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
             CultureInfo currentUICulture = Thread.CurrentThread.CurrentUICulture;

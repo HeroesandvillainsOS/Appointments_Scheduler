@@ -1,6 +1,7 @@
 ﻿using Appointments_Scheduler.Database_Table_Classes;
 using Appointments_Scheduler.Report_Forms;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Appointments_Scheduler.Forms
@@ -34,6 +35,20 @@ namespace Appointments_Scheduler.Forms
             {
                 MessageBox.Show("Reminder that you have an appointment within 15 minutes.", "Appointment Reminder",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            // Logs each successful login to Login_History.txt
+            string projectDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            // Moves up two directories because the program points to bin\debug for some reason
+            string folderPath = Path.Combine(projectDirectory, "..", "..", "Text Files");  
+            string filePath = Path.Combine(folderPath, "Login_History.txt");
+            string loggedInUser = userName;
+            DateTime currentTime = DateTime.Now;
+
+            // Writes to the txt file
+            using (StreamWriter sw = new StreamWriter(filePath, append: true))
+            {
+                sw.WriteLine($"User: {loggedInUser} Logged in at {currentTime}");
             }
         }
 
