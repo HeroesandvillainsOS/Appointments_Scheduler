@@ -45,6 +45,7 @@ namespace Appointments_Scheduler.Forms
             string loggedInUser = userName;
             DateTime currentTime = DateTime.Now;
 
+            // Writes to the txt file
             using (StreamWriter sw = new StreamWriter(filePath, append: true))
             {
                 sw.WriteLine($"User: {loggedInUser} Logged in at {currentTime}");
