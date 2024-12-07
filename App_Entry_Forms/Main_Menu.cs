@@ -1,4 +1,5 @@
 ﻿using Appointments_Scheduler.Database_Table_Classes;
+using Appointments_Scheduler.Report_Forms;
 using System;
 using System.Windows.Forms;
 
@@ -78,6 +79,13 @@ namespace Appointments_Scheduler.Forms
         {
             var appointmentRecords = new Appointment_Forms.Appointment_Records();
             appointmentRecords.Show();
+        }
+
+        // Opens the Reports menu when the respective button is clicked
+        private void btn_Reports_Click(object sender, EventArgs e)
+        {
+            Reports reports = new Reports();
+            reports.Show();
         }
     }
 }

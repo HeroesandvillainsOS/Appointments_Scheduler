@@ -206,6 +206,7 @@
             this.txtBox_LastUpdateBy.Name = "txtBox_LastUpdateBy";
             this.txtBox_LastUpdateBy.Size = new System.Drawing.Size(322, 34);
             this.txtBox_LastUpdateBy.TabIndex = 64;
+            this.txtBox_LastUpdateBy.TabStop = false;
             // 
             // txtBox_LastUpdate
             // 
@@ -214,6 +215,7 @@
             this.txtBox_LastUpdate.Name = "txtBox_LastUpdate";
             this.txtBox_LastUpdate.Size = new System.Drawing.Size(322, 34);
             this.txtBox_LastUpdate.TabIndex = 63;
+            this.txtBox_LastUpdate.TabStop = false;
             // 
             // lbl_LastUpdateBy
             // 
@@ -242,6 +244,7 @@
             this.txtBox_CreatedBy.Name = "txtBox_CreatedBy";
             this.txtBox_CreatedBy.Size = new System.Drawing.Size(322, 34);
             this.txtBox_CreatedBy.TabIndex = 60;
+            this.txtBox_CreatedBy.TabStop = false;
             // 
             // lbl_CreatedBy
             // 
@@ -260,6 +263,7 @@
             this.txtBox_CreateDate.Name = "txtBox_CreateDate";
             this.txtBox_CreateDate.Size = new System.Drawing.Size(322, 34);
             this.txtBox_CreateDate.TabIndex = 58;
+            this.txtBox_CreateDate.TabStop = false;
             // 
             // lbl_CreateDate
             // 

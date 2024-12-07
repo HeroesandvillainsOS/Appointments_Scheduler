@@ -80,6 +80,7 @@
             this.txtBox_LastUpdateBy.Name = "txtBox_LastUpdateBy";
             this.txtBox_LastUpdateBy.Size = new System.Drawing.Size(270, 34);
             this.txtBox_LastUpdateBy.TabIndex = 32;
+            this.txtBox_LastUpdateBy.TabStop = false;
             // 
             // txtBox_LastUpdate
             // 
@@ -88,6 +89,7 @@
             this.txtBox_LastUpdate.Name = "txtBox_LastUpdate";
             this.txtBox_LastUpdate.Size = new System.Drawing.Size(270, 34);
             this.txtBox_LastUpdate.TabIndex = 31;
+            this.txtBox_LastUpdate.TabStop = false;
             // 
             // lbl_LastUpdateBy
             // 
@@ -116,6 +118,7 @@
             this.txtBox_CreatedBy.Name = "txtBox_CreatedBy";
             this.txtBox_CreatedBy.Size = new System.Drawing.Size(270, 34);
             this.txtBox_CreatedBy.TabIndex = 28;
+            this.txtBox_CreatedBy.TabStop = false;
             // 
             // lbl_CreatedBy
             // 
@@ -134,6 +137,7 @@
             this.txtBox_CreateDate.Name = "txtBox_CreateDate";
             this.txtBox_CreateDate.Size = new System.Drawing.Size(270, 34);
             this.txtBox_CreateDate.TabIndex = 26;
+            this.txtBox_CreateDate.TabStop = false;
             // 
             // lbl_CreateDate
             // 
@@ -174,6 +178,7 @@
             this.txtBox_Address.Name = "txtBox_Address";
             this.txtBox_Address.Size = new System.Drawing.Size(394, 34);
             this.txtBox_Address.TabIndex = 22;
+            this.txtBox_Address.TabStop = false;
             // 
             // lbl_Address
             // 
@@ -192,6 +197,7 @@
             this.txtBox_CustomerName.Name = "txtBox_CustomerName";
             this.txtBox_CustomerName.Size = new System.Drawing.Size(270, 34);
             this.txtBox_CustomerName.TabIndex = 20;
+            this.txtBox_CustomerName.TabStop = false;
             // 
             // lbl_CustomerName
             // 
@@ -230,6 +236,7 @@
             this.txtBox_Phone.Name = "txtBox_Phone";
             this.txtBox_Phone.Size = new System.Drawing.Size(270, 34);
             this.txtBox_Phone.TabIndex = 37;
+            this.txtBox_Phone.TabStop = false;
             // 
             // lbl_Phone
             // 
@@ -248,6 +255,7 @@
             this.txtBox_PostalCode.Name = "txtBox_PostalCode";
             this.txtBox_PostalCode.Size = new System.Drawing.Size(176, 34);
             this.txtBox_PostalCode.TabIndex = 47;
+            this.txtBox_PostalCode.TabStop = false;
             // 
             // lbl_PostalCode
             // 
@@ -266,6 +274,7 @@
             this.txtBox_City.Name = "txtBox_City";
             this.txtBox_City.Size = new System.Drawing.Size(270, 34);
             this.txtBox_City.TabIndex = 43;
+            this.txtBox_City.TabStop = false;
             // 
             // lbl_City
             // 
@@ -284,6 +293,7 @@
             this.txtBox_Country.Name = "txtBox_Country";
             this.txtBox_Country.Size = new System.Drawing.Size(270, 34);
             this.txtBox_Country.TabIndex = 49;
+            this.txtBox_Country.TabStop = false;
             // 
             // lbl_Country
             // 
@@ -302,6 +312,7 @@
             this.txtBox_Address2.Name = "txtBox_Address2";
             this.txtBox_Address2.Size = new System.Drawing.Size(395, 34);
             this.txtBox_Address2.TabIndex = 51;
+            this.txtBox_Address2.TabStop = false;
             // 
             // lbl_Address2
             // 

@@ -117,6 +117,62 @@ namespace Appointments_Scheduler.Database_Table_Classes
             return allAppointments;
         }
 
+        // Returns a Binding List of all appointments from the appointment database table
+        public static BindingList<Appointment> GetAllAppointmentsForASpecificUser(string userName)
+        {
+            string userIDString = User.GetUserIDFromUserName(userName);
+            int userID = Convert.ToInt32(userIDString);
+
+            // Establishes the SQL query
+            string query = @"SELECT * FROM appointment
+                             WHERE userId = @userID";
+
+            // Creates a new MySQLCommand instance with the established query and database connection
+            var command = new MySqlCommand(query, DBConnection.connection);
+
+            // Defines the @variables values
+            command.Parameters.AddWithValue("@userID", userID);
+
+            // Creates a reader object for the MySQLCommand instance
+            var reader = command.ExecuteReader();
+
+            // Creates a Binding List to store the customer table data
+            BindingList<Appointment> allUserAppointments = new BindingList<Appointment>();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    allUserAppointments.Add(new Appointment(
+                        reader.GetInt32("appointmentId"),
+                        reader.GetInt32("customerId"),
+                        reader.GetInt32("userId"),
+                        reader.GetString("title"),
+                        reader.GetString("description"),
+                        reader.GetString("location"),
+                        reader.GetString("contact"),
+                        reader.GetString("type"),
+                        reader.GetString("url"),
+                        // Set DateTimeKind explicitly for each DateTime field
+                        DateTime.SpecifyKind(reader.GetDateTime("start"), DateTimeKind.Utc),
+                        DateTime.SpecifyKind(reader.GetDateTime("end"), DateTimeKind.Utc),
+                        DateTime.SpecifyKind(reader.GetDateTime("createDate"), DateTimeKind.Utc),
+                        reader.GetString("createdBy"),
+                        DateTime.SpecifyKind(reader.GetDateTime("lastUpdate"), DateTimeKind.Utc),
+                        reader.GetString("lastUpdateBy")
+                    ));
+                }
+            }
+            else
+            {
+                MessageBox.Show("The appointment table has no rows.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            reader.Close();
+
+            // Returns a Binding List of all appointments from the appointment database table
+            return allUserAppointments;
+        }
+
         public static bool UserHasAppointmentWithin15Minutes(string username, DateTime currentTime)
         {
             DateTime currentTimePlus15Minutes = currentTime.AddMinutes(15);
@@ -156,7 +212,6 @@ namespace Appointments_Scheduler.Database_Table_Classes
             }
             return false;
         }
-
 
         // Returns a List of tuples containing appointment start and end times
         public static List<(DateTime Start, DateTime End)> GetAllAppointmentTimes()
@@ -242,6 +297,24 @@ namespace Appointments_Scheduler.Database_Table_Classes
             // Close the reader after use
             reader.Close();
             return allAppointmentTimes;
+        }
+
+        // Returns a Binding List of all unique appointment types from the database
+        public static BindingList<String> GetAllUniqueAppointmentTypes()
+        {
+            BindingList<Appointment> allAppointments = GetAllAppointments();
+            BindingList<String> allUniqueAppointmentTypes = new BindingList<String>();
+
+            foreach (var appointment in allAppointments)
+            {
+                // Ensures the List only has unique appointment types added
+                if (!allUniqueAppointmentTypes.Contains(appointment.Type))
+                {
+                    allUniqueAppointmentTypes.Add(appointment.Type);
+                } 
+            }
+
+            return allUniqueAppointmentTypes;
         }
 
         // Returns a Binding List of appointments based on the user's Filter Appointments criteria
