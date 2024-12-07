@@ -51,6 +51,7 @@
             this.btn_GenerateReport.TabIndex = 23;
             this.btn_GenerateReport.Text = "Generate Report";
             this.btn_GenerateReport.UseVisualStyleBackColor = true;
+            this.btn_GenerateReport.Click += new System.EventHandler(this.btn_GenerateReport_Click);
             // 
             // lbl_Year
             // 
