@@ -164,6 +164,9 @@ namespace Appointments_Scheduler.Report_Forms
             // Shows the total number of appointments returned 
             txtBox_TotalResults.Text = totalResults.ToString();
 
+            // Converts displayed appointments to Local Time
+            filteredAppointments = Appointment.ConvertAppointmentsToLocalTime(filteredAppointments);
+
             // Displays the results in the Data Grid View
             AppointmentTypesByMonth.Instance.DgvAppointmentTypesByMonth.DataSource = filteredAppointments;
         }

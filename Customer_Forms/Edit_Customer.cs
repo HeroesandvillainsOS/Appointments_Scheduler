@@ -2,6 +2,7 @@
 using Appointments_Scheduler.Forms.Customer_Forms;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -16,10 +17,11 @@ namespace Appointments_Scheduler.Customer_Forms
             // Fills the form with the selected customer's data from the customer table's Binding List
             txtBox_CustomerID.Text = customer[0];
             txtBox_CustomerName.Text = customer[1];
+            Debug.WriteLine(customer[3]);
             if (Convert.ToInt32(customer[3]) == 0)
-                radioBtn_Active.Checked = false;
+                chkBox_Active.Checked = false;
             else
-                radioBtn_Active.Checked = true;
+                chkBox_Active.Checked = true;
             txtBox_CreateDate.Text = customer[4];
             txtBox_CreatedBy.Text = customer[5];
             txtBox_LastUpdate.Text = customer[6];
@@ -53,7 +55,7 @@ namespace Appointments_Scheduler.Customer_Forms
             int postalCode;
             string phoneNumber = txtBox_Phone.Text.Trim();
             int active;
-            if (radioBtn_Active.Checked)
+            if (chkBox_Active.Checked)
                 active = 1;
             else
                 active = 0;
@@ -109,7 +111,7 @@ namespace Appointments_Scheduler.Customer_Forms
 
             // Postal Code cannot contain letters
             bool postalCodeIsValid = int.TryParse(txtBox_PostalCode.Text.Trim(), out postalCode);
-            if (!postalCodeIsValid)
+            if (!String.IsNullOrEmpty(txtBox_PostalCode.Text) && !postalCodeIsValid)
             {
                 MessageBox.Show("Postal Code cannot contain letters.", "Warning", MessageBoxButtons.OK,
                  MessageBoxIcon.Warning);

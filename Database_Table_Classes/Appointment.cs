@@ -117,6 +117,20 @@ namespace Appointments_Scheduler.Database_Table_Classes
             return allAppointments;
         }
 
+        // Converts appointments to local time in the Data Grid View
+        // TimeZoneInfo.Local accounts for both Daylight Saving Time user time zones
+        public static BindingList<Appointment> ConvertAppointmentsToLocalTime(BindingList<Appointment> appointments)
+        {
+            foreach (Appointment appointment in appointments)
+            {
+                appointment.Start = TimeZoneInfo.ConvertTimeFromUtc(appointment.Start, TimeZoneInfo.Local);
+                appointment.End = TimeZoneInfo.ConvertTimeFromUtc(appointment.End, TimeZoneInfo.Local);
+                appointment.CreateDate = TimeZoneInfo.ConvertTimeFromUtc(appointment.CreateDate, TimeZoneInfo.Local);
+                appointment.LastUpdate = TimeZoneInfo.ConvertTimeFromUtc(appointment.LastUpdate, TimeZoneInfo.Local);
+            }
+            return appointments;
+        }
+
         // Returns a Binding List of all appointments from the appointment database table
         public static BindingList<Appointment> GetAllAppointmentsForASpecificUser(string userName)
         {

@@ -114,13 +114,13 @@ namespace Appointments_Scheduler.Report_Forms
             BindingList<Appointment> allUserAppointments = Appointment.GetAllAppointmentsForASpecificUser(userName);
 
             // Filters appointments based on the selected Time Frame
-            List<Appointment> filteredAppointments = new List<Appointment>();
+            BindingList<Appointment> filteredAppointments = new BindingList<Appointment>();
 
             // Uses Lambda expressions to add appointments to a List
             if (isTimeFrameToday)
             {
                 allUserAppointments
-                    .Where(appointment => appointment.Start == today)
+                    .Where(appointment => appointment.Start.Date == today)
                     .ToList()
                     .ForEach(appointment =>
                     {
@@ -158,6 +158,7 @@ namespace Appointments_Scheduler.Report_Forms
 
             // Displays the generated report
             txtBox_TotalResults.Text = totalResults.ToString();
+            filteredAppointments = Appointment.ConvertAppointmentsToLocalTime(filteredAppointments);
             UserSchedules.Instance.dgv_UserSchedules.DataSource = filteredAppointments;
         }
     }

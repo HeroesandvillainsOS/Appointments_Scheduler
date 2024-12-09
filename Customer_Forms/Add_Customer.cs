@@ -25,7 +25,7 @@ namespace Appointments_Scheduler.Customer_Forms
             int postalCode;
             string phoneNumber = txtBox_Phone.Text.Trim();
             int active;
-            if (radioBtn_Active.Checked)
+            if (chkBox_Active.Checked)
                 active = 1;
             else
                 active = 0;
@@ -81,7 +81,7 @@ namespace Appointments_Scheduler.Customer_Forms
 
             // Postal Code cannot contain letters
             bool postalCodeIsValid = int.TryParse(txtBox_PostalCode.Text.Trim(), out postalCode);
-            if (!postalCodeIsValid)
+            if (!String.IsNullOrEmpty(txtBox_PostalCode.Text) && !postalCodeIsValid)
             {
                 MessageBox.Show("Postal Code cannot contain letters.", "Warning", MessageBoxButtons.OK,
                  MessageBoxIcon.Warning);

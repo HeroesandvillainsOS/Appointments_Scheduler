@@ -17,9 +17,9 @@ namespace Appointments_Scheduler.Customer_Forms
             txtBox_CustomerID.Text = customer[0];
             txtBox_CustomerName.Text = customer[1];
             if (Convert.ToInt32(customer[3]) == 0)
-                radioBtn_Active.Checked = false;
+                chkBox_Active.Checked = false;
             else
-                radioBtn_Active.Checked = true;
+                chkBox_Active.Checked = true;
             txtBox_CreateDate.Text = customer[4];
             txtBox_CreatedBy.Text = customer[5];
             txtBox_LastUpdate.Text = customer[6];

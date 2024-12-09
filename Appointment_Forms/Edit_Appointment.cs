@@ -106,11 +106,27 @@ namespace Appointments_Scheduler.Appointment_Forms
                 return;
             }
 
+            // Start time cannot be left blank
+            if (String.IsNullOrEmpty(txtBox_Start.Text))
+            {
+                MessageBox.Show("Appointment Start cannot be left blank.", "Warning", MessageBoxButtons.OK,
+                  MessageBoxIcon.Warning);
+                return;
+            }
+
             // Start time cannot be in an invalid DateTime format
             if (!DateTime.TryParse(txtBox_Start.Text, out start))
             {
                 MessageBox.Show("Appointment Start is using an invalid date format.", "Warning", MessageBoxButtons.OK,
                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Start time cannot be left blank
+            if (String.IsNullOrEmpty(txtBox_End.Text))
+            {
+                MessageBox.Show("Appointment End cannot be left blank.", "Warning", MessageBoxButtons.OK,
+                  MessageBoxIcon.Warning);
                 return;
             }
 
