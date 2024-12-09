@@ -41,7 +41,7 @@ namespace Appointments_Scheduler.Appointment_Forms
             AllAppointments = Appointment.GetAllAppointments();
 
             // Converts the Data Grid View DateTime records to Local time (Binding List only)
-            ConvertAppointmentsToLocalTime(AllAppointments);
+            Appointment.ConvertAppointmentsToLocalTime(AllAppointments);
 
             // Displays the Binding List of all appointments on the Data Grid View
             dgv_Appointments.DataSource = AllAppointments;
@@ -275,7 +275,7 @@ namespace Appointments_Scheduler.Appointment_Forms
             {
                 FilteredAppointments = Appointment.GetFilteredAppointments(month, year);
 
-                ConvertAppointmentsToLocalTime(FilteredAppointments);
+                FilteredAppointments = Appointment.ConvertAppointmentsToLocalTime(FilteredAppointments);
                 Appointment_Records.Instance.DgvAppointments.DataSource = FilteredAppointments;
                 return;
             }
@@ -285,21 +285,8 @@ namespace Appointments_Scheduler.Appointment_Forms
             {
                 FilteredAppointments = Appointment.GetFilteredAppointments(month, day, year);
 
-                ConvertAppointmentsToLocalTime(FilteredAppointments);
+                FilteredAppointments = Appointment.ConvertAppointmentsToLocalTime(FilteredAppointments);
                 Appointment_Records.Instance.DgvAppointments.DataSource = FilteredAppointments;
-            }
-        }
-
-        // Converts appointments to local time in the Data Grid View
-        // TimeZoneInfo.Local accounts for both Daylight Saving Time user time zones
-        private void ConvertAppointmentsToLocalTime(BindingList<Appointment> appointments)
-        {
-            foreach (Appointment appointment in appointments)
-            {
-                appointment.Start = TimeZoneInfo.ConvertTimeFromUtc(appointment.Start, TimeZoneInfo.Local);
-                appointment.End = TimeZoneInfo.ConvertTimeFromUtc(appointment.End, TimeZoneInfo.Local);
-                appointment.CreateDate = TimeZoneInfo.ConvertTimeFromUtc(appointment.CreateDate, TimeZoneInfo.Local);
-                appointment.LastUpdate = TimeZoneInfo.ConvertTimeFromUtc(appointment.LastUpdate, TimeZoneInfo.Local);
             }
         }
     }

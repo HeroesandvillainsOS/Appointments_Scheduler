@@ -37,7 +37,6 @@
             this.lbl_CreatedBy = new System.Windows.Forms.Label();
             this.txtBox_CreateDate = new System.Windows.Forms.TextBox();
             this.lbl_CreateDate = new System.Windows.Forms.Label();
-            this.radioBtn_Active = new System.Windows.Forms.RadioButton();
             this.lbl_Active = new System.Windows.Forms.Label();
             this.txtBox_Address = new System.Windows.Forms.TextBox();
             this.lbl_Address = new System.Windows.Forms.Label();
@@ -60,6 +59,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lbl_AsteriskMessage = new System.Windows.Forms.Label();
+            this.chkBox_Active = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btn_Add
@@ -144,18 +144,6 @@
             this.lbl_CreateDate.Size = new System.Drawing.Size(141, 29);
             this.lbl_CreateDate.TabIndex = 25;
             this.lbl_CreateDate.Text = "Create Date";
-            // 
-            // radioBtn_Active
-            // 
-            this.radioBtn_Active.AutoSize = true;
-            this.radioBtn_Active.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioBtn_Active.Location = new System.Drawing.Point(967, 30);
-            this.radioBtn_Active.Name = "radioBtn_Active";
-            this.radioBtn_Active.Size = new System.Drawing.Size(181, 24);
-            this.radioBtn_Active.TabIndex = 24;
-            this.radioBtn_Active.TabStop = true;
-            this.radioBtn_Active.Text = "Customer is Active?";
-            this.radioBtn_Active.UseVisualStyleBackColor = true;
             // 
             // lbl_Active
             // 
@@ -365,11 +353,23 @@
             this.lbl_AsteriskMessage.TabIndex = 50;
             this.lbl_AsteriskMessage.Text = "Indicates a required field";
             // 
+            // chkBox_Active
+            // 
+            this.chkBox_Active.AutoSize = true;
+            this.chkBox_Active.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBox_Active.Location = new System.Drawing.Point(967, 32);
+            this.chkBox_Active.Name = "chkBox_Active";
+            this.chkBox_Active.Size = new System.Drawing.Size(182, 24);
+            this.chkBox_Active.TabIndex = 58;
+            this.chkBox_Active.Text = "Customer is Active?";
+            this.chkBox_Active.UseVisualStyleBackColor = true;
+            // 
             // Add_Customer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1302, 660);
+            this.Controls.Add(this.chkBox_Active);
             this.Controls.Add(this.lbl_AsteriskMessage);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -394,7 +394,6 @@
             this.Controls.Add(this.lbl_CreatedBy);
             this.Controls.Add(this.txtBox_CreateDate);
             this.Controls.Add(this.lbl_CreateDate);
-            this.Controls.Add(this.radioBtn_Active);
             this.Controls.Add(this.lbl_Active);
             this.Controls.Add(this.txtBox_Address);
             this.Controls.Add(this.lbl_Address);
@@ -420,7 +419,6 @@
         private System.Windows.Forms.Label lbl_CreatedBy;
         private System.Windows.Forms.TextBox txtBox_CreateDate;
         private System.Windows.Forms.Label lbl_CreateDate;
-        private System.Windows.Forms.RadioButton radioBtn_Active;
         private System.Windows.Forms.Label lbl_Active;
         private System.Windows.Forms.TextBox txtBox_Address;
         private System.Windows.Forms.Label lbl_Address;
@@ -443,5 +441,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbl_AsteriskMessage;
+        private System.Windows.Forms.CheckBox chkBox_Active;
     }
 }

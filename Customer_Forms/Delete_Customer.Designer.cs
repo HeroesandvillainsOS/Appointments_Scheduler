@@ -44,7 +44,6 @@
             this.lbl_CustomerName = new System.Windows.Forms.Label();
             this.txtBox_CustomerID = new System.Windows.Forms.TextBox();
             this.lbl_CustomerID = new System.Windows.Forms.Label();
-            this.radioBtn_Active = new System.Windows.Forms.RadioButton();
             this.txtBox_Phone = new System.Windows.Forms.TextBox();
             this.lbl_Phone = new System.Windows.Forms.Label();
             this.txtBox_PostalCode = new System.Windows.Forms.TextBox();
@@ -55,6 +54,7 @@
             this.lbl_Country = new System.Windows.Forms.Label();
             this.txtBox_Address2 = new System.Windows.Forms.TextBox();
             this.lbl_Address2 = new System.Windows.Forms.Label();
+            this.chkBox_Active = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btn_Delete
@@ -219,19 +219,6 @@
             this.lbl_CustomerID.TabIndex = 17;
             this.lbl_CustomerID.Text = "Customer ID";
             // 
-            // radioBtn_Active
-            // 
-            this.radioBtn_Active.AutoSize = true;
-            this.radioBtn_Active.Enabled = false;
-            this.radioBtn_Active.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioBtn_Active.Location = new System.Drawing.Point(968, 26);
-            this.radioBtn_Active.Name = "radioBtn_Active";
-            this.radioBtn_Active.Size = new System.Drawing.Size(181, 24);
-            this.radioBtn_Active.TabIndex = 34;
-            this.radioBtn_Active.TabStop = true;
-            this.radioBtn_Active.Text = "Customer is Active?";
-            this.radioBtn_Active.UseVisualStyleBackColor = true;
-            // 
             // txtBox_Phone
             // 
             this.txtBox_Phone.Enabled = false;
@@ -332,11 +319,24 @@
             this.lbl_Address2.TabIndex = 50;
             this.lbl_Address2.Text = "Address 2";
             // 
+            // chkBox_Active
+            // 
+            this.chkBox_Active.AutoSize = true;
+            this.chkBox_Active.Enabled = false;
+            this.chkBox_Active.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBox_Active.Location = new System.Drawing.Point(968, 27);
+            this.chkBox_Active.Name = "chkBox_Active";
+            this.chkBox_Active.Size = new System.Drawing.Size(182, 24);
+            this.chkBox_Active.TabIndex = 58;
+            this.chkBox_Active.Text = "Customer is Active?";
+            this.chkBox_Active.UseVisualStyleBackColor = true;
+            // 
             // Delete_Customer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1310, 661);
+            this.Controls.Add(this.chkBox_Active);
             this.Controls.Add(this.txtBox_Address2);
             this.Controls.Add(this.lbl_Address2);
             this.Controls.Add(this.txtBox_Country);
@@ -347,7 +347,6 @@
             this.Controls.Add(this.lbl_City);
             this.Controls.Add(this.txtBox_Phone);
             this.Controls.Add(this.lbl_Phone);
-            this.Controls.Add(this.radioBtn_Active);
             this.Controls.Add(this.btn_Delete);
             this.Controls.Add(this.txtBox_LastUpdateBy);
             this.Controls.Add(this.txtBox_LastUpdate);
@@ -389,7 +388,6 @@
         private System.Windows.Forms.Label lbl_CustomerName;
         private System.Windows.Forms.TextBox txtBox_CustomerID;
         private System.Windows.Forms.Label lbl_CustomerID;
-        private System.Windows.Forms.RadioButton radioBtn_Active;
         private System.Windows.Forms.TextBox txtBox_Phone;
         private System.Windows.Forms.Label lbl_Phone;
         private System.Windows.Forms.TextBox txtBox_PostalCode;
@@ -400,5 +398,6 @@
         private System.Windows.Forms.Label lbl_Country;
         private System.Windows.Forms.TextBox txtBox_Address2;
         private System.Windows.Forms.Label lbl_Address2;
+        private System.Windows.Forms.CheckBox chkBox_Active;
     }
 }
