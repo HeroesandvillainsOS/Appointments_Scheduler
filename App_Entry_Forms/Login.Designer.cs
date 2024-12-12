@@ -88,11 +88,11 @@
             // 
             this.lbl_Location.AutoSize = true;
             this.lbl_Location.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Location.Location = new System.Drawing.Point(264, 72);
+            this.lbl_Location.Location = new System.Drawing.Point(215, 80);
             this.lbl_Location.Name = "lbl_Location";
-            this.lbl_Location.Size = new System.Drawing.Size(267, 29);
+            this.lbl_Location.Size = new System.Drawing.Size(328, 29);
             this.lbl_Location.TabIndex = 5;
-            this.lbl_Location.Text = "Location - United States";
+            this.lbl_Location.Text = "Preferred Language - English";
             // 
             // Login
             // 

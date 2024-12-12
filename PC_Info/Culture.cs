@@ -10,23 +10,22 @@ namespace Appointments_Scheduler
         public CultureInfo CurrentCulture { get; private set; } = Thread.CurrentThread.CurrentCulture;
         public CultureInfo CurrentUICulture { get; private set; } = Thread.CurrentThread.CurrentUICulture;
 
-        public static string CultureName { get; private set; }
-
         public void SetCulture(CultureInfo culture, CultureInfo cultureUI)
         {
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = cultureUI;
             CurrentCulture = culture;
             CurrentUICulture = cultureUI;
         }
 
         public string GetCultureName()
         {
-            CultureName = CurrentCulture.Name;
-            return CurrentCulture.Name;
+            return Thread.CurrentThread.CurrentCulture.Name;
         }
 
         public string GetCultureUIName()
         {
-            return CurrentUICulture.Name;
+            return Thread.CurrentThread.CurrentUICulture.Name;
         }
 
         public void PrintCurrentCulture()

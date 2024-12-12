@@ -2,6 +2,7 @@
 using Appointments_Scheduler.Report_Forms;
 using System;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Appointments_Scheduler.Forms
@@ -13,7 +14,7 @@ namespace Appointments_Scheduler.Forms
             InitializeComponent();
 
             // Translates the Main Menu into Spanish if the Spanish culture is detected 
-            if (Culture.CultureName == "es-ES")
+            if (Thread.CurrentThread.CurrentCulture.Name == "es-ES")
             {
                 btn_CustomerRecords.Text = "Registros de Clientes";
                 btn_Appointments.Text = "Citas";
@@ -63,7 +64,7 @@ namespace Appointments_Scheduler.Forms
         {
             DialogResult result;
 
-            if (Culture.CultureName == "es-ES")
+            if (Thread.CurrentThread.CurrentCulture.Name == "es-ES")
             {
                 result = MessageBox.Show("¿Estás seguro de que quieres cerrar el programa?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             }
