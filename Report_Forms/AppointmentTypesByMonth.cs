@@ -136,15 +136,17 @@ namespace Appointments_Scheduler.Report_Forms
             }
 
             string year = cmboBox_Year.Text;
-            int yearInt = Convert.ToInt32(year);
+            int yearInt;
+            bool isValidYear = int.TryParse(year, out yearInt);
             string type = cmboBox_Type.Text;
             int totalResults = 0;
 
             // a month, year, and type must be selected to generate a report
-            if (month == "--" || monthInt == 0 || year == "--" || type == "--")
+            if (month == "--" || monthInt == 0 || year == "--" || !isValidYear || type == "--")
             {
                 MessageBox.Show("Please select a vaild month, year, and appointment type.", "Warning", MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+                return;
             }
 
             BindingList<Appointment> allAppointments = Appointment.GetAllAppointments();
