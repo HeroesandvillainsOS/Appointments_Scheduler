@@ -11,32 +11,32 @@ namespace Appointments_Scheduler
         // Creates a new instance of the Culture class
         private readonly Culture myCulture = new Culture();
 
+        // Sets a test culture for testing purposes (uncomment it for testing only)
+        // CultureInfo myCurrentCulture = new CultureInfo("es-GT"); // For testing (Spanish for Guatemala)
+
+        // Uses the CurrentCulture that's detected at runtime
+        public static CultureInfo myCurrentCulture = CultureInfo.CurrentCulture;
+
+        string cultureName { get; set; }   
+
         public Login()
         {
             InitializeComponent();
 
-            // Uncomment to set the app's language to Spanish
-            /*try
-            {
-                // Sets the system's current culture to Spanish
-                CultureInfo spanishCulture = new CultureInfo("es-ES");
-                myCulture.SetCulture(spanishCulture, spanishCulture);
-                myCulture.PrintCurrentCulture();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }*/
+            // Set the culture for the Culture class
+            myCulture.SetCulture(myCurrentCulture);
+            myCulture.PrintCurrentCulture();  // This will print the current culture to Debug output
 
-            UpdateUICulture();
+            // Update the UI labels based on the current culture
+            UpdateCulture();
         }
 
-        private void UpdateUICulture()
+        private void UpdateCulture()
         {
-            string cultureName = myCulture.GetCultureName();
+            cultureName = myCulture.GetCultureName(myCurrentCulture);
 
             // Changes the login page language to Spanish if a Spanish culture is detected
-            if (cultureName == "es-ES")
+            if (cultureName.StartsWith("es-"))
             {
                 lbl_Location.Text = "Idioma Preferido - Español";
                 lbl_Username.Text = "Nombre de usuario:";
@@ -50,7 +50,11 @@ namespace Appointments_Scheduler
                 lbl_Password.Text = "Password:";
                 btn_Submit.Text = "Submit";
             }
+
+            // Force the form to refresh and update the UI
+            this.Refresh();  // Force the form to repaint and update the controls
         }
+
 
         private void btn_Submit_Click(object sender, EventArgs e)
         {
@@ -59,7 +63,6 @@ namespace Appointments_Scheduler
             string currentPassword = txtBox_Password.Text.Trim();
 
             BindingList<User> allUsers = User.GetAllUsers();
-            string cultureName = myCulture.GetCultureName();
             bool isUserFound = false;
 
             // Iterates through the Binding List to find a username match

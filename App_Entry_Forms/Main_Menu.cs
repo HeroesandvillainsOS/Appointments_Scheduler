@@ -14,7 +14,7 @@ namespace Appointments_Scheduler.Forms
             InitializeComponent();
 
             // Translates the Main Menu into Spanish if the Spanish culture is detected 
-            if (Thread.CurrentThread.CurrentCulture.Name == "es-ES")
+            if (Login.myCurrentCulture.Name.StartsWith("es-"))
             {
                 btn_CustomerRecords.Text = "Registros de Clientes";
                 btn_Appointments.Text = "Citas";

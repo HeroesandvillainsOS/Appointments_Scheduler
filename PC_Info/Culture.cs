@@ -1,37 +1,25 @@
-﻿using System;
-using System.Globalization;
-using System.Threading;
-using System.Windows.Forms;
+﻿using System.Globalization;
+using System.Diagnostics;
 
 namespace Appointments_Scheduler
 {
-    internal class Culture
+    public class Culture
     {
-        public CultureInfo CurrentCulture { get; private set; } = Thread.CurrentThread.CurrentCulture;
-        public CultureInfo CurrentUICulture { get; private set; } = Thread.CurrentThread.CurrentUICulture;
+        public CultureInfo CurrentCulture { get; private set; } = CultureInfo.CurrentCulture;
 
-        public void SetCulture(CultureInfo culture, CultureInfo cultureUI)
+        public void SetCulture(CultureInfo culture)
         {
-            Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = cultureUI;
             CurrentCulture = culture;
-            CurrentUICulture = cultureUI;
         }
 
-        public string GetCultureName()
+        public string GetCultureName(CultureInfo cultureInfo)
         {
-            return Thread.CurrentThread.CurrentCulture.Name;
-        }
-
-        public string GetCultureUIName()
-        {
-            return Thread.CurrentThread.CurrentUICulture.Name;
+            return CurrentCulture.Name;
         }
 
         public void PrintCurrentCulture()
         {
-            Console.WriteLine($"Current Culture: {CurrentCulture.Name}, Current UI Culture: {CurrentUICulture}");
+            Debug.WriteLine($"Current Culture: {CurrentCulture.Name}");
         }
-      
     }
 }
